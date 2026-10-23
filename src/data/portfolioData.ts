@@ -1,0 +1,697 @@
+export interface ProjectItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  category: string;
+  featured: boolean;
+  coverImage: string;
+  galleryImages: { path: string; label: string }[];
+  videoDemo?: string;
+  technologies: string[];
+  description: string;
+  problemSolved: string;
+  aiIntegration: string;
+  liveUrl?: string;
+  githubUrl?: string;
+}
+
+export interface CertificateItem {
+  id: string;
+  title: string;
+  issuer: string;
+  issuerCategory: "Google" | "IBM" | "AWS" | "Cisco" | "Dicoding" | "Kominfo" | "Lainnya";
+  category: "AI & Data Science" | "Cloud & DevOps" | "Cybersecurity" | "Web & Programming";
+  filePath: string;
+  isPdf: boolean;
+  year?: string;
+}
+
+export interface TechItem {
+  name: string;
+  category: "AI & Agents" | "Frontend" | "Backend & DB" | "Cloud & Security";
+  level: "Advanced" | "Intermediate" | "Specialized";
+  description: string;
+  iconName: string;
+  accentColor: string;
+}
+
+export const PERSONAL_INFO = {
+  fullName: "Akhyar Mualif",
+  callName: "Akhyar",
+  role: "AI Agent Builder & Technopreneur",
+  university: "Universitas Ma'arif Nahdlatul Ulama Kebumen",
+  department: "Teknik Informatika",
+  semester: "Semester 5",
+  location: "Kebumen, Jawa Tengah, Indonesia",
+  bio: "Mahasiswa Teknik Informatika yang berfokus membangun produk digital berbasis AI Agent. Menggabungkan pola pikir Technopreneurship, arsitektur RAG, dan pengembangan Full-Stack untuk menciptakan solusi software yang berdampak nyata.",
+  socials: {
+    github: "https://github.com/Vraken9",
+    linkedin: "https://www.linkedin.com/in/akhyar-mualif",
+    whatsapp: "https://wa.me/628930123608",
+    whatsappDisplay: "+62 893-0123-608",
+  },
+  stats: [
+    { label: "Aplikasi Web Full-Stack", value: "4", description: "EdTech AI, RAG Chatbot, Booking Kos, Multi-Vendor" },
+    { label: "Sertifikasi Resmi", value: "45+", description: "Google, IBM, AWS, Cisco, Dicoding & Kominfo" },
+    { label: "Penyelesaian Final Project", value: "100%", description: "Hasil riset & pelatihan terverifikasi" },
+    { label: "Spesialisasi Utama", value: "AI Agents", description: "Cursor, Antigravity, LLM APIs & RAG" },
+  ],
+};
+
+export const RUNNING_TEXT_ITEMS = [
+  "AKHYAR MUALIF",
+  "AI AGENT BUILDER",
+  "TECHNOPRENEUR ENTHUSIAST",
+  "TEKNIK INFORMATIKA UNU KEBUMEN",
+  "45+ SERTIFIKASI RESMI",
+  "FULL-STACK DEVELOPER",
+  "RAG ARCHITECTURE",
+  "NEXT.JS & PYTHON",
+  "INNOVATION DRIVEN",
+];
+
+export const TECH_STACKS: TechItem[] = [
+  // AI & Agents
+  {
+    name: "Cursor AI",
+    category: "AI & Agents",
+    level: "Advanced",
+    description: "Editor utama untuk agentic workflow, composer orchestration, dan refactoring presisi.",
+    iconName: "Bot",
+    accentColor: "#38bdf8",
+  },
+  {
+    name: "Google Antigravity",
+    category: "AI & Agents",
+    level: "Advanced",
+    description: "Agentic coding ecosystem untuk autonomous multi-step execution dan browser automation.",
+    iconName: "Sparkles",
+    accentColor: "#a855f7",
+  },
+  {
+    name: "IBM AI Agent for Prog.",
+    category: "AI & Agents",
+    level: "Specialized",
+    description: "Tersertifikasi resmi IBM Hacktiv8 dalam pemanfaatan AI Agent untuk pemrograman enterprise.",
+    iconName: "Cpu",
+    accentColor: "#60a5fa",
+  },
+  {
+    name: "RAG & LLM APIs",
+    category: "AI & Agents",
+    level: "Advanced",
+    description: "Implementasi Retrieval-Augmented Generation (seperti pada Nusa Bali) & Gemini/OpenAI API.",
+    iconName: "BrainCircuit",
+    accentColor: "#34d399",
+  },
+  {
+    name: "AI Question Generator",
+    category: "AI & Agents",
+    level: "Advanced",
+    description: "Generator soal kustom dan modul ajar otomatis (diimplementasikan di platform Modulku).",
+    iconName: "Wand2",
+    accentColor: "#f59e0b",
+  },
+
+  // Frontend
+  {
+    name: "Next.js 16 (App Router)",
+    category: "Frontend",
+    level: "Advanced",
+    description: "Server components, streaming SSR, optimasi SEO, dan routing modern berbasis App Router.",
+    iconName: "Layout",
+    accentColor: "#ffffff",
+  },
+  {
+    name: "React 19 & TypeScript",
+    category: "Frontend",
+    level: "Advanced",
+    description: "Type safety ketat, custom hooks reaktif, dan performa UI berbasis komponen.",
+    iconName: "Code2",
+    accentColor: "#38bdf8",
+  },
+  {
+    name: "Tailwind CSS v4",
+    category: "Frontend",
+    level: "Advanced",
+    description: "Desain antarmuka responsif, utility-first styling, dan kustomisasi theme glassmorphism.",
+    iconName: "Palette",
+    accentColor: "#06b6d4",
+  },
+  {
+    name: "Framer Motion",
+    category: "Frontend",
+    level: "Intermediate",
+    description: "Micro-interactions, running text marquee, 3D card tilts, dan transisi layout dinamis.",
+    iconName: "Flame",
+    accentColor: "#ec4899",
+  },
+
+  // Backend & DB
+  {
+    name: "Node.js & Express",
+    category: "Backend & DB",
+    level: "Intermediate",
+    description: "Pengembangan REST API cepat, webhook integrations, dan logic middleware otentikasi.",
+    iconName: "Server",
+    accentColor: "#22c55e",
+  },
+  {
+    name: "Python",
+    category: "Backend & DB",
+    level: "Intermediate",
+    description: "Scripting otomatisasi, data pipeline, dan integrasi modul machine learning.",
+    iconName: "Terminal",
+    accentColor: "#fbbf24",
+  },
+  {
+    name: "PostgreSQL & MySQL",
+    category: "Backend & DB",
+    level: "Intermediate",
+    description: "Pemodelan database relasional, query analitik, dan manajemen transaksi e-commerce & booking.",
+    iconName: "Database",
+    accentColor: "#3b82f6",
+  },
+
+  // Cloud & Security
+  {
+    name: "AWS Cloud Foundation",
+    category: "Cloud & Security",
+    level: "Specialized",
+    description: "Tersertifikasi AWS Foundation & Digitalent DEX CA untuk arsitektur cloud scalable.",
+    iconName: "Cloud",
+    accentColor: "#f97316",
+  },
+  {
+    name: "Google & Cisco CyberSec",
+    category: "Cloud & Security",
+    level: "Specialized",
+    description: "Pemahaman fundamental keamanan web, mitigasi phishing/malware, dan network defense.",
+    iconName: "ShieldCheck",
+    accentColor: "#10b981",
+  },
+  {
+    name: "Git & GitHub",
+    category: "Cloud & Security",
+    level: "Advanced",
+    description: "Version control, branching strategy, CI/CD deployment ke Vercel dan cloud platform.",
+    iconName: "GitBranch",
+    accentColor: "#f43f5e",
+  },
+];
+
+export const WORKFLOW_STEPS = [
+  {
+    step: "01",
+    title: "Problem Discovery & Business Spec",
+    badge: "Technopreneur Mindset",
+    description: "Menganalisis kebutuhan pasar dan pain points nyata (misal: beban administrasi kurikulum guru di Modulku, atau rumitnya sewa kos di Kos.id). Menuliskan spesifikasi sistem secara terstruktur.",
+    icon: "Target",
+  },
+  {
+    step: "02",
+    title: "Agentic Architecture & AI Scaffolding",
+    badge: "AI Agent Orchestration",
+    description: "Memanfaatkan AI Agents (Cursor, Antigravity, Claude, Gemini) untuk merancang struktur database, arsitektur modul, dan boilerplate sistem 10x lebih cepat tanpa mengorbankan kualitas kode.",
+    icon: "Boxes",
+  },
+  {
+    step: "03",
+    title: "AI Integration (RAG & Generator)",
+    badge: "Smart Capabilities",
+    description: "Mengintegrasikan kecerdasan buatan langsung ke dalam produk: RAG Chatbot di Nusa Bali, Generator Soal & Modul Ajar otomatis di Modulku, serta pelacak konsumsi biaya API.",
+    icon: "Sparkles",
+  },
+  {
+    step: "04",
+    title: "Full-Stack Polish & Deployment",
+    badge: "Production Ready",
+    description: "Membangun sistem pembayaran, struk otomatis, dashboard analitik admin, dan deploy ke cloud dengan performa cepat, responsif, dan siap diuji oleh pengguna akhir.",
+    icon: "Rocket",
+  },
+];
+
+export const PROJECTS: ProjectItem[] = [
+  {
+    id: "modulku",
+    title: "Modulku",
+    subtitle: "AI-Powered Educational SaaS & Teacher Curriculum Hub",
+    category: "EdTech & Generative AI",
+    featured: true,
+    coverImage: "/gambar-web-modulku/halaman-landing-page.png",
+    description: "Platform SaaS pendidikan revolusioner yang dirancang khusus untuk membebaskan guru dari beban administrasi rumit kurikulum nasional dengan bantuan AI.",
+    problemSolved: "Guru sering menghabiskan puluhan jam membuat Modul Ajar, ATP, Prota, Promes, dan bank soal secara manual. Modulku memangkas proses ini menjadi hitungan detik dengan AI kustom.",
+    aiIntegration: "Fitur Soal Generator berbasis LLM, generator Modul Ajar Kurikulum Merdeka, serta Dashboard Admin canggih untuk memantau hit dan biaya token API secara real-time.",
+    technologies: ["Next.js", "AI Soal Generator", "Modul Ajar AI", "API Cost Tracker", "Admin Analytics", "Tailwind CSS"],
+    galleryImages: [
+      { path: "/gambar-web-modulku/halaman-landing-page.png", label: "Halaman Utama Landing Page Modulku" },
+      { path: "/gambar-web-modulku/halaman-dahsboard-guru-soal-generator.png", label: "Dashboard Guru - AI Soal Generator" },
+      { path: "/gambar-web-modulku/halaman-dashboard-guru-modul-ajar-bkpdm.png", label: "Dashboard Guru - Modul Ajar & LKPD" },
+      { path: "/gambar-web-modulku/halaman-dashboard-guru-atp-prota-promes.png", label: "Dashboard Guru - ATP, Prota & Promes" },
+      { path: "/gambar-web-modulku/halaman-admin-pelacakan-hit-dan-biaya-api.png", label: "Admin - Pelacakan Hit & Biaya Token API" },
+      { path: "/gambar-web-modulku/halaman-admin-ikhtisar-metrik.png", label: "Admin - Ikhtisar Metrik & Analitik" },
+      { path: "/gambar-web-modulku/halaman-dashboard-guru.png", label: "Ringkasan Workspace Dashboard Guru" },
+      { path: "/gambar-web-modulku/halaman-admin-persetujuan-langganan.png", label: "Admin - Manajemen Persetujuan Langganan" },
+    ],
+  },
+  {
+    id: "nusa-bali",
+    title: "Nusa Bali",
+    subtitle: "Smart Tourism Marketplace with Interactive AI RAG Chatbot",
+    category: "Tourism Tech & RAG AI",
+    featured: true,
+    coverImage: "/gambar-web-nusa-bali/Halaman-beranda.png",
+    videoDemo: "/gambar-web-nusa-bali/chatbot-RAG.mp4",
+    description: "Platform pemesanan paket wisata Bali yang dilengkapi asisten cerdas AI berbasis Retrieval-Augmented Generation (RAG) untuk menjawab pertanyaan turis secara kontekstual dan akurat.",
+    problemSolved: "Wisatawan sering kesulitan memilih paket yang tepat dan mencari informasi detail destinasi di luar jam kerja agen konvensional.",
+    aiIntegration: "AI Chatbot RAG terintegrasi yang memahami dokumen panduan destinasi Bali dan merespons pertanyaan pengunjung secara instan dan cerdas (tersedia rekaman video demo).",
+    technologies: ["RAG Architecture", "Interactive Video Player", "Catalog System", "Booking Flow", "Responsive UI"],
+    galleryImages: [
+      { path: "/gambar-web-nusa-bali/Halaman-beranda.png", label: "Halaman Beranda Nusa Bali Tour & Travel" },
+      { path: "/gambar-web-nusa-bali/halaman-katalog-paket.png", label: "Katalog Lengkap Paket Wisata Eksplorasi Bali" },
+      { path: "/gambar-web-nusa-bali/halaman-detail-paket.png", label: "Detail Paket, Itinerary & Fasilitas" },
+    ],
+  },
+  {
+    id: "kos-id",
+    title: "Kos.id",
+    subtitle: "Full-Stack Boarding House Reservation & Management System",
+    category: "Property Management & Booking",
+    featured: true,
+    coverImage: "/gambar-web-kos.id/halaman-beranda.png",
+    description: "Sistem reservasi dan pengelolaan indekos terpadu yang mempermudah pencari kos memesan kamar, mengunggah bukti bayar, dan mencetak bukti struk resmi.",
+    problemSolved: "Menggantikan pencatatan manual pemilik kos yang sering salah rekap pembayaran dan mempermudah penghuni mendapatkan konfirmasi serta struk resmi.",
+    aiIntegration: "Dibangun dengan orkestrasi AI Agent untuk menyelesaikan alur transaksi kompleks dari pemesanan, verifikasi admin, cetak struk PDF, hingga ketersediaan kamar.",
+    technologies: ["Booking Engine", "Payment Proof Upload", "Receipt / Struk Generator", "Admin Management", "Facilities Filter"],
+    galleryImages: [
+      { path: "/gambar-web-kos.id/halaman-beranda.png", label: "Halaman Utama Pencarian Kos.id" },
+      { path: "/gambar-web-kos.id/halaman-user-pesan-kos.png", label: "Alur Formulir Pemesanan Kamar Kos" },
+      { path: "/gambar-web-kos.id/halaman-user-pembayaran-kos.png", label: "Halaman Instruksi Pembayaran & Transfer" },
+      { path: "/gambar-web-kos.id/halaman-user-setelah-upload-bukti-pembayaran.png", label: "Status Verifikasi Bukti Pembayaran" },
+      { path: "/gambar-web-kos.id/halaman-user-cetak-struk-pembayaran.png", label: "Fitur Cetak Struk Bukti Pembayaran Resmi" },
+      { path: "/gambar-web-kos.id/halaman-dashboard-admin.png", label: "Dashboard Ringkasan Admin Kos" },
+      { path: "/gambar-web-kos.id/halaman-admin-kelola-kos.png", label: "Admin - Kelola Daftar Kamar & Status Ketersediaan" },
+      { path: "/gambar-web-kos.id/halaman-admin-booking.png", label: "Admin - Verifikasi Booking & Transaksi Masuk" },
+    ],
+  },
+  {
+    id: "floramart",
+    title: "FloraMart",
+    subtitle: "Multi-Vendor Plants Marketplace & Store Management",
+    category: "E-Commerce & Multi-Vendor",
+    featured: true,
+    coverImage: "/gambar-web-floramart/halaman-beranda.png",
+    description: "Marketplace tanaman hias dan kebutuhan botani multi-vendor yang menghubungkan pecinta tanaman dengan penjual lokal lengkap dengan analitik toko.",
+    problemSolved: "Memberi wadah digital bagi petani dan toko tanaman lokal untuk memasarkan produk ke pasar yang lebih luas dengan sistem checkout terpusat.",
+    aiIntegration: "Dirancang dan dibangun menggunakan agentic workflow untuk mempercepat modul multi-vendor, sistem peran (pembeli, toko owner, dan superadmin).",
+    technologies: ["Multi-Vendor Store", "Owner Dashboard", "Product Catalog", "Cart System", "Sales Analytics"],
+    galleryImages: [
+      { path: "/gambar-web-floramart/halaman-beranda.png", label: "Halaman Beranda Marketplace FloraMart" },
+      { path: "/gambar-web-floramart/halaman-katalog-produk.png", label: "Katalog Tanaman Hias & Filter Kategori" },
+      { path: "/gambar-web-floramart/halaman-detail-produk.png", label: "Halaman Detail Produk & Spesifikasi" },
+      { path: "/gambar-web-floramart/halaman-toko.png", label: "Profil Etalase Toko Penjual (Vendor)" },
+      { path: "/gambar-web-floramart/halaman-owner-dashboard.png", label: "Dashboard Pemilik Toko & Kelola Pesanan" },
+      { path: "/gambar-web-floramart/halaman-admin-analitik.png", label: "Superadmin - Analitik Penjualan & Statistik" },
+      { path: "/gambar-web-floramart/halaman-admin-ringkasan.png", label: "Superadmin - Ringkasan Ekosistem Transaksi" },
+    ],
+  },
+];
+
+export const CERTIFICATES: CertificateItem[] = [
+  // AI & Data Science
+  {
+    id: "cert-ibm-ai-agent",
+    title: "AI Agent for Programming Certificate",
+    issuer: "IBM & Hacktiv8",
+    issuerCategory: "IBM",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/IBM Hacktiv8 AI Agent for Programming Certificate.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-ibm-transcript",
+    title: "AI Agent for Programming Academic Transcript",
+    issuer: "IBM & Hacktiv8",
+    issuerCategory: "IBM",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/IBM Hacktiv8 AI Agent for Programming Transcript.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-google-ai-essentials",
+    title: "Google AI Essentials Certified",
+    issuer: "Google",
+    issuerCategory: "Google",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Google AI Essentials.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-google-juara-vibe",
+    title: "Google Juara Vibe Coding",
+    issuer: "Google Developers",
+    issuerCategory: "Google",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Google JuaraVibeCoding.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-google-extended",
+    title: "Google Extended AI Innovation",
+    issuer: "Google Developers",
+    issuerCategory: "Google",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Google Extended.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-cisco-modern-ai",
+    title: "Cisco Modern Artificial Intelligence",
+    issuer: "Cisco Networking Academy",
+    issuerCategory: "Cisco",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Cisco Modern AI.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-cisco-data-science",
+    title: "Introduction to Data Science",
+    issuer: "Cisco Networking Academy",
+    issuerCategory: "Cisco",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Cisco Introduction Data Science.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-dicoding-gen-ai-aws",
+    title: "Generative AI on AWS",
+    issuer: "Dicoding & AWS",
+    issuerCategory: "Dicoding",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Dicoding Gen AI AWS.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-dicoding-gen-ai",
+    title: "Belajar Dasar Generative AI",
+    issuer: "Dicoding Indonesia",
+    issuerCategory: "Dicoding",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Dicoding Gen AI.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-dicoding-ml-beginner",
+    title: "Machine Learning for Beginners",
+    issuer: "Dicoding Indonesia",
+    issuerCategory: "Dicoding",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Dicoding ML for Beginer.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-dicoding-data-science",
+    title: "Belajar Dasar Data Science",
+    issuer: "Dicoding Indonesia",
+    issuerCategory: "Dicoding",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Dicoding Data Science.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-hacktiv8-ai-prod",
+    title: "AI Productivity & API Integration for Developers",
+    issuer: "Hacktiv8",
+    issuerCategory: "Lainnya",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Hacktiv8 AI Productivity and API Intergration for Developer.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-digitalent-ai-essentials",
+    title: "Intermediate Cybersecurity + AI Essentials",
+    issuer: "Kominfo Digitalent & Google",
+    issuerCategory: "Kominfo",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Digitalent Intermediate Cybersecurity + AI Essentials - Google - Nasional.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-digitalent-data-science",
+    title: "Pengenalan Data Science Sektoral",
+    issuer: "Kominfo Digitalent",
+    issuerCategory: "Kominfo",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Digitalent Pengenalan Data Science dan Pemanfaatannya di Berbagai Sektor.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-bisaai-ds",
+    title: "Bisa AI Data Science Mastery",
+    issuer: "Bisa AI Academy",
+    issuerCategory: "Lainnya",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Bisa AI Data Science.png",
+    isPdf: false,
+  },
+  {
+    id: "cert-bisaai-ml",
+    title: "Bisa AI Machine Learning Specialist",
+    issuer: "Bisa AI Academy",
+    issuerCategory: "Lainnya",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Bisa AI ML.png",
+    isPdf: false,
+  },
+  {
+    id: "cert-asean-ai",
+    title: "ASEAN Ahead AI Career Accelerator",
+    issuer: "ASEAN Foundation",
+    issuerCategory: "Lainnya",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/ASEAN Ahead AI Carer.png",
+    isPdf: false,
+  },
+  {
+    id: "cert-dunia-coding-kotlin-ai",
+    title: "Workshop Modern Kotlin + AI Integration",
+    issuer: "Dunia Coding",
+    issuerCategory: "Lainnya",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/Dunia Coding Workshop Kotlin+AI.pdf",
+    isPdf: true,
+  },
+
+  // Cloud & DevOps
+  {
+    id: "cert-aws-cloud-foundations",
+    title: "AWS Cloud Foundation",
+    issuer: "Amazon Web Services (AWS)",
+    issuerCategory: "AWS",
+    category: "Cloud & DevOps",
+    filePath: "/sertifikat-pelatihan/AWS Cloud Foundation.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-digitalent-aws-dex",
+    title: "Cloud Essentials CA - DEX - AWS Nasional",
+    issuer: "Kominfo Digitalent & AWS",
+    issuerCategory: "Kominfo",
+    category: "Cloud & DevOps",
+    filePath: "/sertifikat-pelatihan/Digitalent Cloud Essentials CA - DEX - AWS - Nasional.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-dicoding-spec-aws",
+    title: "Architecting on AWS - Spec-Driven",
+    issuer: "Dicoding & AWS",
+    issuerCategory: "AWS",
+    category: "Cloud & DevOps",
+    filePath: "/sertifikat-pelatihan/Dicoding Spec-Driven AWS.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-dicoding-microsoft",
+    title: "Microsoft Elevate Training Center",
+    issuer: "Microsoft & Dicoding",
+    issuerCategory: "Dicoding",
+    category: "Cloud & DevOps",
+    filePath: "/sertifikat-pelatihan/Dicoding Microsoft Elevate Training Center.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-digitalent-network-admin",
+    title: "Fundamental of Associate Network Administrator",
+    issuer: "Kominfo Digitalent",
+    issuerCategory: "Kominfo",
+    category: "Cloud & DevOps",
+    filePath: "/sertifikat-pelatihan/Digitalent Fundamental of Associate Network Administrator - Nasional.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-digitalent-intermediate-network",
+    title: "Intermediate Associate Network Administrator",
+    issuer: "Kominfo Digitalent",
+    issuerCategory: "Kominfo",
+    category: "Cloud & DevOps",
+    filePath: "/sertifikat-pelatihan/Digitalent Intermediate Associate Network Administrator - Nasional.pdf",
+    isPdf: true,
+  },
+
+  // Cybersecurity
+  {
+    id: "cert-google-cybersecurity",
+    title: "Google Cybersecurity Professional",
+    issuer: "Google",
+    issuerCategory: "Google",
+    category: "Cybersecurity",
+    filePath: "/sertifikat-pelatihan/Google Cybersecurity.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-digitalent-google-cyber",
+    title: "Final Courses & Certificate Cybersecurity",
+    issuer: "Kominfo Digitalent & Google",
+    issuerCategory: "Google",
+    category: "Cybersecurity",
+    filePath: "/sertifikat-pelatihan/Digitalent Final Courses and Certificate Cybersecurity - Google.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-cisco-cybersec",
+    title: "Introduction to Cybersecurity",
+    issuer: "Cisco Networking Academy",
+    issuerCategory: "Cisco",
+    category: "Cybersecurity",
+    filePath: "/sertifikat-pelatihan/Cisco Introduction CyberSec.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-digitalent-fundamental-cyber",
+    title: "Fundamental Cybersecurity Awareness",
+    issuer: "Kominfo Digitalent",
+    issuerCategory: "Kominfo",
+    category: "Cybersecurity",
+    filePath: "/sertifikat-pelatihan/Digitalent Fundamental Cybersecurity.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-digitalent-huawei-cyber",
+    title: "Huawei Certified Cybersecurity Basics",
+    issuer: "Huawei & Kominfo",
+    issuerCategory: "Kominfo",
+    category: "Cybersecurity",
+    filePath: "/sertifikat-pelatihan/Digitalent Huawai Cyber.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-dunia-coding-linux-sec",
+    title: "Linux for Cybersecurity Defense",
+    issuer: "Dunia Coding",
+    issuerCategory: "Lainnya",
+    category: "Cybersecurity",
+    filePath: "/sertifikat-pelatihan/Dunia Coding Linux for Cyber Security.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-systech-sec",
+    title: "SysTech Enterprise Security Standards",
+    issuer: "SysTech",
+    issuerCategory: "Lainnya",
+    category: "Cybersecurity",
+    filePath: "/sertifikat-pelatihan/Systech Sec.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-digitalent-phishing",
+    title: "Proteksi Terhadap Phishing & Malware",
+    issuer: "Kominfo Digitalent",
+    issuerCategory: "Kominfo",
+    category: "Cybersecurity",
+    filePath: "/sertifikat-pelatihan/Digitalent Tips Melindungi Diri Dari Ancaman Phising dan Malware di Era Digital.pdf",
+    isPdf: true,
+  },
+
+  // Web & Programming
+  {
+    id: "cert-digitalent-intermediate-web",
+    title: "Intermediate Assistant Web Developer Nasional",
+    issuer: "Kominfo Digitalent",
+    issuerCategory: "Kominfo",
+    category: "Web & Programming",
+    filePath: "/sertifikat-pelatihan/Digitalent Intermediate Assistant Web Developer - Nasional.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-digitalent-fundamental-web",
+    title: "Fundamental Assistant Web Developer Nasional",
+    issuer: "Kominfo Digitalent",
+    issuerCategory: "Kominfo",
+    category: "Web & Programming",
+    filePath: "/sertifikat-pelatihan/Digitalent Fundamental of Assistant Web Developer - Nasional.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-digitalent-prog-fundamental",
+    title: "Programming Fundamental Nasional",
+    issuer: "Kominfo Digitalent",
+    issuerCategory: "Kominfo",
+    category: "Web & Programming",
+    filePath: "/sertifikat-pelatihan/Digitalent Programming Fundamental - Nasional.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-digitalent-konsep-prog",
+    title: "Konsep Dasar Pemrograman Modern",
+    issuer: "Kominfo Digitalent",
+    issuerCategory: "Kominfo",
+    category: "Web & Programming",
+    filePath: "/sertifikat-pelatihan/Digitalent Konsep Pemrograman.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-dicoding-python",
+    title: "Memulai Pemrograman Dengan Python",
+    issuer: "Dicoding Indonesia",
+    issuerCategory: "Dicoding",
+    category: "Web & Programming",
+    filePath: "/sertifikat-pelatihan/Dicoding Python.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-bisaai-python",
+    title: "Bisa AI Python Programming Fundamentals",
+    issuer: "Bisa AI Academy",
+    issuerCategory: "Lainnya",
+    category: "Web & Programming",
+    filePath: "/sertifikat-pelatihan/Bisa AI Python.png",
+    isPdf: false,
+  },
+  {
+    id: "cert-umnu-webdev",
+    title: "Web Developer Certification UNU",
+    issuer: "Universitas Ma'arif Nahdlatul Ulama",
+    issuerCategory: "Lainnya",
+    category: "Web & Programming",
+    filePath: "/sertifikat-pelatihan/UMNU Web Dev.png",
+    isPdf: false,
+  },
+  {
+    id: "cert-bkpm-uiux",
+    title: "BKPM UI/UX Product Design Training",
+    issuer: "BKPM",
+    issuerCategory: "Lainnya",
+    category: "Web & Programming",
+    filePath: "/sertifikat-pelatihan/BKPM UIUX.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-web3-hackathon",
+    title: "Indonesia Web3 Innovation Hackathon",
+    issuer: "Indonesia Web3 Association",
+    issuerCategory: "Lainnya",
+    category: "Web & Programming",
+    filePath: "/sertifikat-pelatihan/Indonesia WEB3 Hackathon.pdf",
+    isPdf: true,
+  },
+];
