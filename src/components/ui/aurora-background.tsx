@@ -35,11 +35,21 @@ export const AuroraBackground = ({
             after:content-[''] after:absolute after:inset-0 
             after:[background-image:var(--white-gradient),var(--aurora)] 
             after:[background-size:200%,_100%] 
-            after:animate-aurora after:[background-attachment:fixed] after:mix-blend-difference
+            after:animate-aurora after:mix-blend-difference
             absolute -inset-[10px] opacity-50 will-change-transform`,
             showRadialGradient &&
-              `[mask-image:radial-gradient(ellipse_at_100%_0%,black_10%,transparent_70%)]`
+              `[mask-image:radial-gradient(ellipse_125%_135%_at_85%_0%,black_20%,transparent_92%)]`
           )}
+          style={
+            showRadialGradient
+              ? {
+                  WebkitMaskImage:
+                    "radial-gradient(ellipse 125% 135% at 85% 0%, black 20%, transparent 92%)",
+                  maskImage:
+                    "radial-gradient(ellipse 125% 135% at 85% 0%, black 20%, transparent 92%)",
+                }
+              : undefined
+          }
         />
       </div>
       <div className="relative z-10 w-full flex-1 flex flex-col">{children}</div>

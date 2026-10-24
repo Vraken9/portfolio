@@ -149,7 +149,7 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section id="tentang" className="relative w-full overflow-hidden text-zinc-900 border-t border-zinc-200/80">
+    <section id="tentang" className="relative z-0 isolate w-full overflow-hidden text-zinc-900 border-t border-zinc-200/80">
       
       {/* Precision Grid Pattern Background with Lavender Ambient Glow */}
       <BackgroundSnippets />
@@ -220,11 +220,15 @@ export default function AboutSection() {
 
       {/* 3. Running Text Skills Pill Marquee with Star Dividers */}
       <div className="w-full border-b border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl border-x border-zinc-200/80 py-3 overflow-hidden select-none">
-          
-          {/* Blind White Shadow Mask Left & Right */}
-          <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-16 sm:w-28 md:w-44 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
-          <div className="pointer-events-none absolute top-0 bottom-0 right-0 w-16 sm:w-28 md:w-44 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
+        <div
+          className="relative mx-auto max-w-7xl border-x border-zinc-200/80 py-3 overflow-hidden select-none"
+          style={{
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+            maskImage:
+              "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+          }}
+        >
 
           {/* Interactive Marquee */}
           <Marquee duration={32} pauseOnHover={false} className="py-1">
