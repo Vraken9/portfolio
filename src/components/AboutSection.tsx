@@ -1,29 +1,22 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import Image from "next/image";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { PlusSeparator } from "@/components/ui/plus-separator";
 import { Marquee } from "@/components/ui/marquee";
 import { BauhausGenerator } from "@/components/ui/bauhaus-generator";
 import { Star12, Star15, Star28, Star3, Star40 } from "@/components/ui/star-icons";
+import { BrandIcons } from "@/components/ui/brand-icons";
 import { cn } from "@/lib/utils";
 import {
-  Bot,
-  Brain,
-  Code2,
-  Database,
-  Layers,
-  Sparkles,
-  Workflow,
-  Terminal,
-  Cpu,
-  Globe,
   Rocket,
-  Palette,
-  FileCode,
-  ShieldCheck,
+  Layers,
+  GraduationCap,
+  Sparkles,
+  Network,
+  Workflow,
+  Cpu,
 } from "lucide-react";
 
 interface SkillContent {
@@ -32,8 +25,7 @@ interface SkillContent {
   subtitle: string;
   tools: Array<{
     name: string;
-    icon: React.ComponentType<{ className?: string }>;
-    accent?: string;
+    icon: React.ComponentType<{ size?: number; className?: string }>;
   }>;
 }
 
@@ -42,26 +34,27 @@ const skillsData: Record<string, SkillContent> = {
     id: "ai_agent",
     title: "AI Agent Builder",
     subtitle:
-      "Designing autonomous multi-agent systems, function-calling workflows, and tool-augmented LLM architectures for production environments.",
+      "Designing autonomous multi-agent systems, function-calling workflows, and tool-augmented LLM architectures.",
     tools: [
-      { name: "LangChain", icon: Workflow, accent: "#2563EB" },
-      { name: "Python", icon: Terminal, accent: "#38BDF8" },
-      { name: "OpenAI / Claude", icon: Brain, accent: "#10B981" },
-      { name: "CrewAI", icon: Bot, accent: "#8B5CF6" },
-      { name: "FastAPI", icon: Cpu, accent: "#059669" },
+      { name: "LangChain", icon: BrandIcons.LangChain },
+      { name: "Python", icon: BrandIcons.Python },
+      { name: "OpenAI", icon: BrandIcons.OpenAI },
+      { name: "Claude", icon: BrandIcons.Claude },
+      { name: "FastAPI", icon: BrandIcons.FastAPI },
     ],
   },
   fullstack: {
     id: "fullstack",
     title: "Full-Stack Developer",
     subtitle:
-      "Engineering type-safe, resilient web applications with modern Next.js 15, React 19, TypeScript, and high-performance serverless backends.",
+      "Engineering type-safe, resilient web applications with Next.js 15, TypeScript, Tailwind CSS, and scalable databases.",
     tools: [
-      { name: "Next.js", icon: Globe, accent: "#000000" },
-      { name: "TypeScript", icon: FileCode, accent: "#3178C6" },
-      { name: "React", icon: Code2, accent: "#06B6D4" },
-      { name: "PostgreSQL", icon: Database, accent: "#336791" },
-      { name: "Docker", icon: Layers, accent: "#2496ED" },
+      { name: "Next.js", icon: BrandIcons.Nextjs },
+      { name: "TypeScript", icon: BrandIcons.TypeScript },
+      { name: "React", icon: BrandIcons.React },
+      { name: "Tailwind CSS", icon: BrandIcons.Tailwind },
+      { name: "PostgreSQL", icon: BrandIcons.PostgreSQL },
+      { name: "Docker", icon: BrandIcons.Docker },
     ],
   },
   rag_automation: {
@@ -70,35 +63,35 @@ const skillsData: Record<string, SkillContent> = {
     subtitle:
       "Building Retrieval-Augmented Generation pipelines, vector embeddings search, and end-to-end intelligent automation flows.",
     tools: [
-      { name: "Vector DB", icon: Database, accent: "#6366F1" },
-      { name: "Embeddings", icon: Brain, accent: "#EC4899" },
-      { name: "Automation Flow", icon: Workflow, accent: "#F59E0B" },
-      { name: "LangGraph", icon: Bot, accent: "#14B8A6" },
-      { name: "FastAPI RAG", icon: Cpu, accent: "#10B981" },
+      { name: "Vector DB", icon: BrandIcons.VectorDB },
+      { name: "LangGraph", icon: Network },
+      { name: "Automation Flow", icon: Workflow },
+      { name: "FastAPI RAG", icon: Cpu },
+      { name: "Python", icon: BrandIcons.Python },
     ],
   },
   technopreneur: {
     id: "technopreneur",
     title: "Technopreneur",
     subtitle:
-      "Transforming technological breakthroughs into viable market solutions, scalable digital products, and sustainable business models.",
+      "Transforming curious ideas into real-world software, completing rigorous courses, and building production-ready final projects.",
     tools: [
-      { name: "Product Strategy", icon: Rocket, accent: "#EF4444" },
-      { name: "System Architecture", icon: Layers, accent: "#3B82F6" },
-      { name: "Growth Engineering", icon: Sparkles, accent: "#F59E0B" },
-      { name: "45+ Certifications", icon: ShieldCheck, accent: "#10B981" },
+      { name: "Product Strategy", icon: Rocket },
+      { name: "System Design", icon: Layers },
+      { name: "Course Projects", icon: GraduationCap },
+      { name: "Innovation", icon: Sparkles },
     ],
   },
   uiux: {
     id: "uiux",
     title: "UI/UX & Frontend",
     subtitle:
-      "Crafting intuitive user experiences, refined glassmorphic aesthetics, and dynamic micro-interactions focused on modern design systems.",
+      "Designing intuitive user experiences and beautiful interfaces. Focused on user-centered design principles and modern design systems.",
     tools: [
-      { name: "Figma", icon: Palette, accent: "#F24E1E" },
-      { name: "Tailwind CSS", icon: Code2, accent: "#38BDF8" },
-      { name: "Framer Motion", icon: Sparkles, accent: "#A855F7" },
-      { name: "Design Systems", icon: Layers, accent: "#6366F1" },
+      { name: "Figma", icon: BrandIcons.Figma },
+      { name: "Framer", icon: BrandIcons.Framer },
+      { name: "LottieFiles", icon: BrandIcons.LottieFiles },
+      { name: "Tailwind CSS", icon: BrandIcons.Tailwind },
     ],
   },
 };
@@ -134,7 +127,7 @@ export default function AboutSection() {
   const activeSkillId = hoveredSkill || selectedSkill;
   const currentContent = skillsData[activeSkillId] || skillsData["ai_agent"];
 
-  // Auto-rotating progress loop
+  // Auto-rotating loop
   useEffect(() => {
     if (isPaused || hoveredSkill) return;
 
@@ -187,12 +180,11 @@ export default function AboutSection() {
         </div>
       </div>
 
-      {/* 2. Main Bio & Philosophy Row */}
+      {/* 2. Main Bio Narrative (Philosophy card removed as requested) */}
       <div className="w-full border-b border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-16 sm:py-20 border-x border-zinc-200/80 flex flex-col xl:flex-row xl:items-start xl:justify-between gap-12">
-          
-          {/* Left Column: Hello Animated Typography & Narrative Bio */}
-          <div className="flex-1 max-w-3xl">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-16 sm:py-20 border-x border-zinc-200/80">
+          <div className="max-w-3xl">
+            
             {/* Animated Typography GIF 'hello.' */}
             <div className="relative mb-5 -mt-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -203,57 +195,28 @@ export default function AboutSection() {
               />
             </div>
 
-            {/* Paragraph 1 */}
+            {/* Paragraph 1: Authentic Student & AI Builder Persona */}
             <p className="text-sm sm:text-base text-zinc-700 leading-relaxed font-normal">
               i'm akhyar, but my real name is{" "}
-              <span className="font-semibold text-zinc-900">Akhyar Mualif</span>. i am a{" "}
-              <span className="underline decoration-zinc-400 decoration-dashed underline-offset-4 cursor-help">
-                20-year-old
-              </span>{" "}
-              student majoring in Informatics Engineering at{" "}
+              <span className="font-semibold text-zinc-900">Akhyar Mualif</span>. i am an Informatics
+              Engineering student at{" "}
               <span className="text-zinc-900 font-medium">Universitas Ma'arif Nahdlatul Ulama Kebumen</span>{" "}
               and an <span className="font-semibold text-zinc-900">AI Agent Builder & Technopreneur</span>.
-              growing up, i spent countless hours fascinated by how software can solve complex real-world challenges,
-              and now i love designing autonomous AI workflows, RAG pipelines, and scalable web solutions.
+              growing up, i was fascinated by how software can solve complex challenges, and now i love turning
+              curious concepts into real, working applications.
             </p>
 
             <br />
 
-            {/* Paragraph 2 */}
+            {/* Paragraph 2: 'Stay curious and keep learning' Mindset */}
             <p className="text-sm sm:text-base text-zinc-700 leading-relaxed font-normal">
-              if you're curious, my journey started with software fundamentals and rapidly expanded into generative AI,
-              multi-agent architectures, and technopreneurship. during my spare time, i've invested over{" "}
-              <span className="underline decoration-indigo-400 decoration-dashed underline-offset-4 font-mono font-medium text-zinc-900">
-                1,400+ hours
-              </span>{" "}
-              into continuous learning, earning{" "}
-              <span className="font-semibold text-zinc-900">45+ professional certifications</span>{" "}
-              from leading technology organizations, tackling complex architectural challenges, and turning ambitious
-              ideas into solid, production-ready software.
+              my philosophy is simple:{" "}
+              <span className="font-semibold text-zinc-900 italic">stay curious and keep learning</span>.
+              i genuinely enjoy spending my spare time taking in-depth technical courses and completing their final projects—from
+              crafting intelligent AI agent workflows and RAG pipelines to engineering clean, full-stack web products.
+              for me, continuous learning isn't a chore; it's the most fulfilling part of being an engineer.
             </p>
-          </div>
 
-          {/* Right Column: Philosophy Card */}
-          <div className="w-full xl:w-auto flex justify-center xl:justify-end xl:sticky xl:top-24">
-            <div
-              data-cursor-expand
-              className="relative w-full max-w-sm rounded-xs border border-zinc-200/90 bg-white/70 backdrop-blur-md p-6 shadow-xs transition-all duration-300 hover:border-zinc-300 hover:shadow-md"
-            >
-              <h3 className="font-semibold text-lg text-zinc-900 tracking-tight">philosophy</h3>
-              <p className="mt-2 text-sm text-zinc-600 leading-relaxed">
-                "I'd rather ship slow and solid than fast and fragile. Every project is an opportunity to build
-                something that feels precise, calm, and durable, not just 'done'."
-              </p>
-              <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between">
-                <Link
-                  href="#kontak"
-                  className="font-mono text-xs text-indigo-600 hover:text-indigo-800 transition-colors font-medium hover:underline"
-                >
-                  [/philosophy]
-                </Link>
-                <span className="text-[11px] font-mono text-zinc-400">UNU KEBUMEN</span>
-              </div>
-            </div>
           </div>
 
           <PlusSeparator position={["top-left", "top-right"]} />
@@ -309,17 +272,17 @@ export default function AboutSection() {
         </div>
       </div>
 
-      {/* 4. Active Selected Skill Detail Showcase */}
+      {/* 4. Active Selected Skill Detail Showcase (Pure SVG Brand Logos matching hexaa.sh) */}
       <div className="w-full border-b border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-12 sm:py-16 border-x border-zinc-200/80 min-h-[320px] flex flex-col justify-center items-center overflow-hidden">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-12 sm:py-16 border-x border-zinc-200/80 min-h-[300px] flex flex-col justify-center items-center overflow-hidden">
           
           <AnimatePresence mode="wait">
             <motion.div
               key={currentContent.id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, y: -14 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col items-center text-center max-w-3xl"
             >
               {/* Title */}
@@ -332,20 +295,20 @@ export default function AboutSection() {
                 {currentContent.subtitle}
               </p>
 
-              {/* Tools & Tech Icons */}
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+              {/* Tools & Tech Icons - Clean brand logos without bulky boxes, matching hexaa.sh */}
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-10">
                 {currentContent.tools.map((tool) => {
                   const Icon = tool.icon;
                   return (
                     <div
                       key={tool.name}
                       data-cursor-expand
-                      className="group flex flex-col items-center gap-2 p-2.5 rounded-lg hover:bg-zinc-100/80 transition-colors"
+                      className="group flex flex-col items-center gap-2 cursor-pointer transition-transform duration-200 hover:-translate-y-1"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-white border border-zinc-200 shadow-2xs flex items-center justify-center text-zinc-800 group-hover:scale-110 transition-transform">
-                        <Icon className="w-5 h-5" />
+                      <div className="w-10 h-10 flex items-center justify-center text-zinc-700 group-hover:text-zinc-950 transition-colors">
+                        <Icon size={32} className="w-8 h-8 transition-transform duration-200 group-hover:scale-110" />
                       </div>
-                      <span className="text-xs font-mono text-zinc-600 group-hover:text-zinc-900 transition-colors">
+                      <span className="text-xs sm:text-sm font-sans text-zinc-500 group-hover:text-zinc-900 transition-colors">
                         {tool.name}
                       </span>
                     </div>
@@ -355,8 +318,8 @@ export default function AboutSection() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Subtle Ambient Light Glow at Bottom */}
-          <div className="pointer-events-none absolute -bottom-10 left-1/4 right-1/4 h-24 bg-gradient-to-t from-indigo-200/25 via-sky-200/20 to-transparent blur-3xl -z-10" />
+          {/* Subtle Ambient Glow */}
+          <div className="pointer-events-none absolute -bottom-10 left-1/4 right-1/4 h-24 bg-gradient-to-t from-indigo-200/20 via-sky-200/15 to-transparent blur-3xl -z-10" />
 
           {/* Progress Indicator - Bottom Right */}
           <div className="absolute right-4 sm:right-6 bottom-4 z-20">

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MessageSquare, Menu, X, ArrowUpRight } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 
@@ -10,13 +10,13 @@ export interface NavItem {
 }
 
 const defaultNavLinks: NavItem[] = [
-  { label: "Beranda", href: "#hero" },
-  { label: "Tentang", href: "#about" },
-  { label: "Keahlian", href: "#tech-stack" },
-  { label: "Proyek Web", href: "#projects" },
-  { label: "Sertifikat", href: "#certificates" },
-  { label: "Pengalaman", href: "#experience" },
-  { label: "Kontak", href: "#contact" },
+  { label: "Home", href: "#hero" },
+  { label: "About", href: "#tentang" },
+  { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
+  { label: "Certificates", href: "#certificates" },
+  { label: "Experience", href: "#experience" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function GlashmorphismNavigation({
@@ -25,32 +25,54 @@ export function GlashmorphismNavigation({
   links?: NavItem[];
 }) {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeHash, setActiveHash] = useState("#hero");
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 15);
+      const currentScrollY = window.scrollY;
+
+      // Always visible near top of page
+      if (currentScrollY < 60) {
+        setVisible(true);
+      } else if (currentScrollY > lastScrollY.current && currentScrollY - lastScrollY.current > 8) {
+        // Scrolling DOWN -> hide navbar to avoid covering content
+        setVisible(false);
+        setMobileMenuOpen(false);
+      } else if (currentScrollY < lastScrollY.current && lastScrollY.current - currentScrollY > 8) {
+        // Scrolling UP -> reveal navbar smoothly
+        setVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+      setScrolled(currentScrollY > 15);
       const hash = window.location.hash || "#hero";
       setActiveHash(hash);
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header className="fixed top-4 sm:top-5 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 pointer-events-none">
-      {/* Pill capsule with aurora-blended glassmorphism - Refined (-3% trimmed for optimal balance) */}
+    <header
+      className={`fixed top-4 sm:top-5 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 pointer-events-none transition-all duration-300 ease-in-out ${
+        visible ? "translate-y-0 opacity-100" : "-translate-y-28 opacity-0 pointer-events-none"
+      }`}
+    >
+      {/* Pill capsule with aurora-blended glassmorphism - English labels, -3% trimmed size */}
       <div
         className={`pointer-events-auto w-full max-w-[1100px] rounded-full transition-all duration-300 ${
           scrolled
-            ? "bg-white/70 bg-gradient-to-r from-white/85 via-indigo-50/30 to-sky-50/40 backdrop-blur-2xl border border-white/90 shadow-[0_14px_32px_-6px_rgba(99,102,241,0.11),inset_0_1px_2px_rgba(255,255,255,0.95)] py-2 px-5 sm:px-7"
-            : "bg-white/50 bg-gradient-to-r from-white/65 via-indigo-50/25 to-sky-50/35 backdrop-blur-xl border border-white/80 shadow-[0_10px_28px_-4px_rgba(99,102,241,0.07),inset_0_1px_2px_rgba(255,255,255,0.95)] py-2.5 px-5 sm:px-7"
+            ? "bg-white/75 bg-gradient-to-r from-white/90 via-indigo-50/30 to-sky-50/40 backdrop-blur-2xl border border-white/90 shadow-[0_14px_32px_-6px_rgba(99,102,241,0.11),inset_0_1px_2px_rgba(255,255,255,0.95)] py-2 px-5 sm:px-7"
+            : "bg-white/55 bg-gradient-to-r from-white/70 via-indigo-50/25 to-sky-50/35 backdrop-blur-xl border border-white/80 shadow-[0_10px_28px_-4px_rgba(99,102,241,0.07),inset_0_1px_2px_rgba(255,255,255,0.95)] py-2.5 px-5 sm:px-7"
         }`}
       >
         <div className="flex items-center justify-between gap-3 sm:gap-5">
           
-          {/* Desktop Navigation Links - Refined 3% smaller for crisp readability */}
+          {/* Desktop Navigation Links in English */}
           <nav className="hidden md:flex items-center gap-1.5 flex-1">
             {links.map((link) => {
               const isActive = activeHash === link.href;
@@ -93,7 +115,7 @@ export function GlashmorphismNavigation({
               className="inline-flex items-center gap-2 px-5 py-2 sm:px-5.5 sm:py-2.5 rounded-full bg-zinc-950 text-white font-semibold text-[13.5px] sm:text-sm hover:bg-zinc-800 transition-all duration-200 shadow-sm hover:shadow-[0_4px_16px_rgba(99,102,241,0.2)] hover:-translate-y-0.5 cursor-pointer"
             >
               <MessageSquare className="w-3.5 h-3.5 text-indigo-300" />
-              <span>Hubungi Saya</span>
+              <span>Get in Touch</span>
             </a>
           </div>
 
@@ -138,7 +160,7 @@ export function GlashmorphismNavigation({
               className="w-full flex items-center justify-center gap-2 py-2.5 rounded-full bg-zinc-950 text-white font-semibold text-xs shadow-sm"
             >
               <MessageSquare className="w-3.5 h-3.5 text-indigo-300" />
-              <span>Hubungi via WhatsApp</span>
+              <span>Contact via WhatsApp</span>
             </a>
           </div>
         </div>

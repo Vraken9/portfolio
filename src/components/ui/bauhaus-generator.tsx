@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState, type JSX } from "react";
+import React, { useCallback, useEffect, useRef, useState, type JSX, memo } from "react";
 import { cn } from "@/lib/utils";
 
 const divisions = 2;
+const DEFAULT_COLORS = ["#F65009", "#F3C11B", "#3D38F5", "#DE7D02"];
 
 export interface BauhausProps {
   width?: number;
@@ -13,26 +14,26 @@ export interface BauhausProps {
   className?: string;
 }
 
-export function BauhausGenerator({
+function BauhausGeneratorComponent({
   width = 4,
   height = 2,
   size = 18,
-  colors = ["#F65009", "#F3C11B", "#3D38F5", "#DE7D02"],
+  colors = DEFAULT_COLORS,
   className,
 }: BauhausProps) {
   const [svgNodes, setSvgNodes] = useState<JSX.Element[] | null>(null);
+  const isInitializedRef = useRef(false);
 
   const randomBetween = (min: number, max: number) =>
     min + Math.floor(Math.random() * (max - min + 1));
-  const randomBool = () => Math.random() < 0.5;
 
   const getRandomColor = useCallback(() => {
-    if (!colors || colors.length === 0) return "#000000";
-    const c = colors[Math.floor(Math.random() * colors.length)];
+    const palette = colors && colors.length > 0 ? colors : DEFAULT_COLORS;
+    const c = palette[Math.floor(Math.random() * palette.length)];
     return c.startsWith("#") ? c : `#${c}`;
   }, [colors]);
 
-  const shapeSquare = (s: number, color: string) => {
+  const shapeSquare = useCallback((s: number, color: string) => {
     const level = randomBetween(1, divisions);
     const nodes: JSX.Element[] = [];
     for (let i = 1; i < level + 1; i++) {
@@ -50,9 +51,9 @@ export function BauhausGenerator({
       );
     }
     return nodes;
-  };
+  }, []);
 
-  const shapeCircle = (s: number, color: string) => {
+  const shapeCircle = useCallback((s: number, color: string) => {
     const level = randomBetween(1, divisions);
     const nodes: JSX.Element[] = [];
     for (let i = 1; i < level + 1; i++) {
@@ -68,9 +69,9 @@ export function BauhausGenerator({
       );
     }
     return nodes;
-  };
+  }, []);
 
-  const shapeSemi = (s: number, color: string) => {
+  const shapeSemi = useCallback((s: number, color: string) => {
     const rot = randomBetween(0, 3) * 90;
     return [
       <path
@@ -80,9 +81,9 @@ export function BauhausGenerator({
         transform={`rotate(${rot} ${s / 2} ${s / 2})`}
       />,
     ];
-  };
+  }, []);
 
-  const shapeTriangle = (s: number, color: string) => {
+  const shapeTriangle = useCallback((s: number, color: string) => {
     const rot = randomBetween(0, 3) * 90;
     return [
       <polygon
@@ -92,9 +93,9 @@ export function BauhausGenerator({
         transform={`rotate(${rot} ${s / 2} ${s / 2})`}
       />,
     ];
-  };
+  }, []);
 
-  const shapeDots = (s: number, color: string) => {
+  const shapeDots = useCallback((s: number, color: string) => {
     const dSize = s / 4;
     return [
       <circle key={`d1-${Math.random()}`} r={dSize / 2} cx={s / 4} cy={s / 4} fill={color} />,
@@ -102,7 +103,7 @@ export function BauhausGenerator({
       <circle key={`d3-${Math.random()}`} r={dSize / 2} cx={s / 4} cy={(3 * s) / 4} fill={color} />,
       <circle key={`d4-${Math.random()}`} r={dSize / 2} cx={(3 * s) / 4} cy={(3 * s) / 4} fill={color} />,
     ];
-  };
+  }, []);
 
   const renderShape = useCallback(
     (shapeType: number, s: number, color: string) => {
@@ -121,8 +122,7 @@ export function BauhausGenerator({
           return shapeSquare(s, color);
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [divisions]
+    [shapeSquare, shapeCircle, shapeSemi, shapeTriangle, shapeDots]
   );
 
   const generateArt = useCallback(() => {
@@ -150,18 +150,22 @@ export function BauhausGenerator({
     setSvgNodes(elements);
   }, [width, height, size, getRandomColor, renderShape]);
 
+  // Generate ONCE on mount only. Do not regenerate on parent re-renders!
   useEffect(() => {
-    generateArt();
+    if (!isInitializedRef.current) {
+      isInitializedRef.current = true;
+      generateArt();
+    }
   }, [generateArt]);
 
   return (
     <div
       onClick={generateArt}
       className={cn(
-        "cursor-pointer inline-flex items-center justify-center p-1 rounded hover:opacity-80 transition-opacity",
+        "cursor-pointer inline-flex items-center justify-center p-1 rounded hover:opacity-80 transition-opacity select-none",
         className
       )}
-      title="Click to regenerate Bauhaus artwork"
+      title="Click to generate new Bauhaus artwork"
     >
       <svg
         width={width * size}
@@ -174,3 +178,5 @@ export function BauhausGenerator({
     </div>
   );
 }
+
+export const BauhausGenerator = memo(BauhausGeneratorComponent);
