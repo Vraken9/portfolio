@@ -22,18 +22,16 @@ export default function Home() {
           {/* Center Stage: 1 Single Massive Running Text in Background + Enlarged Photo in Foreground */}
           <div className="relative w-full flex-1 flex flex-col items-center justify-end overflow-hidden">
             
-            {/* 1 Single Massive Running Text Row (Positioned behind photo) */}
+            {/* 1 Single Massive Running Text Row (Positioned behind photo, hardware accelerated) */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10 opacity-75">
               <div className="w-full overflow-hidden">
-                <Marquee duration={35} className="py-2">
-                  {Array.from({ length: 4 }).map((_, i) => (
-                    <span
-                      key={i}
-                      className="text-outline-stroke-hero text-9xl sm:text-[140px] md:text-[200px] lg:text-[270px] xl:text-[340px] font-black tracking-widest uppercase whitespace-nowrap px-10 sm:px-16 lg:px-24 select-none leading-none"
-                    >
-                      AKHYAR MUALIF
-                    </span>
-                  ))}
+                <Marquee duration={26} className="py-2">
+                  <span className="text-outline-stroke-hero text-8xl sm:text-[140px] md:text-[200px] lg:text-[280px] xl:text-[360px] font-black tracking-widest uppercase whitespace-nowrap px-8 sm:px-14 lg:px-20 select-none leading-none">
+                    AKHYAR MUALIF
+                  </span>
+                  <span className="text-outline-stroke-hero text-8xl sm:text-[140px] md:text-[200px] lg:text-[280px] xl:text-[360px] font-black tracking-widest uppercase whitespace-nowrap px-8 sm:px-14 lg:px-20 select-none leading-none">
+                    AKHYAR MUALIF
+                  </span>
                 </Marquee>
               </div>
             </div>
@@ -53,11 +51,7 @@ export default function Home() {
 
               {/* Cutout Half-Body Photo - Scaled up significantly */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/profile-half.png"
-                alt="Akhyar Mualif"
-                className="h-[520px] sm:h-[640px] md:h-[740px] lg:h-[840px] xl:h-[890px] w-auto object-contain object-bottom drop-shadow-[0_25px_50px_rgba(0,0,0,0.2)] [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)] select-none pointer-events-none will-change-transform"
-              />
+             
             </motion.div>
 
           </div>

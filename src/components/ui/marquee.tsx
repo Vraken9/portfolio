@@ -7,51 +7,47 @@ interface MarqueeProps {
   reverse?: boolean;
   pauseOnHover?: boolean;
   children?: React.ReactNode;
-  repeat?: number;
   duration?: number;
 }
 
 export function Marquee({
   className = "",
   reverse = false,
-  pauseOnHover = true,
+  pauseOnHover = false,
   children,
-  repeat = 2,
-  duration,
+  duration = 28,
 }: MarqueeProps) {
-  const durationStyle = duration ? { animationDuration: `${duration}s` } : undefined;
+  const durationStyle = {
+    animationDuration: `${duration}s`,
+  };
 
   return (
     <div
-      className={`group relative flex overflow-hidden select-none gap-8 ${className}`}
+      className={`group relative flex overflow-hidden select-none w-full ${className}`}
     >
       {/* Track 1 */}
       <div
         style={durationStyle}
         className={`${
           reverse ? "animate-marquee-reverse" : "animate-marquee"
-        } flex shrink-0 items-center justify-around gap-8 ${
+        } flex shrink-0 items-center will-change-transform ${
           pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""
         }`}
       >
-        {Array.from({ length: repeat }).map((_, i) => (
-          <React.Fragment key={i}>{children}</React.Fragment>
-        ))}
+        {children}
       </div>
 
-      {/* Track 2 (seamless continuation) */}
+      {/* Track 2 (exact clone for 100% seamless infinite loop) */}
       <div
         aria-hidden="true"
         style={durationStyle}
         className={`${
           reverse ? "animate-marquee-reverse" : "animate-marquee"
-        } flex shrink-0 items-center justify-around gap-8 ${
+        } flex shrink-0 items-center will-change-transform ${
           pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""
         }`}
       >
-        {Array.from({ length: repeat }).map((_, i) => (
-          <React.Fragment key={i}>{children}</React.Fragment>
-        ))}
+        {children}
       </div>
     </div>
   );
