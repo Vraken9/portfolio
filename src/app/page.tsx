@@ -10,7 +10,7 @@ import { ArrowDown } from "lucide-react";
 
 export default function Home() {
   return (
-    <MagneticCursor blendMode="difference" cursorSize={34}>
+    <MagneticCursor blendMode="difference" cursorSize={22}>
       <main className="relative min-h-screen bg-zinc-50 overflow-x-hidden selection:bg-indigo-500 selection:text-white">
         {/* Floating Glassmorphism Navigation (Sweet spot +5-10% size) */}
         <Navbar />
@@ -22,19 +22,19 @@ export default function Home() {
             {/* Top Spacing to account for fixed navbar */}
             <div className="w-full h-10 sm:h-16" />
 
-            {/* Center Stage: 1 Single Massive Running Text Row (Centered, Interactive Invert on Hover) */}
+            {/* Center Stage: 1 Single Massive Running Text Row (Centered, Non-stopping, Clean Outline) */}
             <div className="relative w-full flex-1 flex flex-col items-center justify-center overflow-hidden my-auto py-12">
               
-              {/* Massive Hollow Running Text */}
+              {/* Massive Hollow Running Text - Never pauses on hover */}
               <div
                 data-cursor-invert
-                className="w-full overflow-hidden cursor-none select-none py-4"
+                className="w-full overflow-hidden select-none py-4 pointer-events-auto"
               >
-                <Marquee duration={28} className="py-2">
-                  <span className="text-outline-stroke-hero text-8xl sm:text-[140px] md:text-[200px] lg:text-[280px] xl:text-[360px] font-black tracking-widest uppercase whitespace-nowrap px-8 sm:px-14 lg:px-20 select-none leading-none">
+                <Marquee duration={28} pauseOnHover={false} className="py-2">
+                  <span className="text-outline-stroke-hero text-8xl sm:text-[140px] md:text-[200px] lg:text-[280px] xl:text-[340px] font-normal tracking-[0.06em] sm:tracking-[0.08em] uppercase whitespace-nowrap px-8 sm:px-14 lg:px-20 select-none leading-none">
                     AKHYAR MUALIF
                   </span>
-                  <span className="text-outline-stroke-hero text-8xl sm:text-[140px] md:text-[200px] lg:text-[280px] xl:text-[360px] font-black tracking-widest uppercase whitespace-nowrap px-8 sm:px-14 lg:px-20 select-none leading-none">
+                  <span className="text-outline-stroke-hero text-8xl sm:text-[140px] md:text-[200px] lg:text-[280px] xl:text-[340px] font-normal tracking-[0.06em] sm:tracking-[0.08em] uppercase whitespace-nowrap px-8 sm:px-14 lg:px-20 select-none leading-none">
                     AKHYAR MUALIF
                   </span>
                 </Marquee>

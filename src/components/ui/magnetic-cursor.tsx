@@ -12,9 +12,9 @@ interface MagneticCursorProps {
 }
 
 export function MagneticCursor({
-  magneticFactor = 0.4,
+  magneticFactor = 0.35,
   blendMode = "difference",
-  cursorSize = 34,
+  cursorSize = 22,
   color = "#ffffff",
   children,
 }: MagneticCursorProps) {
@@ -25,7 +25,7 @@ export function MagneticCursor({
   const idleTimer = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Only disable on small touch-only mobile screens (smartphones/tablets without pointer)
+    // Only disable on small touch-only mobile devices (smartphones without fine pointer)
     const isTouchOnly =
       typeof window !== "undefined" &&
       window.matchMedia("(max-width: 768px) and (pointer: coarse)").matches;
@@ -44,7 +44,7 @@ export function MagneticCursor({
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
 
-      // On first mouse movement, snap directly to pointer coordinates with no jump from offscreen
+      // On first mouse movement, snap directly to pointer coordinates without offscreen jump
       if (pos.current.x < 0) {
         pos.current.x = clientX;
         pos.current.y = clientY;
@@ -57,7 +57,7 @@ export function MagneticCursor({
       pos.current.targetX = clientX;
       pos.current.targetY = clientY;
 
-      // Instantly reveal cursor on movement with snappy smooth transition
+      // Instantly reveal cursor on movement
       gsap.to(cursor, {
         opacity: 1,
         duration: 0.15,
@@ -65,23 +65,15 @@ export function MagneticCursor({
         ease: "power1.out",
       });
 
-      // Reset 1-second (1000ms) inactivity timer
-      if (idleTimer.current) clearTimeout(idleTimer.current);
-      idleTimer.current = setTimeout(() => {
-        // Smoothly fade out when stationary for 1 second
-        gsap.to(cursor, {
-          opacity: 0,
-          duration: 0.35,
-          ease: "power2.out",
-        });
-      }, 1000);
-
       // Check if mouse is hovering over interactive elements or text designated for inversion
       const target = (e.target as HTMLElement)?.closest(
-        "[data-magnetic], [data-cursor-invert], a, button, nav, header"
+        "[data-magnetic], [data-cursor-invert], a, button, nav, header, [role='button'], .cursor-pointer"
       ) as HTMLElement | null;
 
       if (target) {
+        // Clear idle timer while hovering interactive elements so the inversion lens remains visible
+        if (idleTimer.current) clearTimeout(idleTimer.current);
+
         const isMarquee = target.hasAttribute("data-cursor-invert");
         const isMagnetic = target.hasAttribute("data-magnetic");
 
@@ -98,8 +90,8 @@ export function MagneticCursor({
           pos.current.targetY = centerY + distY * (1 - magneticFactor);
         }
 
-        // Distinct large aperture inversion lens: 3.2x on giant running marquee, 2.2x on nav links/buttons
-        const targetScale = isMarquee ? 3.2 : 2.2;
+        // Slightly enlarge on hover (1.85x on nav/buttons, 2.1x on running text) for a clear, stunning inversion lens
+        const targetScale = isMarquee ? 2.1 : 1.85;
 
         if (!isHovered.current || currentScale.current !== targetScale) {
           isHovered.current = true;
@@ -116,10 +108,20 @@ export function MagneticCursor({
           currentScale.current = 1;
           gsap.to(cursor, {
             scale: 1,
-            duration: 0.28,
+            duration: 0.25,
             ease: "power2.out",
           });
         }
+
+        // Reset 1-second (1000ms) inactivity timer only when on empty background
+        if (idleTimer.current) clearTimeout(idleTimer.current);
+        idleTimer.current = setTimeout(() => {
+          gsap.to(cursor, {
+            opacity: 0,
+            duration: 0.35,
+            ease: "power2.out",
+          });
+        }, 1000);
       }
     };
 
@@ -134,7 +136,7 @@ export function MagneticCursor({
 
     const handleMouseDown = () => {
       gsap.to(cursor, {
-        scale: currentScale.current * 0.82,
+        scale: currentScale.current * 0.85,
         duration: 0.12,
       });
     };
@@ -178,7 +180,7 @@ export function MagneticCursor({
 
   return (
     <>
-      {/* Fluid Inversion Cursor Disc - Pure fluid lens, NO center dot */}
+      {/* Fluid Inversion Cursor Disc - Pure fluid lens, NO center dot, compact sleek size */}
       <div
         ref={cursorRef}
         aria-hidden="true"

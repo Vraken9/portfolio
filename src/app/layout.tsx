@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Syne, Outfit } from "next/font/google";
+import { Plus_Jakarta_Sans, Bebas_Neue, Montserrat } from "next/font/google";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -8,16 +8,16 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
 });
 
-const syne = Syne({
+const bebasNeue = Bebas_Neue({
   subsets: ["latin"],
-  weight: ["700", "800"],
-  variable: "--font-syne",
+  weight: "400",
+  variable: "--font-bebas",
 });
 
-const outfit = Outfit({
+const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["800", "900"],
-  variable: "--font-outfit",
+  variable: "--font-montserrat",
 });
 
 export const metadata: Metadata = {
@@ -53,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${plusJakartaSans.variable} ${syne.variable} ${outfit.variable} scroll-smooth`}
+      className={`${plusJakartaSans.variable} ${bebasNeue.variable} ${montserrat.variable} scroll-smooth`}
     >
       <body className="min-h-screen bg-zinc-50 text-zinc-900 font-sans antialiased selection:bg-cyan-500/20 selection:text-cyan-900">
         {children}

@@ -78,11 +78,6 @@ body {
   will-change: transform;
 }
 
-.animate-marquee:hover,
-.animate-marquee-reverse:hover {
-  animation-play-state: paused;
-}
-
 /* Glassmorphism utility for light theme */
 .glass-panel {
   background: rgba(255, 255, 255, 0.7);
@@ -122,24 +117,24 @@ body {
   -webkit-text-stroke: 1.5px rgba(99, 102, 241, 0.35);
 }
 
-/* Hero massive outline stroke - strictly hollow line, high-contrast wireframe */
+/* Hero massive outline stroke - Bebas Neue architectural display font, strictly hollow wireframe */
 .text-outline-stroke-hero {
-  font-family: var(--font-syne), var(--font-outfit), sans-serif;
+  font-family: var(--font-bebas), var(--font-montserrat), sans-serif;
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
-  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-width: 2.5px;
   -webkit-text-stroke-color: rgba(24, 24, 27, 0.72);
-  transition: -webkit-text-stroke-color 0.2s ease;
+  letter-spacing: 0.06em;
 }
 @media (min-width: 640px) {
   .text-outline-stroke-hero {
-    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-width: 3.5px;
     -webkit-text-stroke-color: rgba(24, 24, 27, 0.72);
   }
 }
 @media (min-width: 1024px) {
   .text-outline-stroke-hero {
-    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-width: 4.5px;
     -webkit-text-stroke-color: rgba(24, 24, 27, 0.72);
   }
 }
