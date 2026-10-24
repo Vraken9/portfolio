@@ -40,18 +40,18 @@ export function GlashmorphismNavigation({
 
   return (
     <header className="fixed top-4 sm:top-6 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 lg:px-8 pointer-events-none">
-      {/* Enlarged Main Container Width (matches max-w-7xl) with Glassmorphism */}
+      {/* Pill capsule with aurora-blended glassmorphism & full rounding */}
       <div
-        className={`pointer-events-auto w-full max-w-7xl rounded-2xl sm:rounded-3xl transition-all duration-300 ${
+        className={`pointer-events-auto w-full max-w-7xl rounded-full transition-all duration-500 ${
           scrolled
-            ? "bg-white/85 backdrop-blur-2xl border border-zinc-200/90 shadow-[0_16px_40px_-8px_rgba(0,0,0,0.08)] py-3.5 px-6 sm:px-10"
-            : "bg-white/70 backdrop-blur-xl border border-white/90 shadow-[0_10px_35px_rgba(0,0,0,0.04)] py-4 px-6 sm:px-10"
+            ? "bg-white/60 bg-gradient-to-r from-white/70 via-indigo-50/30 to-sky-50/40 backdrop-blur-2xl border border-white/80 shadow-[0_16px_40px_-6px_rgba(99,102,241,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] py-3 px-6 sm:px-10"
+            : "bg-white/40 bg-gradient-to-r from-white/50 via-indigo-50/20 to-sky-50/30 backdrop-blur-xl border border-white/70 shadow-[0_12px_36px_-6px_rgba(99,102,241,0.08),inset_0_1px_2px_rgba(255,255,255,0.9)] py-3.5 px-6 sm:px-10"
         }`}
       >
         <div className="flex items-center justify-between gap-6">
           
-          {/* Desktop Navigation Links - Enlarged & Proportional */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2 flex-1">
+          {/* Desktop Navigation Links - Larger typography, fully rounded pills */}
+          <nav className="hidden md:flex items-center gap-1.5 lg:gap-2 flex-1">
             {links.map((link) => {
               const isActive = activeHash === link.href;
               return (
@@ -59,10 +59,10 @@ export function GlashmorphismNavigation({
                   key={link.href}
                   href={link.href}
                   onClick={() => setActiveHash(link.href)}
-                  className={`px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-200 cursor-pointer ${
+                  className={`px-5 py-2.5 text-base font-semibold rounded-full transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? "text-zinc-950 bg-zinc-100/90 font-semibold shadow-xs"
-                      : "text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100/70"
+                      ? "text-zinc-950 bg-white/85 shadow-[0_4px_16px_rgba(99,102,241,0.1)] border border-white/90 scale-[1.02]"
+                      : "text-zinc-700 hover:text-zinc-950 hover:bg-white/50 hover:shadow-xs"
                   }`}
                 >
                   {link.label}
@@ -71,37 +71,37 @@ export function GlashmorphismNavigation({
             })}
           </nav>
 
-          {/* Right Action Buttons */}
+          {/* Right Action Buttons - Fully rounded & enlarged */}
           <div className="hidden md:flex items-center gap-3">
             <a
               href={PERSONAL_INFO.socials.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2.5 text-sm font-medium text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100/70 rounded-xl transition-all inline-flex items-center gap-1.5"
+              className="px-5 py-2.5 text-base font-semibold text-zinc-700 hover:text-zinc-950 hover:bg-white/50 rounded-full transition-all duration-300 inline-flex items-center gap-1.5 border border-transparent hover:border-white/60"
             >
               <span>GitHub</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
+              <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-zinc-700" />
             </a>
 
             <a
               href={PERSONAL_INFO.socials.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-zinc-900 text-white font-medium text-sm hover:bg-zinc-800 transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
+              className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-zinc-950 text-white font-semibold text-base hover:bg-zinc-800 transition-all duration-300 shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.25)] hover:-translate-y-0.5 cursor-pointer"
             >
-              <MessageSquare className="w-4 h-4" />
+              <MessageSquare className="w-4 h-4 text-indigo-300" />
               <span>Hubungi Saya</span>
             </a>
           </div>
 
           {/* Mobile View Toggle */}
           <div className="flex md:hidden items-center justify-between w-full">
-            <span className="text-xs font-mono font-bold tracking-wider text-zinc-700 uppercase">
+            <span className="text-sm font-mono font-bold tracking-wider text-zinc-800 uppercase">
               Navigasi Portfolio
             </span>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 transition-colors"
+              className="p-2.5 rounded-full bg-white/70 hover:bg-white/90 text-zinc-900 border border-white/80 transition-colors shadow-xs"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -111,9 +111,9 @@ export function GlashmorphismNavigation({
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer with matching rounded & aurora glassmorphism */}
       {mobileMenuOpen && (
-        <div className="pointer-events-auto absolute top-20 left-4 right-4 bg-white/95 backdrop-blur-2xl border border-zinc-200/90 rounded-2xl p-5 shadow-2xl flex flex-col gap-2 md:hidden animate-in fade-in slide-in-from-top-3">
+        <div className="pointer-events-auto absolute top-20 left-4 right-4 bg-white/80 bg-gradient-to-b from-white/90 via-indigo-50/30 to-sky-50/40 backdrop-blur-2xl border border-white/80 rounded-3xl p-6 shadow-[0_20px_50px_rgba(99,102,241,0.15)] flex flex-col gap-2.5 md:hidden animate-in fade-in slide-in-from-top-3">
           {links.map((link) => (
             <a
               key={link.href}
@@ -122,19 +122,19 @@ export function GlashmorphismNavigation({
                 setActiveHash(link.href);
                 setMobileMenuOpen(false);
               }}
-              className="px-4 py-3 text-sm font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100/80 rounded-xl transition-colors"
+              className="px-5 py-3.5 text-base font-semibold text-zinc-800 hover:text-zinc-950 hover:bg-white/70 rounded-full transition-colors"
             >
               {link.label}
             </a>
           ))}
-          <div className="pt-3 border-t border-zinc-100 mt-1 flex flex-col gap-2">
+          <div className="pt-3 border-t border-zinc-200/60 mt-1 flex flex-col gap-2">
             <a
               href={PERSONAL_INFO.socials.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-zinc-900 text-white font-medium text-sm shadow-sm"
+              className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-full bg-zinc-950 text-white font-semibold text-base shadow-md"
             >
-              <MessageSquare className="w-4 h-4" />
+              <MessageSquare className="w-4 h-4 text-indigo-300" />
               <span>Hubungi via WhatsApp</span>
             </a>
           </div>
