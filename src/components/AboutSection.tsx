@@ -8,7 +8,7 @@ import { Marquee } from "@/components/ui/marquee";
 import { BauhausGenerator } from "@/components/ui/bauhaus-generator";
 import { Star12, Star15, Star28, Star3, Star40 } from "@/components/ui/star-icons";
 import { BrandIcons } from "@/components/ui/brand-icons";
-import { BackgroundSnipped } from "@/components/ui/background-snipped";
+import { BackgroundSnippets } from "@/components/ui/background-snippets";
 import { cn } from "@/lib/utils";
 
 interface SkillContent {
@@ -152,10 +152,10 @@ export default function AboutSection() {
     <section id="tentang" className="relative w-full overflow-hidden text-zinc-900 border-t border-zinc-200/80">
       
       {/* Precision Grid Pattern Background with Lavender Ambient Glow */}
-      <BackgroundSnipped />
+      <BackgroundSnippets />
 
       {/* 1. Header Bar: [Time] on Left, Bauhaus Artwork on Right */}
-      <div className="w-full border-b border-zinc-200/80 bg-white/40 backdrop-blur-xs">
+      <div className="w-full border-b border-zinc-200/80">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-3 border-x border-zinc-200/80 flex items-center justify-between">
           <Link
             href="https://time.is/Jakarta"
@@ -176,7 +176,7 @@ export default function AboutSection() {
       </div>
 
       {/* 2. Main Bio Narrative */}
-      <div className="w-full border-b border-zinc-200/80 bg-white/40 backdrop-blur-xs">
+      <div className="w-full border-b border-zinc-200/80">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-16 sm:py-20 border-x border-zinc-200/80">
           <div className="max-w-3xl">
             
@@ -219,12 +219,12 @@ export default function AboutSection() {
       </div>
 
       {/* 3. Running Text Skills Pill Marquee with Star Dividers */}
-      <div className="w-full border-b border-zinc-200/80 bg-white/50 backdrop-blur-xs">
+      <div className="w-full border-b border-zinc-200/80">
         <div className="relative mx-auto max-w-7xl border-x border-zinc-200/80 py-3 overflow-hidden select-none">
           
           {/* Blind White Shadow Mask Left & Right */}
-          <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-16 sm:w-28 md:w-44 bg-gradient-to-r from-zinc-50 via-zinc-50/90 to-transparent z-10" />
-          <div className="pointer-events-none absolute top-0 bottom-0 right-0 w-16 sm:w-28 md:w-44 bg-gradient-to-l from-zinc-50 via-zinc-50/90 to-transparent z-10" />
+          <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-16 sm:w-28 md:w-44 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
+          <div className="pointer-events-none absolute top-0 bottom-0 right-0 w-16 sm:w-28 md:w-44 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
 
           {/* Interactive Marquee */}
           <Marquee duration={32} pauseOnHover={false} className="py-1">
@@ -268,7 +268,7 @@ export default function AboutSection() {
       </div>
 
       {/* 4. Active Selected Skill Detail Showcase (Authentic colors revealed on cursor hover) */}
-      <div className="w-full border-b border-zinc-200/80 bg-white/40 backdrop-blur-xs">
+      <div className="w-full border-b border-zinc-200/80">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-12 sm:py-16 border-x border-zinc-200/80 min-h-[300px] flex flex-col justify-center items-center overflow-hidden">
           
           <AnimatePresence mode="wait">
