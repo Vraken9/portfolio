@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { PlusSeparator } from "@/components/ui/plus-separator";
@@ -8,16 +8,8 @@ import { Marquee } from "@/components/ui/marquee";
 import { BauhausGenerator } from "@/components/ui/bauhaus-generator";
 import { Star12, Star15, Star28, Star3, Star40 } from "@/components/ui/star-icons";
 import { BrandIcons } from "@/components/ui/brand-icons";
+import { BackgroundSnipped } from "@/components/ui/background-snipped";
 import { cn } from "@/lib/utils";
-import {
-  Rocket,
-  Layers,
-  GraduationCap,
-  Sparkles,
-  Network,
-  Workflow,
-  Cpu,
-} from "lucide-react";
 
 interface SkillContent {
   id: string;
@@ -64,9 +56,9 @@ const skillsData: Record<string, SkillContent> = {
       "Building Retrieval-Augmented Generation pipelines, vector embeddings search, and end-to-end intelligent automation flows.",
     tools: [
       { name: "Vector DB", icon: BrandIcons.VectorDB },
-      { name: "LangGraph", icon: Network },
-      { name: "Automation Flow", icon: Workflow },
-      { name: "FastAPI RAG", icon: Cpu },
+      { name: "LangGraph", icon: BrandIcons.LangGraph },
+      { name: "Automation Flow", icon: BrandIcons.AutomationFlow },
+      { name: "FastAPI RAG", icon: BrandIcons.FastAPI },
       { name: "Python", icon: BrandIcons.Python },
     ],
   },
@@ -76,10 +68,10 @@ const skillsData: Record<string, SkillContent> = {
     subtitle:
       "Transforming curious ideas into real-world software, completing rigorous courses, and building production-ready final projects.",
     tools: [
-      { name: "Product Strategy", icon: Rocket },
-      { name: "System Design", icon: Layers },
-      { name: "Course Projects", icon: GraduationCap },
-      { name: "Innovation", icon: Sparkles },
+      { name: "Product Strategy", icon: BrandIcons.ProductStrategy },
+      { name: "System Design", icon: BrandIcons.SystemDesign },
+      { name: "Course Projects", icon: BrandIcons.CourseProjects },
+      { name: "Innovation", icon: BrandIcons.Innovation },
     ],
   },
   uiux: {
@@ -157,10 +149,13 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section id="tentang" className="relative w-full bg-zinc-50/90 text-zinc-900 border-t border-zinc-200/80">
+    <section id="tentang" className="relative w-full overflow-hidden text-zinc-900 border-t border-zinc-200/80">
       
+      {/* Precision Grid Pattern Background with Lavender Ambient Glow */}
+      <BackgroundSnipped />
+
       {/* 1. Header Bar: [Time] on Left, Bauhaus Artwork on Right */}
-      <div className="w-full border-b border-zinc-200/80">
+      <div className="w-full border-b border-zinc-200/80 bg-white/40 backdrop-blur-xs">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-3 border-x border-zinc-200/80 flex items-center justify-between">
           <Link
             href="https://time.is/Jakarta"
@@ -180,8 +175,8 @@ export default function AboutSection() {
         </div>
       </div>
 
-      {/* 2. Main Bio Narrative (Philosophy card removed as requested) */}
-      <div className="w-full border-b border-zinc-200/80">
+      {/* 2. Main Bio Narrative */}
+      <div className="w-full border-b border-zinc-200/80 bg-white/40 backdrop-blur-xs">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-16 sm:py-20 border-x border-zinc-200/80">
           <div className="max-w-3xl">
             
@@ -224,7 +219,7 @@ export default function AboutSection() {
       </div>
 
       {/* 3. Running Text Skills Pill Marquee with Star Dividers */}
-      <div className="w-full border-b border-zinc-200/80">
+      <div className="w-full border-b border-zinc-200/80 bg-white/50 backdrop-blur-xs">
         <div className="relative mx-auto max-w-7xl border-x border-zinc-200/80 py-3 overflow-hidden select-none">
           
           {/* Blind White Shadow Mask Left & Right */}
@@ -272,8 +267,8 @@ export default function AboutSection() {
         </div>
       </div>
 
-      {/* 4. Active Selected Skill Detail Showcase (Pure SVG Brand Logos matching hexaa.sh) */}
-      <div className="w-full border-b border-zinc-200/80">
+      {/* 4. Active Selected Skill Detail Showcase (Authentic colors revealed on cursor hover) */}
+      <div className="w-full border-b border-zinc-200/80 bg-white/40 backdrop-blur-xs">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-12 sm:py-16 border-x border-zinc-200/80 min-h-[300px] flex flex-col justify-center items-center overflow-hidden">
           
           <AnimatePresence mode="wait">
@@ -295,20 +290,20 @@ export default function AboutSection() {
                 {currentContent.subtitle}
               </p>
 
-              {/* Tools & Tech Icons - Clean brand logos without bulky boxes, matching hexaa.sh */}
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+              {/* Tools & Tech Icons - Grayscale by default, bursting into authentic brand colors on hover */}
+              <div className="mt-9 flex flex-wrap items-center justify-center gap-7 sm:gap-11">
                 {currentContent.tools.map((tool) => {
                   const Icon = tool.icon;
                   return (
                     <div
                       key={tool.name}
                       data-cursor-expand
-                      className="group flex flex-col items-center gap-2 cursor-pointer transition-transform duration-200 hover:-translate-y-1"
+                      className="group flex flex-col items-center gap-2.5 cursor-pointer transition-all duration-300 hover:-translate-y-1.5"
                     >
-                      <div className="w-10 h-10 flex items-center justify-center text-zinc-700 group-hover:text-zinc-950 transition-colors">
-                        <Icon size={32} className="w-8 h-8 transition-transform duration-200 group-hover:scale-110" />
+                      <div className="w-11 h-11 flex items-center justify-center transition-all duration-300 filter grayscale opacity-45 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 group-hover:drop-shadow-[0_6px_14px_rgba(0,0,0,0.12)]">
+                        <Icon size={34} className="w-8 h-8 sm:w-9 sm:h-9 transition-transform duration-300" />
                       </div>
-                      <span className="text-xs sm:text-sm font-sans text-zinc-500 group-hover:text-zinc-900 transition-colors">
+                      <span className="text-xs sm:text-sm font-sans text-zinc-400 group-hover:text-zinc-950 transition-colors duration-200 font-medium tracking-tight">
                         {tool.name}
                       </span>
                     </div>
@@ -317,9 +312,6 @@ export default function AboutSection() {
               </div>
             </motion.div>
           </AnimatePresence>
-
-          {/* Subtle Ambient Glow */}
-          <div className="pointer-events-none absolute -bottom-10 left-1/4 right-1/4 h-24 bg-gradient-to-t from-indigo-200/20 via-sky-200/15 to-transparent blur-3xl -z-10" />
 
           {/* Progress Indicator - Bottom Right */}
           <div className="absolute right-4 sm:right-6 bottom-4 z-20">

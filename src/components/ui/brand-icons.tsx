@@ -5,7 +5,7 @@ interface BrandIconProps extends React.SVGProps<SVGSVGElement> {
 }
 
 export const BrandIcons = {
-  // Python
+  // Python - Official dual-tone Blue & Yellow
   Python: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
@@ -18,16 +18,16 @@ export const BrandIcons = {
     >
       <path
         d="M11.914 2c-5.042 0-4.73 2.186-4.73 2.186l.005 2.266h4.785v.68H5.196s-3.196.363-3.196 4.717c0 4.355 2.784 4.54 2.784 4.54h1.662v-2.33s-.09-2.783 2.723-2.783h4.697s2.632.042 2.632-2.553V4.553S16.956 2 11.914 2zm-2.58 1.488a.86.86 0 11.002 1.72.86.86 0 01-.002-1.72z"
-        fill="currentColor"
+        fill="#3776AB"
       />
       <path
         d="M12.086 22c5.042 0 4.73-2.186 4.73-2.186l-.005-2.266h-4.785v-.68h6.778s3.196-.363 3.196-4.717c0-4.355-2.784-4.54-2.784-4.54h-1.662v2.33s.09 2.783-2.723 2.783H10.14s-2.632-.042-2.632 2.553v4.168S7.044 22 12.086 22zm2.58-1.488a.86.86 0 11-.002-1.72.86.86 0 01.002 1.72z"
-        fill="currentColor"
+        fill="#FFD43B"
       />
     </svg>
   ),
 
-  // LangChain
+  // LangChain - Signature Emerald Green & Dark Teal
   LangChain: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
@@ -38,30 +38,30 @@ export const BrandIcons = {
       className={className}
       {...props}
     >
-      <circle cx="6.5" cy="12" r="3.5" stroke="currentColor" strokeWidth="2" />
-      <circle cx="17.5" cy="12" r="3.5" stroke="currentColor" strokeWidth="2" />
+      <circle cx="6.5" cy="12" r="3.5" stroke="#10B981" strokeWidth="2.2" />
+      <circle cx="17.5" cy="12" r="3.5" stroke="#059669" strokeWidth="2.2" />
       <path
         d="M10 12h4m-2-2v4"
-        stroke="currentColor"
-        strokeWidth="2"
+        stroke="#10B981"
+        strokeWidth="2.2"
         strokeLinecap="round"
       />
       <path
         d="M6.5 5.5v3M17.5 5.5v3M6.5 15.5v3M17.5 15.5v3"
-        stroke="currentColor"
-        strokeWidth="1.5"
+        stroke="#047857"
+        strokeWidth="1.8"
         strokeLinecap="round"
       />
     </svg>
   ),
 
-  // OpenAI
+  // OpenAI - Signature Emerald Swirl
   OpenAI: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="currentColor"
+      fill="#10A37F"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
@@ -70,76 +70,85 @@ export const BrandIcons = {
     </svg>
   ),
 
-  // Claude / Anthropic
+  // Claude / Anthropic - Signature Terracotta
   Claude: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="currentColor"
+      fill="#D97706"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
     >
       <path d="M17.472 14.382l4.243-2.45-4.243-2.45v4.9zm-4.743 2.738l-4.243 2.45 4.243 2.45v-4.9zm-6.215-3.589L2.27 12l4.243-2.45v4.9zm4.743-2.738l4.243-2.45-4.243-2.45v4.9z" />
-      <circle cx="12" cy="12" r="3.2" />
+      <circle cx="12" cy="12" r="3.2" fill="#B45309" />
     </svg>
   ),
 
-  // FastAPI
+  // FastAPI - Official Emerald-Teal with white flash
   FastAPI: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
     >
-      <path d="M12 0C5.372 0 0 5.373 0 12c0 6.628 5.372 12 12 12s12-5.372 12-12c0-6.627-5.372-12-12-12zm-.586 4.343l5.093 7.029h-4.32l.707 8.285-5.347-7.228h4.08l-.213-8.086z" />
+      <circle cx="12" cy="12" r="12" fill="#009688" />
+      <path
+        d="M11.414 4.343l5.093 7.029h-4.32l.707 8.285-5.347-7.228h4.08l-.213-8.086z"
+        fill="#FFFFFF"
+      />
     </svg>
   ),
 
-  // Next.js
+  // Next.js - Official Monochrome Dark with white gradient
   Nextjs: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
     >
-      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.632 17.525L9.61 7.2h2.247l5.65 7.472v2.853zm-3.036-6.66l-2.02-2.673H7.8v9.6h2.246v-5.263l2.55 3.336z" />
+      <circle cx="12" cy="12" r="12" fill="#000000" />
+      <path
+        d="M17.632 17.525L9.61 7.2h2.247l5.65 7.472v2.853zm-3.036-6.66l-2.02-2.673H7.8v9.6h2.246v-5.263l2.55 3.336z"
+        fill="#FFFFFF"
+      />
     </svg>
   ),
 
-  // TypeScript
+  // TypeScript - Official Royal Blue badge
   TypeScript: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
     >
-      <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0H1.125zm11.2 12.083H7.553v9.062H5.068v-9.062H.3V9.757h12.025v2.326zm4.845 9.215c-1.5 0-2.76-.374-3.782-1.122l1.199-1.95c.78.539 1.696.81 2.583.81 1.259 0 1.95-.54 1.95-1.32 0-.84-.72-1.17-2.04-1.68-2.04-.78-3.33-1.8-3.33-3.6 0-2.19 1.77-3.81 4.38-3.81 1.35 0 2.52.33 3.42.87l-1.08 1.98c-.69-.45-1.53-.66-2.34-.66-1.14 0-1.74.51-1.74 1.23 0 .75.69 1.08 1.98 1.56 2.19.81 3.39 1.89 3.39 3.75 0 2.4-1.89 3.882-4.59 3.882z" />
+      <rect width="24" height="24" rx="3.5" fill="#3178C6" />
+      <path
+        d="M12.325 12.083H7.553v9.062H5.068v-9.062H.3V9.757h12.025v2.326zm4.845 9.215c-1.5 0-2.76-.374-3.782-1.122l1.199-1.95c.78.539 1.696.81 2.583.81 1.259 0 1.95-.54 1.95-1.32 0-.84-.72-1.17-2.04-1.68-2.04-.78-3.33-1.8-3.33-3.6 0-2.19 1.77-3.81 4.38-3.81 1.35 0 2.52.33 3.42.87l-1.08 1.98c-.69-.45-1.53-.66-2.34-.66-1.14 0-1.74.51-1.74 1.23 0 .75.69 1.08 1.98 1.56 2.19.81 3.39 1.89 3.39 3.75 0 2.4-1.89 3.882-4.59 3.882z"
+        fill="#FFFFFF"
+      />
     </svg>
   ),
 
-  // React
+  // React - Official Electric Cyan
   React: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
       fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
+      stroke="#61DAFB"
+      strokeWidth="1.6"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
@@ -147,17 +156,17 @@ export const BrandIcons = {
       <ellipse cx="12" cy="12" rx="3.5" ry="9" transform="rotate(30 12 12)" />
       <ellipse cx="12" cy="12" rx="3.5" ry="9" transform="rotate(90 12 12)" />
       <ellipse cx="12" cy="12" rx="3.5" ry="9" transform="rotate(150 12 12)" />
-      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+      <circle cx="12" cy="12" r="1.6" fill="#61DAFB" />
     </svg>
   ),
 
-  // Tailwind CSS
+  // Tailwind CSS - Official Sky Blue Waves
   Tailwind: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="currentColor"
+      fill="#38BDF8"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
@@ -166,13 +175,13 @@ export const BrandIcons = {
     </svg>
   ),
 
-  // PostgreSQL
+  // PostgreSQL - Official Blue Elephant
   PostgreSQL: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="currentColor"
+      fill="#336791"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
@@ -181,13 +190,13 @@ export const BrandIcons = {
     </svg>
   ),
 
-  // Docker
+  // Docker - Official Marine Blue
   Docker: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="currentColor"
+      fill="#2496ED"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
@@ -196,28 +205,32 @@ export const BrandIcons = {
     </svg>
   ),
 
-  // Figma
+  // Figma - Official 5-color icon
   Figma: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="currentColor"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
     >
-      <path d="M8 24c2.208 0 4-1.792 4-4v-4H8c-2.208 0-4 1.792-4 4s1.792 4 4 4zM4 12c0-2.208 1.792-4 4-4h4v8H8c-2.208 0-4-1.792-4-4zm0-8c0-2.208 1.792-4 4-4h4v8H8C5.792 8 4 6.208 4 4zm8 0c0-2.208 1.792-4 4-4s4 1.792 4 4-1.792 4-4 4h-4V0zm0 8h4c2.208 0 4 1.792 4 4s-1.792 4-4 4h-4V8z" />
+      <path d="M8 24c2.208 0 4-1.792 4-4v-4H8c-2.208 0-4 1.792-4 4s1.792 4 4 4z" fill="#0ACF83" />
+      <path d="M4 12c0-2.208 1.792-4 4-4h4v8H8c-2.208 0-4-1.792-4-4z" fill="#A259FF" />
+      <path d="M4 4c0-2.208 1.792-4 4-4h4v8H8C5.792 8 4 6.208 4 4z" fill="#F24E1E" />
+      <path d="M12 0h4c2.208 0 4 1.792 4 4s-1.792 4-4 4h-4V0z" fill="#FF7262" />
+      <path d="M20 12c0 2.208-1.792 4-4 4h-4v-8h4c2.208 0 4 1.792 4 4z" fill="#1ABCFE" />
     </svg>
   ),
 
-  // Framer
+  // Framer - Official Blue
   Framer: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="currentColor"
+      fill="#0055FF"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
@@ -226,13 +239,13 @@ export const BrandIcons = {
     </svg>
   ),
 
-  // LottieFiles
+  // LottieFiles - Official Mint Cyan
   LottieFiles: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="currentColor"
+      fill="#00DDB3"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
@@ -241,22 +254,132 @@ export const BrandIcons = {
     </svg>
   ),
 
-  // Vector DB / Embeddings
+  // Vector DB / Embeddings - Indigo Accent
   VectorDB: ({ size = 32, className, ...props }: BrandIconProps) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
       fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
+      stroke="#6366F1"
+      strokeWidth="2"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
     >
       <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
-      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-      <line x1="12" y1="22.08" x2="12" y2="12" />
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96" stroke="#4F46E5" />
+      <line x1="12" y1="22.08" x2="12" y2="12" stroke="#818CF8" />
+    </svg>
+  ),
+
+  // LangGraph - Sky Blue Graph Nodes
+  LangGraph: ({ size = 32, className, ...props }: BrandIconProps) => (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...props}
+    >
+      <circle cx="12" cy="5" r="3" fill="#0EA5E9" />
+      <circle cx="5" cy="18" r="3" fill="#38BDF8" />
+      <circle cx="19" cy="18" r="3" fill="#0284C7" />
+      <line x1="10" y1="7" x2="6.5" y2="15.5" stroke="#0284C7" strokeWidth="2" />
+      <line x1="14" y1="7" x2="17.5" y2="15.5" stroke="#0284C7" strokeWidth="2" />
+      <line x1="8" y1="18" x2="16" y2="18" stroke="#38BDF8" strokeWidth="2" />
+    </svg>
+  ),
+
+  // Automation Flow - Amber Pipeline
+  AutomationFlow: ({ size = 32, className, ...props }: BrandIconProps) => (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...props}
+    >
+      <rect x="3" y="4" width="6" height="6" rx="1.5" fill="#F59E0B" />
+      <rect x="15" y="4" width="6" height="6" rx="1.5" fill="#D97706" />
+      <rect x="9" y="14" width="6" height="6" rx="1.5" fill="#B45309" />
+      <path d="M6 10v2a2 2 0 002 2h1M18 10v2a2 2 0 01-2 2h-1" stroke="#F59E0B" strokeWidth="2" />
+    </svg>
+  ),
+
+  // Product Strategy - Vibrant Coral Red Rocket
+  ProductStrategy: ({ size = 32, className, ...props }: BrandIconProps) => (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...props}
+    >
+      <path
+        d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"
+        fill="#EF4444"
+      />
+      <path
+        d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"
+        fill="#DC2626"
+      />
+      <circle cx="15.5" cy="8.5" r="1.5" fill="#FFFFFF" />
+    </svg>
+  ),
+
+  // System Design - Royal Blue Multi-Tier Architecture
+  SystemDesign: ({ size = 32, className, ...props }: BrandIconProps) => (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...props}
+    >
+      <polygon points="12 2 2 7 12 12 22 7 12 2" fill="#3B82F6" />
+      <polyline points="2 12 12 17 22 12" stroke="#2563EB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <polyline points="2 17 12 22 22 17" stroke="#1D4ED8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+
+  // Course Projects - Royal Violet Graduation Cap
+  CourseProjects: ({ size = 32, className, ...props }: BrandIconProps) => (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...props}
+    >
+      <path d="M22 10v6M2 10l10-5 10 5-10 5z" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="#8B5CF6" fillOpacity="0.2" />
+      <path d="M6 12v5c3 3 9 3 12 0v-5" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+
+  // Innovation - Vivid Rose / Pink Sparkles
+  Innovation: ({ size = 32, className, ...props }: BrandIconProps) => (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="#EC4899"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...props}
+    >
+      <path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z" />
+      <circle cx="19" cy="5" r="2" fill="#F43F5E" />
     </svg>
   ),
 };
