@@ -25,13 +25,13 @@ export default function Home() {
             {/* 1 Single Massive Running Text Row (Positioned behind photo) */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10 opacity-75">
               <div className="w-full overflow-hidden">
-                <Marquee duration={32} className="py-2">
+                <Marquee duration={35} className="py-2">
                   {Array.from({ length: 4 }).map((_, i) => (
                     <span
                       key={i}
-                      className="text-outline-stroke-hero text-8xl sm:text-9xl md:text-[140px] lg:text-[190px] xl:text-[240px] font-black tracking-widest uppercase whitespace-nowrap px-8 select-none"
+                      className="text-outline-stroke-hero text-9xl sm:text-[140px] md:text-[200px] lg:text-[270px] xl:text-[340px] font-black tracking-widest uppercase whitespace-nowrap px-10 sm:px-16 lg:px-24 select-none leading-none"
                     >
-                      AKHYAR MUALIF •
+                      AKHYAR MUALIF
                     </span>
                   ))}
                 </Marquee>
