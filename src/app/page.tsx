@@ -31,10 +31,10 @@ export default function Home() {
                 className="w-full overflow-hidden select-none py-4 pointer-events-auto"
               >
                 <Marquee duration={28} pauseOnHover={false} className="py-2">
-                  <span className="text-outline-stroke-hero text-8xl sm:text-[140px] md:text-[200px] lg:text-[280px] xl:text-[340px] font-normal tracking-[0.06em] sm:tracking-[0.08em] uppercase whitespace-nowrap px-8 sm:px-14 lg:px-20 select-none leading-none">
+                  <span className="text-outline-stroke-hero text-9xl sm:text-[140px] md:text-[200px] lg:text-[270px] xl:text-[340px] font-black tracking-widest uppercase whitespace-nowrap px-10 sm:px-16 lg:px-24 select-none leading-none">
                     AKHYAR MUALIF
                   </span>
-                  <span className="text-outline-stroke-hero text-8xl sm:text-[140px] md:text-[200px] lg:text-[280px] xl:text-[340px] font-normal tracking-[0.06em] sm:tracking-[0.08em] uppercase whitespace-nowrap px-8 sm:px-14 lg:px-20 select-none leading-none">
+                  <span className="text-outline-stroke-hero text-9xl sm:text-[140px] md:text-[200px] lg:text-[270px] xl:text-[340px] font-black tracking-widest uppercase whitespace-nowrap px-10 sm:px-16 lg:px-24 select-none leading-none">
                     AKHYAR MUALIF
                   </span>
                 </Marquee>

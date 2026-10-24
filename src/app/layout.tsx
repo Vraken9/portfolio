@@ -1,23 +1,11 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Bebas_Neue, Montserrat } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-sans",
-});
-
-const bebasNeue = Bebas_Neue({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-bebas",
-});
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["800", "900"],
-  variable: "--font-montserrat",
 });
 
 export const metadata: Metadata = {
@@ -53,7 +41,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${plusJakartaSans.variable} ${bebasNeue.variable} ${montserrat.variable} scroll-smooth`}
+      className={`${plusJakartaSans.variable} scroll-smooth`}
     >
       <body className="min-h-screen bg-zinc-50 text-zinc-900 font-sans antialiased selection:bg-cyan-500/20 selection:text-cyan-900">
         {children}

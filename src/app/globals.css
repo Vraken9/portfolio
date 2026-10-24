@@ -117,25 +117,26 @@ body {
   -webkit-text-stroke: 1.5px rgba(99, 102, 241, 0.35);
 }
 
-/* Hero massive outline stroke - Bebas Neue architectural display font, strictly hollow wireframe */
+/* Hero massive outline stroke - Plus Jakarta Sans (original font), clean hollow wireframe */
 .text-outline-stroke-hero {
-  font-family: var(--font-bebas), var(--font-montserrat), sans-serif;
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 800;
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
-  -webkit-text-stroke-width: 2.5px;
-  -webkit-text-stroke-color: rgba(24, 24, 27, 0.72);
-  letter-spacing: 0.06em;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgba(24, 24, 27, 0.45);
+  letter-spacing: 0.08em;
 }
 @media (min-width: 640px) {
   .text-outline-stroke-hero {
-    -webkit-text-stroke-width: 3.5px;
-    -webkit-text-stroke-color: rgba(24, 24, 27, 0.72);
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: rgba(24, 24, 27, 0.45);
   }
 }
 @media (min-width: 1024px) {
   .text-outline-stroke-hero {
-    -webkit-text-stroke-width: 4.5px;
-    -webkit-text-stroke-color: rgba(24, 24, 27, 0.72);
+    -webkit-text-stroke-width: 3.5px;
+    -webkit-text-stroke-color: rgba(24, 24, 27, 0.5);
   }
 }
 
