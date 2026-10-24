@@ -1,10 +1,12 @@
+import React from "react";
+
 export const Component = ({ className }: { className?: string } = {}) => {
   return (
     <div
-      className={`absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)] ${className || ""}`}
+      className={`absolute inset-0 -z-10 h-full w-full pointer-events-none select-none bg-white ${className || ""}`}
       style={{
         background:
-          "radial-gradient(125% 100% at 50% 0%, #ffffff 30%, #ebdffc 55%, #b794f6 80%, #6333ee 100%)",
+          "radial-gradient(135% 100% at 50% 100%, #ebdffc 0%, #f7f3fe 42%, #ffffff 82%)",
       }}
     />
   );

@@ -149,11 +149,8 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section id="tentang" className="relative z-0 isolate w-full overflow-hidden text-zinc-900 border-t border-zinc-200/80">
+    <section id="tentang" className="relative z-0 isolate w-full overflow-hidden text-zinc-900 border-t border-zinc-200/80 bg-white">
       
-      {/* Precision Grid Pattern Background with Lavender Ambient Glow */}
-      <BackgroundSnippets />
-
       {/* 1. Header Bar: [Time] on Left, Bauhaus Artwork on Right */}
       <div className="w-full border-b border-zinc-200/80">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-3 border-x border-zinc-200/80 flex items-center justify-between">
@@ -175,10 +172,14 @@ export default function AboutSection() {
         </div>
       </div>
 
-      {/* 2. Main Bio Narrative */}
+      {/* 2. Main Bio Narrative (Background Snippet applied specifically to this box above running skills) */}
       <div className="w-full border-b border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-16 sm:py-20 border-x border-zinc-200/80">
-          <div className="max-w-3xl">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-16 sm:py-20 border-x border-zinc-200/80 overflow-hidden">
+          
+          {/* Subtle Near-White Upward-Radiating Violet Ambient Glow */}
+          <BackgroundSnippets />
+
+          <div className="relative z-10 max-w-3xl">
             
             {/* Animated Typography GIF 'hello.' */}
             <div className="relative mb-5 -mt-2">
