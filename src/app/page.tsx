@@ -48,7 +48,7 @@ export default function Home() {
                 className="mt-6 flex flex-col items-center text-center px-4"
               >
                 <p className="text-xs sm:text-sm font-mono tracking-widest text-zinc-500 uppercase">
-                  AI Agent Builder & Technopreneur • UNU Kebumen
+                  AI Agent Builder & Technopreneur • Universitas Ma'arif Nahdlatul Ulama Kebumen
                 </p>
               </motion.div>
 

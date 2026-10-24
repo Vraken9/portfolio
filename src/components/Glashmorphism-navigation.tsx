@@ -40,18 +40,18 @@ export function GlashmorphismNavigation({
 
   return (
     <header className="fixed top-4 sm:top-5 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 pointer-events-none">
-      {/* Pill capsule with aurora-blended glassmorphism - Balanced size (+5-10%) */}
+      {/* Pill capsule with aurora-blended glassmorphism - Sized comfortably (+5-10% boost) */}
       <div
-        className={`pointer-events-auto w-full max-w-[1080px] rounded-full transition-all duration-300 ${
+        className={`pointer-events-auto w-full max-w-[1140px] rounded-full transition-all duration-300 ${
           scrolled
-            ? "bg-white/65 bg-gradient-to-r from-white/80 via-indigo-50/25 to-sky-50/35 backdrop-blur-2xl border border-white/85 shadow-[0_14px_32px_-6px_rgba(99,102,241,0.1),inset_0_1px_1.5px_rgba(255,255,255,0.95)] py-2 px-5 sm:px-7"
-            : "bg-white/45 bg-gradient-to-r from-white/60 via-indigo-50/20 to-sky-50/30 backdrop-blur-xl border border-white/75 shadow-[0_10px_28px_-4px_rgba(99,102,241,0.06),inset_0_1px_1.5px_rgba(255,255,255,0.9)] py-2.5 px-5 sm:px-7"
+            ? "bg-white/70 bg-gradient-to-r from-white/85 via-indigo-50/30 to-sky-50/40 backdrop-blur-2xl border border-white/90 shadow-[0_16px_36px_-6px_rgba(99,102,241,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] py-2.5 px-6 sm:px-8"
+            : "bg-white/50 bg-gradient-to-r from-white/65 via-indigo-50/25 to-sky-50/35 backdrop-blur-xl border border-white/80 shadow-[0_12px_30px_-4px_rgba(99,102,241,0.08),inset_0_1px_2px_rgba(255,255,255,0.95)] py-3 px-6 sm:px-8"
         }`}
       >
-        <div className="flex items-center justify-between gap-3 sm:gap-5">
+        <div className="flex items-center justify-between gap-4 sm:gap-6">
           
-          {/* Desktop Navigation Links - Sweet spot size (13.5px / 14px font) */}
-          <nav className="hidden md:flex items-center gap-1.5 flex-1">
+          {/* Desktop Navigation Links - Sized 5-10% larger (14.5px / 15px font) */}
+          <nav className="hidden md:flex items-center gap-2 flex-1">
             {links.map((link) => {
               const isActive = activeHash === link.href;
               return (
@@ -60,10 +60,10 @@ export function GlashmorphismNavigation({
                   href={link.href}
                   data-magnetic
                   onClick={() => setActiveHash(link.href)}
-                  className={`px-4 py-2 text-[13.5px] sm:text-sm font-semibold rounded-full transition-all duration-200 cursor-pointer ${
+                  className={`px-4.5 py-2 text-sm sm:text-[14.5px] font-semibold rounded-full transition-all duration-200 cursor-pointer ${
                     isActive
-                      ? "text-zinc-950 bg-white/90 shadow-[0_2px_12px_rgba(99,102,241,0.08)] border border-white/90"
-                      : "text-zinc-600 hover:text-zinc-950 hover:bg-white/50"
+                      ? "text-zinc-950 bg-white/95 shadow-[0_2px_14px_rgba(99,102,241,0.1)] border border-white/90"
+                      : "text-zinc-600 hover:text-zinc-950 hover:bg-white/60"
                   }`}
                 >
                   {link.label}
@@ -72,17 +72,17 @@ export function GlashmorphismNavigation({
             })}
           </nav>
 
-          {/* Right Action Buttons - Tuned ~5-10% larger */}
-          <div className="hidden md:flex items-center gap-2.5">
+          {/* Right Action Buttons - 5-10% larger */}
+          <div className="hidden md:flex items-center gap-3">
             <a
               href={PERSONAL_INFO.socials.github}
               target="_blank"
               rel="noopener noreferrer"
               data-magnetic
-              className="px-4 py-2 text-[13.5px] sm:text-sm font-semibold text-zinc-600 hover:text-zinc-950 hover:bg-white/50 rounded-full transition-all duration-200 inline-flex items-center gap-1.5 border border-transparent hover:border-white/60"
+              className="px-4.5 py-2 text-sm sm:text-[14.5px] font-semibold text-zinc-600 hover:text-zinc-950 hover:bg-white/60 rounded-full transition-all duration-200 inline-flex items-center gap-1.5 border border-transparent hover:border-white/70"
             >
               <span>GitHub</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-700" />
+              <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-zinc-700" />
             </a>
 
             <a
@@ -90,9 +90,9 @@ export function GlashmorphismNavigation({
               target="_blank"
               rel="noopener noreferrer"
               data-magnetic
-              className="inline-flex items-center gap-2 px-5 py-2 sm:px-5.5 sm:py-2.5 rounded-full bg-zinc-950 text-white font-semibold text-[13.5px] sm:text-sm hover:bg-zinc-800 transition-all duration-200 shadow-sm hover:shadow-[0_4px_16px_rgba(99,102,241,0.2)] hover:-translate-y-0.5 cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-2.5 sm:px-6.5 sm:py-3 rounded-full bg-zinc-950 text-white font-semibold text-sm sm:text-[14.5px] hover:bg-zinc-800 transition-all duration-200 shadow-sm hover:shadow-[0_4px_18px_rgba(99,102,241,0.25)] hover:-translate-y-0.5 cursor-pointer"
             >
-              <MessageSquare className="w-3.5 h-3.5 text-indigo-300" />
+              <MessageSquare className="w-4 h-4 text-indigo-300" />
               <span>Hubungi Saya</span>
             </a>
           </div>
@@ -104,10 +104,10 @@ export function GlashmorphismNavigation({
             </span>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-full bg-white/70 hover:bg-white/90 text-zinc-900 border border-white/80 transition-colors shadow-xs"
+              className="p-2.5 rounded-full bg-white/75 hover:bg-white/95 text-zinc-900 border border-white/80 transition-colors shadow-xs"
               aria-label="Toggle Menu"
             >
-              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              {mobileMenuOpen ? <X className="w-4.5 h-4.5" /> : <Menu className="w-4.5 h-4.5" />}
             </button>
           </div>
 
