@@ -5,7 +5,7 @@ import gsap from "gsap";
 
 interface MagneticCursorProps {
   magneticFactor?: number;
-  blendMode?: "exclusion" | "difference" | "normal";
+  blendMode?: "difference" | "exclusion" | "normal";
   cursorSize?: number;
   color?: string;
   children: React.ReactNode;
@@ -21,22 +21,20 @@ interface Particle {
 }
 
 export function MagneticCursor({
-  magneticFactor = 0.55,
-  blendMode = "exclusion",
-  cursorSize = 36,
+  magneticFactor = 0.5,
+  blendMode = "difference",
+  cursorSize = 34,
   color = "#ffffff",
   children,
 }: MagneticCursorProps) {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const dotRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
   const isTouchDevice = useRef(false);
 
-  // Position state tracked by GSAP
-  const pos = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
+  // Position & physics state tracked by GSAP
+  const pos = useRef({ x: -100, y: -100, targetX: -100, targetY: -100 });
   const isLocked = useRef(false);
+  const idleTimer = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     // Touch detection
@@ -46,64 +44,80 @@ export function MagneticCursor({
     }
 
     const cursor = cursorRef.current;
-    const dot = dotRef.current;
-    if (!cursor || !dot) return;
+    if (!cursor) return;
 
-    // Center cursor offscreen initially
-    pos.current = {
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
-      targetX: window.innerWidth / 2,
-      targetY: window.innerHeight / 2,
-    };
+    // Start with opacity 0 until first mouse move
+    gsap.set(cursor, { opacity: 0 });
 
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       pos.current.targetX = clientX;
       pos.current.targetY = clientY;
 
-      // Check if mouse is over an element with data-magnetic
-      const target = (e.target as HTMLElement)?.closest("[data-magnetic]") as HTMLElement | null;
+      // Immediately show cursor on movement
+      gsap.to(cursor, { opacity: 1, duration: 0.2, overwrite: "auto" });
+
+      // Reset 1-second idle timer
+      if (idleTimer.current) clearTimeout(idleTimer.current);
+      idleTimer.current = setTimeout(() => {
+        gsap.to(cursor, { opacity: 0, duration: 0.35, ease: "power2.out" });
+      }, 1000);
+
+      // Check if mouse is over an element marked for magnetic or inversion effect
+      const target = (e.target as HTMLElement)?.closest(
+        "[data-magnetic], [data-cursor-invert], a, button"
+      ) as HTMLElement | null;
 
       if (target) {
-        const rect = target.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
+        const isMagnetic = target.hasAttribute("data-magnetic");
 
-        // Pull toward element center
-        const distX = clientX - centerX;
-        const distY = clientY - centerY;
+        if (isMagnetic) {
+          const rect = target.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
 
-        pos.current.targetX = centerX + distX * (1 - magneticFactor);
-        pos.current.targetY = centerY + distY * (1 - magneticFactor);
+          // Pull toward element center with spring resistance
+          const distX = clientX - centerX;
+          const distY = clientY - centerY;
+
+          pos.current.targetX = centerX + distX * (1 - magneticFactor);
+          pos.current.targetY = centerY + distY * (1 - magneticFactor);
+        }
 
         if (!isLocked.current) {
           isLocked.current = true;
-          setIsHovered(true);
+          // Scale up for prominent inversion lens
           gsap.to(cursor, {
-            scale: 1.6,
-            duration: 0.3,
+            scale: 2.2,
+            duration: 0.25,
             ease: "power2.out",
           });
         }
       } else {
         if (isLocked.current) {
           isLocked.current = false;
-          setIsHovered(false);
           gsap.to(cursor, {
             scale: 1,
-            duration: 0.35,
+            duration: 0.3,
             ease: "elastic.out(1, 0.4)",
           });
         }
       }
     };
 
-    const handleMouseDown = (e: MouseEvent) => {
-      setIsClicking(true);
-      gsap.to(cursor, { scale: 0.85, duration: 0.15 });
+    const handleMouseLeave = () => {
+      if (idleTimer.current) clearTimeout(idleTimer.current);
+      gsap.to(cursor, { opacity: 0, duration: 0.3 });
+    };
 
-      // Spawn click particles
+    const handleMouseEnter = () => {
+      gsap.to(cursor, { opacity: 1, duration: 0.2 });
+    };
+
+    const handleMouseDown = (e: MouseEvent) => {
+      gsap.to(cursor, { scale: 0.8, duration: 0.15 });
+
+      // Spawn click burst particles
       const newParticles: Particle[] = Array.from({ length: 6 }).map((_, i) => {
         const angle = (i * Math.PI * 2) / 6 + (Math.random() - 0.5);
         const speed = Math.random() * 4 + 2;
@@ -120,40 +134,39 @@ export function MagneticCursor({
     };
 
     const handleMouseUp = () => {
-      setIsClicking(false);
-      gsap.to(cursor, { scale: isHovered ? 1.6 : 1, duration: 0.25 });
+      gsap.to(cursor, { scale: isLocked.current ? 2.2 : 1, duration: 0.25 });
     };
 
-    // Physics render loop using gsap.ticker
+    // Responsive physics render loop with tight lerp (0.35 for snappy immediate response)
     const updateCursor = () => {
-      pos.current.x += (pos.current.targetX - pos.current.x) * 0.18;
-      pos.current.y += (pos.current.targetY - pos.current.y) * 0.18;
+      pos.current.x += (pos.current.targetX - pos.current.x) * 0.35;
+      pos.current.y += (pos.current.targetY - pos.current.y) * 0.35;
 
       gsap.set(cursor, {
         x: pos.current.x - cursorSize / 2,
         y: pos.current.y - cursorSize / 2,
       });
-
-      gsap.set(dot, {
-        x: pos.current.targetX - 2.5,
-        y: pos.current.targetY - 2.5,
-      });
     };
 
     window.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("mouseenter", handleMouseEnter);
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
     gsap.ticker.add(updateCursor);
 
     return () => {
+      if (idleTimer.current) clearTimeout(idleTimer.current);
       window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mouseenter", handleMouseEnter);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
       gsap.ticker.remove(updateCursor);
     };
-  }, [cursorSize, magneticFactor, isHovered]);
+  }, [cursorSize, magneticFactor]);
 
-  // Particle life decay loop
+  // Particle decay loop
   useEffect(() => {
     if (particles.length === 0) return;
     const interval = setInterval(() => {
@@ -173,7 +186,7 @@ export function MagneticCursor({
 
   return (
     <div className="relative w-full">
-      {/* Magnetic Outer Ring / Blob */}
+      {/* Fluid Inversion Cursor (No center dot, pure difference blend) */}
       <div
         ref={cursorRef}
         aria-hidden="true"
@@ -183,19 +196,7 @@ export function MagneticCursor({
           mixBlendMode: blendMode,
           backgroundColor: color,
         }}
-        className={`fixed top-0 left-0 pointer-events-none z-[9999] rounded-full will-change-transform transition-opacity duration-300 opacity-90 backdrop-blur-[1px] ${
-          isTouchDevice.current ? "hidden" : "block"
-        }`}
-      />
-
-      {/* Tiny inner center pointer */}
-      <div
-        ref={dotRef}
-        aria-hidden="true"
-        style={{
-          mixBlendMode: blendMode,
-        }}
-        className={`fixed top-0 left-0 pointer-events-none z-[9999] w-[5px] h-[5px] rounded-full bg-white will-change-transform ${
+        className={`fixed top-0 left-0 pointer-events-none z-[9999] rounded-full will-change-transform ${
           isTouchDevice.current ? "hidden" : "block"
         }`}
       />
@@ -209,7 +210,7 @@ export function MagneticCursor({
             transform: `translate3d(${p.x}px, ${p.y}px, 0)`,
             opacity: p.life,
           }}
-          className="fixed top-0 left-0 pointer-events-none z-[9998] w-1.5 h-1.5 rounded-full bg-zinc-900 dark:bg-white"
+          className="fixed top-0 left-0 pointer-events-none z-[9998] w-1.5 h-1.5 rounded-full bg-zinc-900"
         />
       ))}
 
