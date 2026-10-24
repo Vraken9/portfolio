@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { Marquee } from "@/components/ui/marquee";
 import { MagneticCursor } from "@/components/ui/magnetic-cursor";
+import AboutSection from "@/components/AboutSection";
 import { ArrowDown } from "lucide-react";
 
 export default function Home() {
@@ -60,8 +61,8 @@ export default function Home() {
                 PORTFOLIO 2026 • AKHYAR MUALIF
               </span>
               <a
-                href="#about"
-                data-magnetic
+                href="#tentang"
+                data-cursor-expand
                 className="p-1.5 rounded-full text-zinc-400 hover:text-zinc-800 transition-colors animate-bounce"
                 aria-label="Scroll down to About section"
               >
@@ -71,6 +72,9 @@ export default function Home() {
 
           </AuroraBackground>
         </section>
+
+        {/* About Me Section - Inspired by Hexaa.sh Architecture */}
+        <AboutSection />
       </main>
     </MagneticCursor>
   );
