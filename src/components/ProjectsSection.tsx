@@ -290,7 +290,7 @@ export const HOMEPAGE_PROJECTS: ProjectCardItem[] = [
       "An AI-powered personal finance and budgeting mobile app built with Flutter, featuring Gemini AI voice input, receipt OCR scanner, and an intelligent advisor.",
     imageId: "/gambar-finai/finai-card-banner.png",
     badge: ["Mobile App", "Flutter", "Gemini AI", "FinTech"],
-    link: "https://drive.google.com/file/d/1qz8Gfuc_c4nQW1kQnTP53cSR44I87wCM/view?usp=sharing",
+    link: "https://drive.google.com/drive/folders/1d9zsDj80XVgeccTvx8CXiNqXpxrSJ_Uq?usp=sharing",
     apkLink: "https://drive.google.com/file/d/1qz8Gfuc_c4nQW1kQnTP53cSR44I87wCM/view?usp=sharing",
     repo: "https://github.com/Vraken9/FinAI.git",
     caseStudy: "/projects/finai",

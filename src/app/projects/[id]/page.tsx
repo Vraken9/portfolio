@@ -119,7 +119,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-950 text-white font-medium hover:bg-zinc-800 transition-colors shadow-xs"
               >
-                <span>[visit website]</span>
+                <span>{isMobile ? "[live demo]" : "[visit website]"}</span>
                 <ArrowUpRight className="w-3 h-3" />
               </a>
             )}

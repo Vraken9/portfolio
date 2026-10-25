@@ -573,6 +573,7 @@ export const PROJECTS: ProjectItem[] = [
     problemSolved: "Most people quit tracking their daily expenses because typing every purchase manually is slow and boring. Traditional finance apps also only show numbers without explaining how to save better.",
     solutionRationale: "FinAI solves this by letting users record expenses in seconds using their voice or by taking a photo of a receipt. Google Gemini AI automatically reads the price, store, date, and category. Users can also chat with FinAI Advisor for practical saving tips and export reports to Excel.",
     aiIntegration: "Google Gemini AI for receipt OCR scanning, voice-to-text transaction input, and personal finance AI advisor chatbot.",
+    liveUrl: "https://drive.google.com/drive/folders/1d9zsDj80XVgeccTvx8CXiNqXpxrSJ_Uq?usp=sharing",
     githubUrl: "https://github.com/Vraken9/FinAI.git",
     apkUrl: "https://drive.google.com/file/d/1qz8Gfuc_c4nQW1kQnTP53cSR44I87wCM/view?usp=sharing",
     technologies: ["Flutter", "Dart", "Google Gemini AI", "Receipt OCR", "Voice Input", "Supabase Auth", "Excel Export"],
