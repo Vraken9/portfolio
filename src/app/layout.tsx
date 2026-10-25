@@ -41,7 +41,8 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${plusJakartaSans.variable} scroll-smooth`}
+      className={`${plusJakartaSans.variable} light scroll-smooth`}
+      style={{ colorScheme: "light" }}
     >
       <body className="min-h-screen bg-zinc-50 text-zinc-900 font-sans antialiased selection:bg-cyan-500/20 selection:text-cyan-900">
         {children}

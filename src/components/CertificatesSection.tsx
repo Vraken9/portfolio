@@ -43,7 +43,7 @@ export function CertificatesSection() {
   return (
     <section
       id="sertifikat"
-      className="relative w-full border-t border-b border-black/10 dark:border-white/10 bg-[#faf8fd] dark:bg-zinc-950 overflow-hidden pt-16 sm:pt-20 pb-0"
+      className="relative w-full border-t border-b border-black/10 bg-[#faf8fd] text-zinc-900 overflow-hidden pt-16 sm:pt-20 pb-0"
     >
       <div id="certificates" className="absolute -top-20" />
 
@@ -54,17 +54,17 @@ export function CertificatesSection() {
           data-cursor-scale="1.45"
           className="max-w-3xl cursor-default"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-950 dark:text-zinc-50 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-950 leading-tight">
             Verified Credentials & Training
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
+          <p className="mt-3 text-sm sm:text-base text-zinc-600 leading-relaxed font-normal">
             Curated certifications completed during academic spare time to accelerate skills across Autonomous AI, Cloud Systems, Cybersecurity, Data Science, and Modern Web Engineering.
           </p>
         </div>
       </div>
 
-      {/* 3D Wheel Interactive Full-Bleed Stage */}
-      <div className="relative w-full h-[600px] sm:h-[660px] lg:h-[720px] overflow-hidden select-none bg-[#fdfcff] dark:bg-zinc-950">
+      {/* 3D Wheel Interactive Full-Bleed Stage (Pure Radiant Light Mode) */}
+      <div className="relative w-full h-[600px] sm:h-[660px] lg:h-[720px] overflow-hidden select-none bg-[#fdfcff]">
         {/* Liquid Chrome Shader Metal Background */}
         <ShaderMetal
           metal="chrome"
@@ -73,7 +73,7 @@ export function CertificatesSection() {
           speed={0.22}
           iridescence={0.28}
           interactive={true}
-          className="opacity-70 dark:opacity-40"
+          className="opacity-75"
         />
 
         {/* Ambient Lavender Radial Gradient Overlay */}
@@ -82,7 +82,7 @@ export function CertificatesSection() {
           className="absolute inset-0 pointer-events-none select-none -z-0"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 50%, rgba(235, 223, 252, 0.45) 0%, rgba(247, 243, 254, 0.25) 50%, rgba(255, 255, 255, 0.6) 100%)",
+              "radial-gradient(ellipse at 50% 50%, rgba(235, 223, 252, 0.55) 0%, rgba(247, 243, 254, 0.3) 50%, rgba(255, 255, 255, 0.75) 100%)",
           }}
         />
 
@@ -103,9 +103,9 @@ export function CertificatesSection() {
 
         {/* Sleek Minimalist Floating Glass Pill (Bottom Left) */}
         {activeCert && (
-          <div className="absolute bottom-8 sm:bottom-10 left-6 sm:left-10 z-30 max-w-[320px] sm:max-w-md p-4 sm:p-5 rounded-2xl bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-xl transition-all duration-300 pointer-events-auto">
+          <div className="absolute bottom-8 sm:bottom-10 left-6 sm:left-10 z-30 max-w-[320px] sm:max-w-md p-4 sm:p-5 rounded-2xl bg-white/95 backdrop-blur-xl border border-black/10 shadow-xl transition-all duration-300 pointer-events-auto">
             <div className="flex items-center justify-between gap-3 mb-2">
-              <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-violet-700 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/60 px-2.5 py-0.5 rounded-full border border-violet-200 dark:border-violet-800/40">
+              <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-violet-700 bg-violet-50 px-2.5 py-0.5 rounded-full border border-violet-200">
                 {activeCert.groupLabel}
               </span>
               <span className="font-mono text-xs text-zinc-400 font-medium">
@@ -113,20 +113,20 @@ export function CertificatesSection() {
               </span>
             </div>
 
-            <h4 className="font-bold text-sm sm:text-base text-zinc-900 dark:text-white leading-snug line-clamp-2">
+            <h4 className="font-bold text-sm sm:text-base text-zinc-900 leading-snug line-clamp-2">
               {activeCert.title}
             </h4>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-normal">
-              Issuer: <span className="font-medium text-zinc-700 dark:text-zinc-300">{activeCert.issuer}</span>
+            <p className="text-xs text-zinc-500 mt-1 font-normal">
+              Issuer: <span className="font-medium text-zinc-700">{activeCert.issuer}</span>
             </p>
 
             {/* Actions */}
-            <div className="flex items-center gap-2 mt-3.5 pt-3 border-t border-black/5 dark:border-white/10">
+            <div className="flex items-center gap-2 mt-3.5 pt-3 border-t border-black/5">
               <button
                 type="button"
                 id="inspect-active-cert"
                 onClick={() => setInspectItem(activeCert)}
-                className="cursor-pointer flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium text-xs hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors shadow-xs"
+                className="cursor-pointer flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900 text-white font-medium text-xs hover:bg-zinc-800 transition-colors shadow-xs"
               >
                 <Award className="w-3.5 h-3.5" />
                 <span>Inspect</span>
@@ -135,7 +135,7 @@ export function CertificatesSection() {
                 href={activeCert.documentUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cursor-pointer inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium text-xs hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors border border-black/5 dark:border-white/10"
+                className="cursor-pointer inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-zinc-100 text-zinc-700 font-medium text-xs hover:bg-zinc-200 transition-colors border border-black/5"
                 title="Open original PDF / PNG"
               >
                 <FileText className="w-3.5 h-3.5" />
@@ -156,23 +156,23 @@ export function CertificatesSection() {
           onClick={() => setInspectItem(null)}
         >
           <div
-            className="relative max-w-4xl w-full bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-black/10 dark:border-white/15 shadow-2xl flex flex-col max-h-[90vh]"
+            className="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden border border-black/10 shadow-2xl flex flex-col max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/50">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-100 bg-zinc-50/50">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-xs font-semibold px-2.5 py-1 rounded-md bg-violet-100 dark:bg-violet-950 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-800/40">
+                <span className="font-mono text-xs font-semibold px-2.5 py-1 rounded-md bg-violet-100 text-violet-700 border border-violet-200">
                   {inspectItem.groupLabel}
                 </span>
-                <h3 className="font-bold text-base sm:text-lg text-zinc-900 dark:text-white truncate max-w-md">
+                <h3 className="font-bold text-base sm:text-lg text-zinc-900 truncate max-w-md">
                   {inspectItem.title}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setInspectItem(null)}
-                className="cursor-pointer p-1.5 rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                className="cursor-pointer p-1.5 rounded-full hover:bg-zinc-200 text-zinc-500 hover:text-zinc-900 transition-colors"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
@@ -180,8 +180,8 @@ export function CertificatesSection() {
             </div>
 
             {/* Modal Image Body */}
-            <div className="p-4 sm:p-6 overflow-y-auto flex-1 flex flex-col items-center justify-center bg-zinc-100/60 dark:bg-zinc-950/60">
-              <div className="relative max-w-3xl w-full rounded-xl overflow-hidden shadow-lg border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900">
+            <div className="p-4 sm:p-6 overflow-y-auto flex-1 flex flex-col items-center justify-center bg-zinc-100/60">
+              <div className="relative max-w-3xl w-full rounded-xl overflow-hidden shadow-lg border border-black/10 bg-white">
                 <img
                   src={inspectItem.image}
                   alt={inspectItem.title}
@@ -191,12 +191,12 @@ export function CertificatesSection() {
             </div>
 
             {/* Modal Footer */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-t border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-t border-zinc-100 bg-white">
               <div className="flex flex-wrap gap-1.5">
                 {inspectItem.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="font-mono text-xs px-2.5 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/60"
+                    className="font-mono text-xs px-2.5 py-1 rounded bg-zinc-100 text-zinc-700 border border-zinc-200"
                   >
                     {skill}
                   </span>

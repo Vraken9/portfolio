@@ -3,6 +3,7 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Marquee } from "@/components/ui/marquee";
+import { cn } from "@/lib/utils";
 
 export interface ProductItem {
   id?: string;
@@ -23,6 +24,7 @@ export interface HeroParallaxProps {
   row3?: ProductItem[];
   header?: React.ReactNode;
   onSelectProduct?: (product: ProductItem) => void;
+  className?: string;
 }
 
 export const HeroParallax = ({
@@ -32,6 +34,7 @@ export const HeroParallax = ({
   row3,
   header,
   onSelectProduct,
+  className,
 }: HeroParallaxProps) => {
   // If distinct rows not provided, dynamically split the products array
   const countPerRow = Math.ceil(products.length / 3);
@@ -45,7 +48,7 @@ export const HeroParallax = ({
   const displayRow3 = thirdRow.length < 8 ? [...thirdRow, ...thirdRow] : thirdRow;
 
   return (
-    <div className="relative w-full h-[85vh] sm:h-[88vh] lg:h-[92vh] min-h-[620px] max-h-[1050px] overflow-hidden antialiased flex flex-col justify-between select-none bg-white">
+    <div className={cn("relative w-full h-full min-h-[640px] overflow-hidden antialiased flex flex-col justify-between select-none bg-transparent", className)}>
       {/* 1. Foreground Header Layer (Interactive, Higher Z-index) */}
       <div className="relative z-20 w-full pointer-events-none">
         {header || <DefaultHeader />}

@@ -308,7 +308,7 @@ export function WorksWheel({
     <section
       aria-label={label}
       className={cn(
-        "bg-background text-foreground relative h-full min-h-[30rem] w-full overflow-hidden select-none",
+        "bg-transparent text-zinc-900 relative h-full min-h-[30rem] w-full overflow-hidden select-none",
         className,
       )}
       {...props}
@@ -373,7 +373,7 @@ export function WorksWheel({
                   }}
                   className={cn(
                     "group absolute [backface-visibility:hidden] cursor-pointer will-change-transform select-none [transform-style:preserve-3d]",
-                    i === active && "ring-2 ring-primary/40 rounded-xl"
+                    i === active && "ring-2 ring-violet-500/40 rounded-xl"
                   )}
                   style={{
                     width: metrics.cardW,
@@ -382,7 +382,7 @@ export function WorksWheel({
                     marginTop: -metrics.cardH / 2,
                   }}
                 >
-                  <span className="bg-muted shadow-foreground/12 relative block size-full overflow-hidden rounded-xl border border-black/10 dark:border-white/10 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.18)] transition-all duration-300 group-hover:shadow-[0_25px_60px_-10px_rgba(139,92,246,0.3)]">
+                  <span className="bg-white relative block size-full overflow-hidden rounded-xl border border-black/10 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.14)] transition-all duration-300 group-hover:shadow-[0_25px_60px_-10px_rgba(139,92,246,0.3)]">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -395,7 +395,7 @@ export function WorksWheel({
                       </span>
                     ) : null}
                     {action ? (
-                      <span className="bg-background/90 text-foreground pointer-events-none absolute right-3 bottom-3 flex translate-y-1 items-center gap-1 rounded-full px-2.5 py-1 text-[0.72rem] font-medium opacity-0 shadow-md backdrop-blur-md transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+                      <span className="bg-white/95 text-zinc-900 border border-black/10 pointer-events-none absolute right-3 bottom-3 flex translate-y-1 items-center gap-1 rounded-full px-2.5 py-1 text-[0.72rem] font-medium opacity-0 shadow-md backdrop-blur-md transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
                         <svg
                           viewBox="0 0 12 12"
                           className="size-2.5"
@@ -424,7 +424,7 @@ export function WorksWheel({
       {/* Ring title and front-card title trade places across the transition */}
       <div
         ref={labelRef}
-        className="pointer-events-none absolute inset-0 grid place-items-center tracking-tight font-light text-foreground/80 z-20"
+        className="pointer-events-none absolute inset-0 grid place-items-center tracking-tight font-light text-zinc-400 z-20"
         style={{ fontSize: metrics.title }}
       >
         {label}
@@ -436,11 +436,11 @@ export function WorksWheel({
           className="pointer-events-none absolute top-1/2 left-[5%] md:left-[8%] -translate-y-1/2 tracking-tight opacity-0 max-w-[28%] md:max-w-[32%] z-20"
           style={{ fontSize: Math.max(metrics.title * 0.85, 20) }}
         >
-          <span className="font-semibold text-foreground block leading-tight drop-shadow-sm">
+          <span className="font-semibold text-zinc-950 block leading-tight drop-shadow-sm">
             {items[active]?.title}
           </span>
           {items[active]?.badge && (
-            <span className="inline-block mt-2 font-mono text-xs uppercase tracking-wider px-2 py-0.5 bg-foreground/10 text-foreground rounded">
+            <span className="inline-block mt-2 font-mono text-xs uppercase tracking-wider px-2 py-0.5 bg-black/5 text-zinc-700 rounded border border-black/10">
               {items[active]?.badge}
             </span>
           )}
@@ -450,7 +450,7 @@ export function WorksWheel({
       {/* Right Index List */}
       <ol
         ref={indexListRef}
-        className="text-muted-foreground absolute top-[8%] right-4 sm:right-8 lg:right-12 max-h-[78%] max-w-[280px] overflow-y-auto text-right leading-[1.8] pointer-events-auto pr-3 pl-2 z-20 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="text-zinc-500 absolute top-[8%] right-4 sm:right-8 lg:right-12 max-h-[78%] max-w-[280px] overflow-y-auto text-right leading-[1.8] pointer-events-auto pr-3 pl-2 z-20 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         style={{ fontSize: Math.max(metrics.index, 11) }}
       >
         {items.map((item, i) => (
@@ -459,13 +459,13 @@ export function WorksWheel({
               type="button"
               onClick={() => to(i + 1)}
               className={cn(
-                "focus-visible:outline-foreground cursor-pointer transition-all duration-200 outline-none text-right block w-full truncate hover:text-foreground",
+                "focus-visible:outline-foreground cursor-pointer transition-all duration-200 outline-none text-right block w-full truncate",
                 i === active
-                  ? "text-foreground font-bold tracking-tight scale-[1.02] origin-right"
-                  : "opacity-60 hover:opacity-100",
+                  ? "text-zinc-950 font-bold tracking-tight scale-[1.02] origin-right"
+                  : "text-zinc-400 hover:text-zinc-900 opacity-70 hover:opacity-100",
               )}
             >
-              <span className="font-mono text-[9px] mr-1.5 opacity-40">
+              <span className="font-mono text-[9px] mr-1.5 opacity-50">
                 {String(i + 1).padStart(2, "0")}.
               </span>
               {item.title}
