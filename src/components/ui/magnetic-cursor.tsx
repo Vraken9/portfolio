@@ -19,8 +19,6 @@ export function MagneticCursor({
   children,
 }: MagneticCursorProps) {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const cursorIconRef = useRef<HTMLDivElement>(null);
-  const currentHoveredLogo = useRef<Element | null>(null);
   const pos = useRef({ x: -100, y: -100, targetX: -100, targetY: -100 });
   const isHovered = useRef(false);
   const currentScale = useRef(1);
@@ -109,46 +107,24 @@ export function MagneticCursor({
 
         // Scale factors:
         // Heading text: 2.5x (inverted difference mode)
-        // Logo lens: 2.85x (~63px diameter circle) to cleanly house the 34px brand icon
+        // Logo lens: 2.4x (~53px diameter circle) to cleanly cover the 34px brand icon
         // General interactive: 1.85x
         let targetScale = 1.85;
         if (isInvertText) {
           targetScale = 2.5;
         } else if (isLogo) {
-          targetScale = 2.85;
+          targetScale = 2.4;
         }
 
         if (isLogo && logoTarget) {
-          // Inside of fluid cursor remains solid black, with radiant brand color outer glow
-          cursor.style.mixBlendMode = "normal";
-          cursor.style.backgroundColor = "#09090b";
-          cursor.style.border = `2px solid ${logoColor}`;
-          cursor.style.boxShadow = `0 0 20px 4px ${logoColor}99, 0 0 45px 8px ${logoColor}33`;
-
-          // Clone and display the authentic brand logo SVG inside the black cursor circle
-          if (currentHoveredLogo.current !== logoTarget) {
-            currentHoveredLogo.current = logoTarget;
-            const originalSvg = logoTarget.querySelector("svg");
-            if (originalSvg && cursorIconRef.current) {
-              const cloned = originalSvg.cloneNode(true) as SVGSVGElement;
-              cloned.setAttribute("width", "34");
-              cloned.setAttribute("height", "34");
-              cloned.style.filter = "none";
-              cloned.style.opacity = "1";
-              cloned.style.transform = "none";
-              cursorIconRef.current.innerHTML = "";
-              cursorIconRef.current.appendChild(cloned);
-              // Counteract parent scale so SVG displays at natural 1:1 crisp 34px size
-              cursorIconRef.current.style.transform = `scale(${1 / targetScale})`;
-            }
-          }
+          // Hexaa.sh architecture: The cursor disc uses difference/exclusion mode with white color.
+          // Over white site background, white inverts to black!
+          // Over the logo (which has group-hover:invert), the difference lens reverses the inversion back to authentic brand color!
+          cursor.style.mixBlendMode = blendMode;
+          cursor.style.backgroundColor = color;
+          cursor.style.border = "1.5px solid rgba(255, 255, 255, 0.85)";
+          cursor.style.boxShadow = `0 0 20px 2px ${logoColor}66`;
         } else {
-          // Leaving logo area: clear cloned icon and restore difference mode
-          if (currentHoveredLogo.current) {
-            currentHoveredLogo.current = null;
-            if (cursorIconRef.current) cursorIconRef.current.innerHTML = "";
-          }
-
           // Standard difference inversion mode
           cursor.style.mixBlendMode = blendMode;
           cursor.style.backgroundColor = color;
@@ -166,12 +142,6 @@ export function MagneticCursor({
           });
         }
       } else {
-        // Clear logo state when moving to non-interactive area
-        if (currentHoveredLogo.current) {
-          currentHoveredLogo.current = null;
-          if (cursorIconRef.current) cursorIconRef.current.innerHTML = "";
-        }
-
         // Reset cursor styling when moving away from interactive elements
         cursor.style.mixBlendMode = blendMode;
         cursor.style.backgroundColor = color;
@@ -255,7 +225,7 @@ export function MagneticCursor({
 
   return (
     <>
-      {/* Fluid Inversion Cursor Disc - Pure fluid lens with dynamic brand SVG display on logo hover */}
+      {/* Fluid Inversion Cursor Disc - Pure fluid lens with signature hexaa.sh difference inversion */}
       <div
         ref={cursorRef}
         aria-hidden="true"
@@ -265,13 +235,8 @@ export function MagneticCursor({
           mixBlendMode: blendMode,
           backgroundColor: color,
         }}
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full will-change-transform opacity-0 select-none flex items-center justify-center overflow-hidden"
-      >
-        <div
-          ref={cursorIconRef}
-          className="w-full h-full flex items-center justify-center pointer-events-none transition-transform duration-150"
-        />
-      </div>
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full will-change-transform opacity-0 select-none"
+      />
 
       {children}
     </>

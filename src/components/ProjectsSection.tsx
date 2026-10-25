@@ -1,12 +1,35 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { HeroParallax, ProductItem } from "@/components/ui/hero-parallax";
 import { PlusSeparator } from "@/components/ui/plus-separator";
-import { PROJECTS, ProjectItem as DetailedProjectItem } from "@/data/portfolioData";
-import { X, Sparkles, CheckCircle2, Layers, Bot, ArrowUpRight, Play } from "lucide-react";
+import { PROJECTS } from "@/data/portfolioData";
+import {
+  ArrowRight,
+  ExternalLink,
+  Download,
+  CheckCircle2,
+  AlertCircle,
+  Smartphone,
+  Globe,
+  Sparkles,
+  Layers,
+  ArrowUpRight,
+} from "lucide-react";
+
+function GithubIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+      />
+    </svg>
+  );
+}
 
 // ROW 1: Exclusively ModulKu AI (6 images)
 export const ROW_MODULKU: ProductItem[] = [
@@ -14,56 +37,56 @@ export const ROW_MODULKU: ProductItem[] = [
     id: "modulku-landing",
     projectId: "modulku",
     title: "ModulKu AI — Landing & Platform Portal",
-    subtitle: "AI-Powered Curriculum & Lesson Plan Hub for Indonesian Educators",
+    subtitle: "AI-Powered Curriculum & Lesson Plan Hub for Educators",
     tag: "MODULKU AI",
     category: "EdTech & Generative AI",
     technologies: ["Next.js", "AI Generator", "Tailwind CSS"],
     thumbnail: "/parallax-showcase/modulku-1-landing.png",
-    link: "#projects",
+    link: "/projects/modulku",
   },
   {
     id: "modulku-dashboard",
     projectId: "modulku",
     title: "ModulKu — Teacher Workspace Suite",
-    subtitle: "Centralized Educator Dashboard for Curriculum Management & Schemes",
+    subtitle: "Centralized Educator Dashboard for Lesson Planning",
     tag: "TEACHER SUITE",
     category: "EdTech SaaS",
     technologies: ["React", "Dashboard UI", "Zustand"],
     thumbnail: "/parallax-showcase/modulku-2-dashboard.png",
-    link: "#projects",
+    link: "/projects/modulku",
   },
   {
     id: "modulku-bank",
     projectId: "modulku",
     title: "ModulKu — Curriculum Bank & Artifacts",
-    subtitle: "Digital Repository for Modul Ajar, Prota, Promes & Teaching Artifacts",
-    tag: "BANK DOKUMEN",
+    subtitle: "Digital Repository for Teaching Modules & Documents",
+    tag: "CURRICULUM BANK",
     category: "Curriculum Engine",
     technologies: ["Cloud Storage", "PDF Exporter", "TypeScript"],
     thumbnail: "/parallax-showcase/modulku-3-bank-dokumen.png",
-    link: "#projects",
+    link: "/projects/modulku",
   },
   {
     id: "modulku-soal",
     projectId: "modulku",
     title: "ModulKu — AI Question Generator",
-    subtitle: "Automated Exam & Assessment Builder Powered by LLM Orchestration",
+    subtitle: "Automated Exam & Assessment Builder Powered by AI",
     tag: "AI GENERATOR",
     category: "Generative AI",
     technologies: ["LLM API", "Prompt Eng.", "TypeScript"],
     thumbnail: "/parallax-showcase/modulku-4-soal-generator.png",
-    link: "#projects",
+    link: "/projects/modulku",
   },
   {
     id: "modulku-metrik",
     projectId: "modulku",
     title: "ModulKu — Platform Analytics & Metrics",
-    subtitle: "Admin System Overview, User Engagement & Curriculum Generation Metrics",
+    subtitle: "Admin System Overview, User Engagement & Curriculum Metrics",
     tag: "SUPERADMIN",
     category: "Enterprise Analytics",
     technologies: ["Chart.js", "Metrics Engine", "PostgreSQL"],
     thumbnail: "/parallax-showcase/modulku-5-admin-metrik.png",
-    link: "#projects",
+    link: "/projects/modulku",
   },
   {
     id: "modulku-cost",
@@ -74,22 +97,22 @@ export const ROW_MODULKU: ProductItem[] = [
     category: "AI Infrastructure",
     technologies: ["Token Tracking", "API Rate Limiter", "Next.js"],
     thumbnail: "/parallax-showcase/modulku-6-admin-api-cost.png",
-    link: "#projects",
+    link: "/projects/modulku",
   },
 ];
 
-// ROW 2: Exclusively FloraMart (4 images, removed admin-kelola-product)
+// ROW 2: Exclusively FloraMart (4 images)
 export const ROW_FLORAMART: ProductItem[] = [
   {
     id: "floramart-home",
     projectId: "floramart",
     title: "FloraMart — Botanical Marketplace",
-    subtitle: "Multi-Vendor Ornamental Plants & Gardening E-Commerce Platform",
+    subtitle: "Multi-Vendor Ornamental Plants & Gardening E-Commerce",
     tag: "FLORAMART",
     category: "E-Commerce",
     technologies: ["Multi-Vendor", "Cart System", "Tailwind CSS"],
     thumbnail: "/parallax-showcase/floramart-1-beranda.png",
-    link: "#projects",
+    link: "/projects/floramart",
   },
   {
     id: "floramart-katalog",
@@ -100,34 +123,45 @@ export const ROW_FLORAMART: ProductItem[] = [
     category: "E-Commerce",
     technologies: ["Facet Search", "Filter Engine", "React"],
     thumbnail: "/parallax-showcase/floramart-2-katalog.png",
-    link: "#projects",
+    link: "/projects/floramart",
   },
   {
     id: "floramart-favorit",
     projectId: "floramart",
     title: "FloraMart — Wishlist & Saved Flora",
-    subtitle: "Customer Dashboard for Favorite Botanicals & Repurchase Alerts",
+    subtitle: "Customer Dashboard for Favorite Botanicals & Alerts",
     tag: "USER FAVORITES",
     category: "Customer Experience",
     technologies: ["LocalStorage", "Zustand", "Next.js"],
     thumbnail: "/parallax-showcase/floramart-3-favorit.png",
-    link: "#projects",
+    link: "/projects/floramart",
   },
   {
     id: "floramart-detail",
     projectId: "floramart",
     title: "FloraMart — Plant Specs & Direct Order",
-    subtitle: "Comprehensive Plant Care Specs, Pot Sizing, Delivery & Instant Checkout",
+    subtitle: "Comprehensive Plant Care Specs, Pot Sizing & Checkout",
     tag: "PRODUCT DETAIL",
     category: "E-Commerce",
     technologies: ["Cart System", "Responsive UI", "TypeScript"],
     thumbnail: "/parallax-showcase/floramart-4-detail.png",
-    link: "#projects",
+    link: "/projects/floramart",
   },
 ];
 
-// ROW 3: Exclusively Kos.id & Nusa Bali (8 images, removed pesan-kos)
+// ROW 3: Kos.id, Nusa Bali, and FinAI Mobile (9 images)
 export const ROW_KOS_NUSA: ProductItem[] = [
+  {
+    id: "finai-home",
+    projectId: "finai",
+    title: "FinAI — Smart Mobile Finance & Gemini AI",
+    subtitle: "Personal Finance & Budgeting with Voice & Receipt OCR",
+    tag: "FINAI MOBILE",
+    category: "Mobile App • FinTech & AI",
+    technologies: ["Flutter", "Gemini AI", "Receipt OCR"],
+    thumbnail: "/parallax-showcase/finai-home.png",
+    link: "/projects/finai",
+  },
   {
     id: "kos-id-home",
     projectId: "kos-id",
@@ -137,7 +171,7 @@ export const ROW_KOS_NUSA: ProductItem[] = [
     category: "Property Tech",
     technologies: ["Next.js", "Catalog Engine", "Tailwind CSS"],
     thumbnail: "/parallax-showcase/kos-1-beranda.png",
-    link: "#projects",
+    link: "/projects/kos-id",
   },
   {
     id: "kos-id-detail",
@@ -148,85 +182,82 @@ export const ROW_KOS_NUSA: ProductItem[] = [
     category: "Property Booking",
     technologies: ["Image Gallery", "Responsive UI", "TypeScript"],
     thumbnail: "/parallax-showcase/kos-2-detail.png",
-    link: "#projects",
+    link: "/projects/kos-id",
   },
   {
     id: "kos-id-admin",
     projectId: "kos-id",
     title: "Kos.id — Admin Property Operations",
-    subtitle: "Landlord Management Dashboard for Room Inventory & Occupancy Leases",
+    subtitle: "Landlord Management Dashboard for Room Inventory & Leases",
     tag: "ADMIN PORTAL",
     category: "Operations SaaS",
     technologies: ["CRUD Engine", "Status Tracker", "PostgreSQL"],
     thumbnail: "/parallax-showcase/kos-3-admin-kelola.png",
-    link: "#projects",
+    link: "/projects/kos-id",
   },
   {
     id: "nusa-bali-hero",
     projectId: "nusa-bali",
-    title: "Nusa Bali — Travel Marketplace Portal",
+    title: "Nusa AI — Travel Marketplace Portal",
     subtitle: "Curated Tour Package Booking & Digital Tourism Platform for Bali",
-    tag: "NUSA BALI",
+    tag: "NUSA AI",
     category: "Tourism Tech",
     technologies: ["Next.js", "Hero Section", "Tailwind CSS"],
     thumbnail: "/parallax-showcase/nusa-bali-1-beranda-hero.png",
-    link: "#projects",
+    link: "/projects/nusa-bali",
   },
   {
     id: "nusa-bali-destinasi",
     projectId: "nusa-bali",
-    title: "Nusa Bali — Destinasi Impian Showcase",
+    title: "Nusa AI — Travel Destinations Showcase",
     subtitle: "Featured Destinations, Hidden Gems & Island Activity Guides",
-    tag: "DESTINASI BALI",
+    tag: "DESTINATIONS",
     category: "Travel Guide",
     technologies: ["Grid Layout", "Framer Motion", "Video Player"],
     thumbnail: "/parallax-showcase/nusa-bali-2-beranda-destinasi.png",
-    link: "#projects",
+    link: "/projects/nusa-bali",
   },
   {
     id: "nusa-bali-detail",
     projectId: "nusa-bali",
-    title: "Nusa Bali — AI RAG Assistant & Details",
+    title: "Nusa AI — AI RAG Assistant & Details",
     subtitle: "Tour Package Itinerary with Integrated Retrieval-Augmented Chatbot",
     tag: "RAG ARCHITECTURE",
     category: "AI Travel Assistant",
     technologies: ["RAG Engine", "Vector Search", "Gemini API"],
     thumbnail: "/parallax-showcase/nusa-bali-3-detail-paket.png",
-    link: "#projects",
+    link: "/projects/nusa-bali",
   },
   {
     id: "nusa-bali-katalog",
     projectId: "nusa-bali",
-    title: "Nusa Bali — Tour Package Exploration",
-    subtitle: "Interactive Tour Catalog with Duration, Difficulty & Price Filters",
+    title: "Nusa AI — Tour Package Exploration",
+    subtitle: "Interactive Tour Catalog with Duration & Price Filters",
     tag: "TOUR CATALOG",
     category: "Travel Marketplace",
     technologies: ["Search Filters", "Catalog UI", "Next.js"],
     thumbnail: "/parallax-showcase/nusa-bali-4-katalog-header.png",
-    link: "#projects",
+    link: "/projects/nusa-bali",
   },
   {
     id: "nusa-bali-grid",
     projectId: "nusa-bali",
-    title: "Nusa Bali — Curated Packages Grid",
-    subtitle: "Comprehensive List of Bali Island Escapes, Snorkeling & Cultural Tours",
+    title: "Nusa AI — Curated Packages Grid",
+    subtitle: "Comprehensive List of Bali Island Escapes & Cultural Tours",
     tag: "PACKAGES GRID",
     category: "Tourism Tech",
     technologies: ["Card System", "Responsive UI", "TypeScript"],
     thumbnail: "/parallax-showcase/nusa-bali-5-katalog-grid.png",
-    link: "#projects",
+    link: "/projects/nusa-bali",
   },
 ];
 
 export default function ProjectsSection() {
-  const [selectedProject, setSelectedProject] = useState<DetailedProjectItem | null>(null);
+  const router = useRouter();
 
   const handleCardSelect = (item: ProductItem) => {
     if (item.projectId) {
-      const found = PROJECTS.find((p) => p.id === item.projectId);
-      if (found) {
-        setSelectedProject(found);
-      }
+      router.push(`/projects/${item.projectId}`);
     }
   };
 
@@ -264,7 +295,7 @@ export default function ProjectsSection() {
 
                 {/* Subtitle with High Legibility */}
                 <p className="mt-3 text-xs sm:text-sm md:text-base text-zinc-700 font-semibold leading-relaxed max-w-2xl">
-                  Membangun aplikasi digital berdaya guna tinggi dengan mengombinasikan arsitektur full-stack modern, alur orkestrasi AI Agent, integrasi RAG kontekstual, dan antarmuka ramah pengguna.
+                  Explore practical web and mobile applications engineered to solve everyday problems with modern full-stack development, AI Agent workflows, and RAG architectures.
                 </p>
               </div>
 
@@ -274,9 +305,202 @@ export default function ProjectsSection() {
         />
       </div>
 
-      {/* 3. Section Bottom Bar */}
+      {/* Clean Selected Projects Overview Section (Why Each App Solves Real Problems) */}
+      <div className="w-full border-t border-zinc-200/80 bg-[#fbfbfb]">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-16 sm:py-24 border-x border-zinc-200/80">
+          <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
+
+          {/* Section Header */}
+          <div className="max-w-3xl mb-14">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-xs font-mono font-bold tracking-wider uppercase mb-3">
+              <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+              Selected Production Works
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-zinc-950">
+              Solving Real-World Problems with Code & AI
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-zinc-600 font-medium leading-relaxed">
+              Here is a clean summary of each project, why it exists, and the logical rationale behind its architecture. Click on any card to explore the full case study with complete screenshots.
+            </p>
+          </div>
+
+          {/* 5 Project Showcase Cards */}
+          <div className="space-y-10 sm:space-y-12">
+            {PROJECTS.map((project, idx) => {
+              const isMobile = project.category.toLowerCase().includes("mobile");
+
+              return (
+                <div
+                  key={project.id}
+                  className="group relative rounded-3xl border border-zinc-200/90 bg-white p-6 sm:p-8 lg:p-10 shadow-sm hover:shadow-xl hover:border-zinc-400/80 transition-all duration-300"
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    {/* Left: 16:9 Cover Screenshot */}
+                    <div className="lg:col-span-6 space-y-4">
+                      <Link
+                        href={`/projects/${project.id}`}
+                        data-cursor-expand
+                        className="block relative aspect-[16/10] rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 group/img"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={project.coverImage}
+                          alt={project.title}
+                          className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover/img:scale-105"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity flex items-end p-5">
+                          <span className="text-white text-xs font-mono font-semibold flex items-center gap-1.5">
+                            Click to explore full case study
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </span>
+                        </div>
+                      </Link>
+
+                      {/* Status Badges */}
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-700 text-xs font-mono font-semibold">
+                          {isMobile ? <Smartphone className="w-3.5 h-3.5 text-indigo-600" /> : <Globe className="w-3.5 h-3.5 text-blue-600" />}
+                          {project.category}
+                        </span>
+
+                        {project.liveUrl && (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-semibold">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                            Live Production Web
+                          </span>
+                        )}
+
+                        {project.apkUrl && (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-800 text-xs font-mono font-semibold">
+                            <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+                            Android App (APK Available)
+                          </span>
+                        )}
+
+                        {project.isPaused && (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-mono font-semibold">
+                            <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
+                            Paused (Maintenance)
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Right: Explanations, Logical Problem Rationale & Actions */}
+                    <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
+                      <div>
+                        {/* Title & Subtitle */}
+                        <div className="flex items-start justify-between gap-4">
+                          <div>
+                            <span className="text-xs font-mono font-bold text-zinc-400">
+                              0{idx + 1} //
+                            </span>
+                            <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight">
+                              {project.title}
+                            </h3>
+                          </div>
+                        </div>
+                        <p className="mt-2 text-sm sm:text-base text-zinc-600 font-medium">
+                          {project.subtitle}
+                        </p>
+
+                        {/* Real-World Problem Box */}
+                        <div className="mt-4 p-4 rounded-2xl bg-red-50/60 border border-red-200/80 text-xs sm:text-sm text-zinc-700">
+                          <span className="font-mono font-bold text-red-700 block mb-1 uppercase tracking-wider text-[11px]">
+                            The Problem:
+                          </span>
+                          {project.problemSolved}
+                        </div>
+
+                        {/* Logical Solution Rationale Box */}
+                        <div className="mt-3 p-4 rounded-2xl bg-emerald-50/60 border border-emerald-200/80 text-xs sm:text-sm text-zinc-700">
+                          <span className="font-mono font-bold text-emerald-800 block mb-1 uppercase tracking-wider text-[11px]">
+                            The Solution:
+                          </span>
+                          {project.solutionRationale}
+                        </div>
+
+                        {/* Tech Stack Pills */}
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {project.technologies.slice(0, 4).map((tech) => (
+                            <span
+                              key={tech}
+                              className="px-2.5 py-1 rounded-lg bg-zinc-100 border border-zinc-200/90 text-xs font-mono text-zinc-700 font-medium"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                          {project.technologies.length > 4 && (
+                            <span className="px-2.5 py-1 rounded-lg bg-zinc-50 border border-zinc-200 text-xs font-mono text-zinc-400">
+                              +{project.technologies.length - 4} more
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="pt-2 flex flex-wrap items-center gap-3">
+                        <Link
+                          href={`/projects/${project.id}`}
+                          data-cursor-expand
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-950 text-white text-xs sm:text-sm font-semibold hover:bg-zinc-800 transition-colors shadow-xs"
+                        >
+                          <span>View Project Details</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </Link>
+
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-cursor-expand
+                            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-zinc-800 text-xs sm:text-sm font-semibold hover:bg-zinc-100 transition-colors shadow-xs"
+                          >
+                            <span>Live Website</span>
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+
+                        {project.apkUrl && (
+                          <a
+                            href={project.apkUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-cursor-expand
+                            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-indigo-600 text-white text-xs sm:text-sm font-semibold hover:bg-indigo-700 transition-colors shadow-xs"
+                          >
+                            <Download className="w-3.5 h-3.5" />
+                            <span>Download APK</span>
+                          </a>
+                        )}
+
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-cursor-expand
+                            className="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-xl text-zinc-600 hover:text-zinc-950 text-xs font-mono font-medium transition-colors"
+                          >
+                            <GithubIcon className="w-3.5 h-3.5" />
+                            <span>GitHub</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Section Bottom Bar */}
       <div className="w-full border-t border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-4 border-x border-zinc-200/80 flex items-center justify-between">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-5 border-x border-zinc-200/80 flex items-center justify-between">
           <span className="font-mono text-xs text-zinc-400 tracking-wider">
             [END OF SELECTED WORKS]
           </span>
@@ -293,184 +517,6 @@ export default function ProjectsSection() {
           <PlusSeparator position={["bottom-left", "bottom-right"]} />
         </div>
       </div>
-
-      {/* 4. Interactive Project Detail Case Study Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-10">
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedProject(null)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-md"
-            />
-
-            {/* Modal Dialog */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              className="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-3xl shadow-2xl border border-zinc-200/90 overflow-hidden z-10 flex flex-col"
-            >
-              {/* Modal Top Header */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-200/80 bg-zinc-50/80">
-                <div className="flex items-center gap-2.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-xs font-mono font-semibold tracking-wider text-zinc-500 uppercase">
-                    {selectedProject.category}
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setSelectedProject(null)}
-                  data-cursor-expand
-                  className="p-1.5 rounded-full text-zinc-400 hover:text-zinc-900 hover:bg-zinc-200/70 transition-colors"
-                  aria-label="Close modal"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Modal Scrollable Body */}
-              <div className="overflow-y-auto p-6 sm:p-8 space-y-8">
-                {/* Title & Subtitle */}
-                <div>
-                  <h3 className="text-2xl sm:text-4xl font-extrabold text-zinc-950 tracking-tight">
-                    {selectedProject.title}
-                  </h3>
-                  <p className="mt-2 text-base sm:text-lg text-zinc-600 font-medium">
-                    {selectedProject.subtitle}
-                  </p>
-                </div>
-
-                {/* Cover Image or Video Demo */}
-                <div className="relative rounded-2xl overflow-hidden border border-zinc-200/90 bg-zinc-100 shadow-inner">
-                  {selectedProject.videoDemo ? (
-                    <div className="space-y-2">
-                      <div className="px-4 py-2 bg-zinc-900 text-white text-xs font-mono flex items-center justify-between">
-                        <span className="flex items-center gap-2">
-                          <Play className="w-3.5 h-3.5 text-emerald-400" />
-                          Interactive Demo Video: RAG Chatbot
-                        </span>
-                        <span className="text-zinc-400 text-[10px]">HTML5 Video</span>
-                      </div>
-                      <video
-                        src={selectedProject.videoDemo}
-                        controls
-                        className="w-full max-h-[420px] object-cover bg-black"
-                      />
-                    </div>
-                  ) : (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={selectedProject.coverImage}
-                      alt={selectedProject.title}
-                      className="w-full max-h-[420px] object-cover object-top"
-                    />
-                  )}
-                </div>
-
-                {/* Grid Info: Overview, Problem Solved, AI Integration */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="p-5 rounded-2xl bg-zinc-50 border border-zinc-200/80">
-                    <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-900 flex items-center gap-2 mb-2">
-                      <Layers className="w-4 h-4 text-indigo-600" />
-                      Ringkasan Solusi
-                    </h4>
-                    <p className="text-sm text-zinc-600 leading-relaxed">
-                      {selectedProject.description}
-                    </p>
-                  </div>
-
-                  <div className="p-5 rounded-2xl bg-zinc-50 border border-zinc-200/80">
-                    <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-900 flex items-center gap-2 mb-2">
-                      <Bot className="w-4 h-4 text-emerald-600" />
-                      Integrasi AI & Automasi
-                    </h4>
-                    <p className="text-sm text-zinc-600 leading-relaxed">
-                      {selectedProject.aiIntegration}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Problem Solved */}
-                <div className="p-5 rounded-2xl bg-indigo-50/50 border border-indigo-100">
-                  <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-900 flex items-center gap-2 mb-2">
-                    <Sparkles className="w-4 h-4 text-indigo-600" />
-                    Problem Solved & Dampak Pengguna
-                  </h4>
-                  <p className="text-sm text-indigo-950/80 leading-relaxed">
-                    {selectedProject.problemSolved}
-                  </p>
-                </div>
-
-                {/* Technologies */}
-                <div>
-                  <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 mb-3">
-                    Teknologi & Fitur Utama
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1.5 rounded-xl bg-zinc-100 border border-zinc-200 text-xs font-mono text-zinc-800 font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Gallery Images */}
-                {selectedProject.galleryImages.length > 0 && (
-                  <div>
-                    <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 mb-4">
-                      Tangkapan Layar Sistem ({selectedProject.galleryImages.length} Halaman)
-                    </h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {selectedProject.galleryImages.map((img) => (
-                        <div
-                          key={img.path}
-                          className="group relative rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100"
-                        >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={img.path}
-                            alt={img.label}
-                            className="w-full h-48 object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-x-0 bottom-0 p-2.5 bg-gradient-to-t from-black/80 to-transparent text-white text-[11px] font-sans">
-                            {img.label}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Modal Footer */}
-              <div className="px-6 py-4 border-t border-zinc-200/80 bg-zinc-50 flex items-center justify-between">
-                <span className="text-xs font-mono text-zinc-500">
-                  Project ID: #{selectedProject.id}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setSelectedProject(null)}
-                  data-cursor-expand
-                  className="px-4 py-2 rounded-xl bg-zinc-950 text-white text-xs font-semibold hover:bg-zinc-800 transition-colors"
-                >
-                  Tutup Tinjauan
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
 
     </section>
   );

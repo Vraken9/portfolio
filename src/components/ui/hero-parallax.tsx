@@ -111,7 +111,7 @@ export const DefaultHeader = () => {
           Crafted Software & AI Agent Ecosystems
         </h2>
         <p className="text-sm sm:text-base mt-3 text-zinc-600 leading-relaxed font-medium">
-          Eksplorasi pembuatan aplikasi nyata bertenaga AI Agent, arsitektur RAG, SaaS pendidikan, hingga platform multi-vendor yang dirancang untuk skala produksi.
+          Practical web and mobile applications engineered to solve everyday problems with modern full-stack development and practical AI.
         </p>
       </div>
     </div>
