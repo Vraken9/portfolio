@@ -31,46 +31,48 @@ export const HeroParallax = ({
   header?: React.ReactNode;
   onSelectProduct?: (product: ProductItem) => void;
 }) => {
-  const firstRow = products.slice(0, 5);
-  const secondRow = products.slice(5, 10);
-  const thirdRow = products.slice(10, 15);
+  const countPerRow = Math.ceil(products.length / 3);
+  const firstRow = products.slice(0, countPerRow);
+  const secondRow = products.slice(countPerRow, countPerRow * 2);
+  const thirdRow = products.slice(countPerRow * 2);
+
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"],
+    offset: ["start start", "end end"],
   });
 
   const springConfig = { stiffness: 140, damping: 25, mass: 0.8 };
 
   const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, 850]),
+    useTransform(scrollYProgress, [0, 1], [0, 600]),
     springConfig
   );
   const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -850]),
+    useTransform(scrollYProgress, [0, 1], [0, -600]),
     springConfig
   );
   const rotateX = useSpring(
-    useTransform(scrollYProgress, [0, 0.22], [14, 0]),
+    useTransform(scrollYProgress, [0, 0.65], [15, 0]),
     springConfig
   );
   const opacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.18], [0.3, 1]),
+    useTransform(scrollYProgress, [0, 0.25], [0.35, 1]),
     springConfig
   );
   const rotateZ = useSpring(
-    useTransform(scrollYProgress, [0, 0.22], [14, 0]),
+    useTransform(scrollYProgress, [0, 0.65], [12, 0]),
     springConfig
   );
   const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.22], [-500, 150]),
+    useTransform(scrollYProgress, [0, 0.65], [-350, 40]),
     springConfig
   );
 
   return (
     <div
       ref={ref}
-      className="min-h-[260vh] lg:min-h-[290vh] py-16 sm:py-24 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+      className="min-h-[145vh] lg:min-h-[165vh] pt-8 sm:pt-12 pb-8 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
     >
       {header || <DefaultHeader />}
       
@@ -81,39 +83,39 @@ export const HeroParallax = ({
           translateY,
           opacity,
         }}
-        className="w-full"
+        className="w-full mt-2 sm:mt-6"
       >
         {/* Row 1 (Translates Right) */}
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-6 sm:space-x-10 mb-8 sm:mb-12">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-6 sm:space-x-8 mb-6 sm:mb-8">
           {firstRow.map((product) => (
             <ProductCard
               product={product}
               translate={translateX}
-              key={product.title}
+              key={product.id || product.title}
               onSelect={onSelectProduct}
             />
           ))}
         </motion.div>
 
         {/* Row 2 (Translates Left) */}
-        <motion.div className="flex flex-row mb-8 sm:mb-12 space-x-6 sm:space-x-10">
+        <motion.div className="flex flex-row mb-6 sm:mb-8 space-x-6 sm:space-x-8">
           {secondRow.map((product) => (
             <ProductCard
               product={product}
               translate={translateXReverse}
-              key={product.title}
+              key={product.id || product.title}
               onSelect={onSelectProduct}
             />
           ))}
         </motion.div>
 
         {/* Row 3 (Translates Right) */}
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-6 sm:space-x-10">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-6 sm:space-x-8">
           {thirdRow.map((product) => (
             <ProductCard
               product={product}
               translate={translateX}
-              key={product.title}
+              key={product.id || product.title}
               onSelect={onSelectProduct}
             />
           ))}
@@ -161,7 +163,7 @@ export const ProductCard = ({
       key={product.title}
       onClick={() => onSelect?.(product)}
       data-cursor-expand
-      className="group/product h-80 sm:h-96 w-[22rem] sm:w-[28rem] lg:w-[32rem] relative shrink-0 rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-200/90 bg-zinc-100 shadow-sm hover:shadow-2xl hover:border-zinc-300 transition-all duration-300 cursor-pointer select-none"
+      className="group/product h-72 sm:h-80 md:h-88 lg:h-92 w-[22rem] sm:w-[28rem] md:w-[32rem] lg:w-[35rem] relative shrink-0 rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-200/90 bg-zinc-100 shadow-sm hover:shadow-2xl hover:border-zinc-300 transition-all duration-300 cursor-pointer select-none"
     >
       <div className="relative h-full w-full overflow-hidden">
         {/* Screenshot Image with Smooth Zoom */}
