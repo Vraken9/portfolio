@@ -233,6 +233,13 @@ export default function ProjectsSection() {
   return (
     <section id="projects" className="relative z-0 isolate w-full overflow-hidden text-zinc-900 border-t border-zinc-200/80 bg-white">
 
+      {/* Structural Spacing & Grid Separation between Skills and Projects */}
+      <div className="w-full border-b border-zinc-200/80">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-5 sm:py-7 border-x border-zinc-200/80 flex items-center justify-between">
+          <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
+        </div>
+      </div>
+
       {/* 3D Auto-Running Showcase Container (No Scroll-Trapping) */}
       <div className="w-full">
         <HeroParallax
@@ -241,7 +248,7 @@ export default function ProjectsSection() {
           row3={ROW_KOS_NUSA}
           onSelectProduct={handleCardSelect}
           header={
-            <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 pt-4 sm:pt-6 lg:pt-8 pb-2 border-x border-zinc-200/80 w-full left-0 top-0 pointer-events-none">
+            <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 pt-10 sm:pt-16 lg:pt-20 pb-6 sm:pb-8 border-x border-zinc-200/80 w-full left-0 top-0 pointer-events-none">
               <div className="max-w-3xl relative pointer-events-auto p-4 sm:p-6 lg:p-7 rounded-3xl">
                 
                 {/* Soft Radial White Gradient Glow behind text for supreme readability over moving cards */}

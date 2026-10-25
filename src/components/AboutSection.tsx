@@ -275,7 +275,11 @@ export default function AboutSection() {
 
       {/* 4. Active Selected Skill Detail Showcase (Authentic colors revealed on cursor hover) */}
       <div className="w-full border-b border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-12 sm:py-16 border-x border-zinc-200/80 min-h-[300px] flex flex-col justify-center items-center overflow-hidden">
+        <div
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-16 sm:py-24 lg:py-28 border-x border-zinc-200/80 min-h-[340px] flex flex-col justify-center items-center overflow-hidden"
+        >
           
           <AnimatePresence mode="wait">
             <motion.div
@@ -303,7 +307,7 @@ export default function AboutSection() {
               <div
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
-                className="mt-10 flex flex-wrap items-center justify-center gap-7 sm:gap-11"
+                className="mt-10 mb-8 sm:mb-14 flex flex-wrap items-center justify-center gap-7 sm:gap-11"
               >
                 {currentContent.tools.map((tool) => {
                   const Icon = tool.icon;
@@ -315,7 +319,7 @@ export default function AboutSection() {
                       className="group relative flex flex-col items-center gap-2 cursor-pointer transition-transform duration-300 hover:-translate-y-1.5 select-none"
                     >
                       {/* Logo Vector - Idle grayscale opacity-90, revealing authentic original brand colors cleanly on hover */}
-                      <div className="relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300 filter grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110">
+                      <div className="logo-icon-container relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300 filter grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110">
                         <Icon size={36} className="w-8 h-8 sm:w-9 sm:h-9 transition-transform duration-300" />
                       </div>
 

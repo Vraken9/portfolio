@@ -19,6 +19,8 @@ export function MagneticCursor({
   children,
 }: MagneticCursorProps) {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const cursorIconRef = useRef<HTMLDivElement>(null);
+  const currentHoveredLogo = useRef<Element | null>(null);
   const pos = useRef({ x: -100, y: -100, targetX: -100, targetY: -100 });
   const isHovered = useRef(false);
   const currentScale = useRef(1);
@@ -75,7 +77,7 @@ export function MagneticCursor({
         if (idleTimer.current) clearTimeout(idleTimer.current);
 
         const isInvertText = target.hasAttribute("data-cursor-invert") || target.closest("[data-cursor-invert]");
-        const logoTarget = target.hasAttribute("data-cursor-logo") ? target : target.closest("[data-cursor-logo]");
+        const logoTarget = (target.hasAttribute("data-cursor-logo") ? target : target.closest("[data-cursor-logo]")) as HTMLElement | null;
         const isLogo = !!logoTarget;
         const logoColor = logoTarget?.getAttribute("data-logo-color") || "#38bdf8";
         const isMagnetic = target.hasAttribute("data-magnetic");
@@ -91,23 +93,62 @@ export function MagneticCursor({
 
           pos.current.targetX = centerX + distX * (1 - magneticFactor);
           pos.current.targetY = centerY + distY * (1 - magneticFactor);
+        } else if (isLogo && logoTarget) {
+          // Anchor fluid cursor firmly to the center of the logo icon with subtle fluid lerp
+          const iconElem = (logoTarget.querySelector(".logo-icon-container") || logoTarget) as HTMLElement;
+          const rect = iconElem.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+
+          const distX = clientX - centerX;
+          const distY = clientY - centerY;
+
+          pos.current.targetX = centerX + distX * 0.08;
+          pos.current.targetY = centerY + distY * 0.08;
         }
 
-        // Enlarge on hover: 2.5x on inverted text headings, 2.1x on logo lens, 1.85x on general interactive elements
+        // Scale factors:
+        // Heading text: 2.5x (inverted difference mode)
+        // Logo lens: 2.85x (~63px diameter circle) to cleanly house the 34px brand icon
+        // General interactive: 1.85x
         let targetScale = 1.85;
         if (isInvertText) {
           targetScale = 2.5;
         } else if (isLogo) {
-          targetScale = 2.1;
+          targetScale = 2.85;
         }
 
-        if (isLogo) {
-          // Inside of fluid cursor remains solid black, while radiating the logo's authentic brand color
+        if (isLogo && logoTarget) {
+          // Inside of fluid cursor remains solid black, with radiant brand color outer glow
           cursor.style.mixBlendMode = "normal";
           cursor.style.backgroundColor = "#09090b";
           cursor.style.border = `2px solid ${logoColor}`;
-          cursor.style.boxShadow = `0 0 16px 3px ${logoColor}99, 0 0 35px 8px ${logoColor}44`;
+          cursor.style.boxShadow = `0 0 20px 4px ${logoColor}99, 0 0 45px 8px ${logoColor}33`;
+
+          // Clone and display the authentic brand logo SVG inside the black cursor circle
+          if (currentHoveredLogo.current !== logoTarget) {
+            currentHoveredLogo.current = logoTarget;
+            const originalSvg = logoTarget.querySelector("svg");
+            if (originalSvg && cursorIconRef.current) {
+              const cloned = originalSvg.cloneNode(true) as SVGSVGElement;
+              cloned.setAttribute("width", "34");
+              cloned.setAttribute("height", "34");
+              cloned.style.filter = "none";
+              cloned.style.opacity = "1";
+              cloned.style.transform = "none";
+              cursorIconRef.current.innerHTML = "";
+              cursorIconRef.current.appendChild(cloned);
+              // Counteract parent scale so SVG displays at natural 1:1 crisp 34px size
+              cursorIconRef.current.style.transform = `scale(${1 / targetScale})`;
+            }
+          }
         } else {
+          // Leaving logo area: clear cloned icon and restore difference mode
+          if (currentHoveredLogo.current) {
+            currentHoveredLogo.current = null;
+            if (cursorIconRef.current) cursorIconRef.current.innerHTML = "";
+          }
+
           // Standard difference inversion mode
           cursor.style.mixBlendMode = blendMode;
           cursor.style.backgroundColor = color;
@@ -125,6 +166,12 @@ export function MagneticCursor({
           });
         }
       } else {
+        // Clear logo state when moving to non-interactive area
+        if (currentHoveredLogo.current) {
+          currentHoveredLogo.current = null;
+          if (cursorIconRef.current) cursorIconRef.current.innerHTML = "";
+        }
+
         // Reset cursor styling when moving away from interactive elements
         cursor.style.mixBlendMode = blendMode;
         cursor.style.backgroundColor = color;
@@ -208,7 +255,7 @@ export function MagneticCursor({
 
   return (
     <>
-      {/* Fluid Inversion Cursor Disc - Pure fluid lens, NO center dot, compact sleek size */}
+      {/* Fluid Inversion Cursor Disc - Pure fluid lens with dynamic brand SVG display on logo hover */}
       <div
         ref={cursorRef}
         aria-hidden="true"
@@ -218,8 +265,13 @@ export function MagneticCursor({
           mixBlendMode: blendMode,
           backgroundColor: color,
         }}
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full will-change-transform opacity-0 select-none"
-      />
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full will-change-transform opacity-0 select-none flex items-center justify-center overflow-hidden"
+      >
+        <div
+          ref={cursorIconRef}
+          className="w-full h-full flex items-center justify-center pointer-events-none transition-transform duration-150"
+        />
+      </div>
 
       {children}
     </>
