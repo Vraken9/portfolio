@@ -67,14 +67,15 @@ export function MagneticCursor({
 
       // Check if mouse is hovering over interactive elements or text designated for inversion
       const target = (e.target as HTMLElement)?.closest(
-        "[data-magnetic], [data-cursor-invert], [data-cursor-expand], a, button, nav, header, [role='button'], .cursor-pointer"
+        "[data-magnetic], [data-cursor-invert], [data-cursor-logo], [data-cursor-expand], a, button, nav, header, [role='button'], .cursor-pointer"
       ) as HTMLElement | null;
 
       if (target) {
-        // Clear idle timer while hovering interactive elements so the inversion lens remains visible
+        // Clear idle timer while hovering interactive elements so the lens remains visible
         if (idleTimer.current) clearTimeout(idleTimer.current);
 
-        const isMarquee = target.hasAttribute("data-cursor-invert");
+        const isInvertText = target.hasAttribute("data-cursor-invert") || target.closest("[data-cursor-invert]");
+        const isLogo = target.hasAttribute("data-cursor-logo") || target.closest("[data-cursor-logo]");
         const isMagnetic = target.hasAttribute("data-magnetic");
 
         // Magnetic attraction if element specifically requests magnetic pull
@@ -90,8 +91,27 @@ export function MagneticCursor({
           pos.current.targetY = centerY + distY * (1 - magneticFactor);
         }
 
-        // Enlarge on hover (1.85x on interactive elements, 2.1x on running text) for clear fluid black cursor
-        const targetScale = isMarquee ? 2.1 : 1.85;
+        // Enlarge on hover: 2.5x on inverted text headings, 2.2x on logo lens, 1.85x on general interactive elements
+        let targetScale = 1.85;
+        if (isInvertText) {
+          targetScale = 2.5;
+        } else if (isLogo) {
+          targetScale = 2.2;
+        }
+
+        if (isLogo) {
+          // Switch to transparent lens with subtle ring so authentic logo colors shine 100% inside the circle
+          cursor.style.mixBlendMode = "normal";
+          cursor.style.backgroundColor = "transparent";
+          cursor.style.border = "1.5px solid rgba(24, 24, 27, 0.45)";
+          cursor.style.boxShadow = "0 0 16px rgba(0, 0, 0, 0.08)";
+        } else {
+          // Standard difference inversion mode
+          cursor.style.mixBlendMode = blendMode;
+          cursor.style.backgroundColor = color;
+          cursor.style.border = "none";
+          cursor.style.boxShadow = "none";
+        }
 
         if (!isHovered.current || currentScale.current !== targetScale) {
           isHovered.current = true;
@@ -103,6 +123,12 @@ export function MagneticCursor({
           });
         }
       } else {
+        // Reset cursor styling when moving away from interactive elements
+        cursor.style.mixBlendMode = blendMode;
+        cursor.style.backgroundColor = color;
+        cursor.style.border = "none";
+        cursor.style.boxShadow = "none";
+
         if (isHovered.current) {
           isHovered.current = false;
           currentScale.current = 1;

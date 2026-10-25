@@ -265,19 +265,16 @@ export default function ProjectsSection() {
                 {/* Soft Radial White Gradient Glow behind text for supreme readability over moving cards */}
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-white/95 via-white/85 to-white/0 backdrop-blur-xs rounded-3xl border border-white/60 shadow-sm pointer-events-none" />
 
-                {/* Category Pill Tag */}
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="px-3 py-1 rounded-full bg-white/95 text-zinc-900 text-xs font-mono font-bold tracking-wide border border-zinc-200/90 inline-flex items-center gap-1.5 shadow-xs backdrop-blur-md">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    SELECTED WORKS & ECOSYSTEMS
-                  </span>
-                  <span className="text-xs font-mono font-semibold text-zinc-500 bg-white/70 px-2 py-0.5 rounded-md backdrop-blur-xs">
-                    • 4 PRODUCTION APPS
-                  </span>
-                </div>
+                {/* Minimalist Monospace Category Tag */}
+                <span className="font-mono text-xs font-bold text-indigo-600 tracking-widest uppercase mb-2 inline-block">
+                  [SELECTED WORKS // PRODUCTION APPS]
+                </span>
 
-                {/* Main Heading with Enhanced Weight and Crispness */}
-                <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-950 leading-[1.1] drop-shadow-xs">
+                {/* Main Heading with Enhanced Weight and Invert Cursor */}
+                <h2
+                  data-cursor-invert
+                  className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-950 leading-[1.1] drop-shadow-xs cursor-default select-none"
+                >
                   Crafted Software & AI Agent Ecosystems
                 </h2>
 
@@ -285,31 +282,6 @@ export default function ProjectsSection() {
                 <p className="mt-3 text-xs sm:text-sm md:text-base text-zinc-700 font-semibold leading-relaxed max-w-2xl">
                   Membangun aplikasi digital berdaya guna tinggi dengan mengombinasikan arsitektur full-stack modern, alur orkestrasi AI Agent, integrasi RAG kontekstual, dan antarmuka ramah pengguna.
                 </p>
-
-                {/* Feature Highlights Pills */}
-                <div className="mt-5 flex flex-wrap gap-2 sm:gap-2.5">
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-zinc-200/90 text-xs font-bold text-zinc-800 shadow-xs">
-                    <Layers className="w-3.5 h-3.5 text-indigo-600" />
-                    <span>4 Full-Stack Platforms</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-zinc-200/90 text-xs font-bold text-zinc-800 shadow-xs">
-                    <Bot className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>RAG & Generative AI</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-zinc-200/90 text-xs font-bold text-zinc-800 shadow-xs">
-                    <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                    <span>Production Grade Architecture</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-zinc-200/90 text-xs font-bold text-zinc-800 shadow-xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-blue-600" />
-                    <span>Next.js, TypeScript & Python</span>
-                  </div>
-                </div>
-
-                <div className="mt-4 flex items-center gap-2 text-[11px] font-mono text-zinc-500">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>3D Continuous Showcase • Hover row to pause • Click card for detailed case study</span>
-                </div>
               </div>
 
               <PlusSeparator position={["bottom-left", "bottom-right"]} />

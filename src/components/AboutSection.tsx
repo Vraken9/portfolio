@@ -286,8 +286,11 @@ export default function AboutSection() {
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col items-center text-center max-w-3xl"
             >
-              {/* Title */}
-              <h3 className="font-bold text-3xl sm:text-4xl md:text-5xl text-zinc-900 tracking-tight">
+              {/* Title with Invert Cursor */}
+              <h3
+                data-cursor-invert
+                className="font-bold text-3xl sm:text-4xl md:text-5xl text-zinc-900 tracking-tight cursor-default select-none"
+              >
                 {currentContent.title}
               </h3>
 
@@ -296,7 +299,7 @@ export default function AboutSection() {
                 {currentContent.subtitle}
               </p>
 
-              {/* Tools & Tech Icons - Bold, crisp, solid opacity without bounding box, bursting into authentic brand colors on hover */}
+              {/* Tools & Tech Icons - Authentic brand colors revealed right inside fluid cursor lens */}
               <div
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
@@ -307,11 +310,11 @@ export default function AboutSection() {
                   return (
                     <div
                       key={tool.name}
-                      data-cursor-expand
+                      data-cursor-logo
                       className="group relative flex flex-col items-center gap-2 cursor-pointer transition-transform duration-300 hover:-translate-y-1.5 select-none"
                     >
-                      {/* Logo Vector - Clean, sharp, solid opacity in idle (grayscale opacity-90), smoothly revealing authentic original brand colors on hover */}
-                      <div className="relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300 filter grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-108">
+                      {/* Logo Vector - Idle grayscale opacity-90, revealing authentic original brand colors cleanly on hover */}
+                      <div className="relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300 filter grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110">
                         <Icon size={36} className="w-8 h-8 sm:w-9 sm:h-9 transition-transform duration-300" />
                       </div>
 

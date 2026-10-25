@@ -142,7 +142,7 @@ export const ProductCard = ({
         />
 
         {/* Ambient Top Shadow for Tag Visibility */}
-        <div className="absolute top-0 inset-x-0 h-20 bg-gradient-to-b from-black/50 via-black/20 to-transparent opacity-60 group-hover/product:opacity-85 transition-opacity duration-300 pointer-events-none" />
+        <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-black/25 via-transparent to-transparent opacity-50 pointer-events-none" />
 
         {/* Top Floating Badge Bar */}
         <div className="absolute top-3 inset-x-3 sm:top-4 sm:inset-x-4 flex items-center justify-between z-10 pointer-events-none">
@@ -158,33 +158,33 @@ export const ProductCard = ({
           </div>
         </div>
 
-        {/* Bottom Dark Glass Gradient Overlay for High Readability on Hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/95 via-zinc-950/45 to-transparent opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 pointer-events-none" />
+        {/* Clean White Frosted Glass Overlay on Hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/85 to-white/20 backdrop-blur-[3px] opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-        {/* Bottom Details Content */}
-        <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 translate-y-3 opacity-0 group-hover/product:translate-y-0 group-hover/product:opacity-100 transition-all duration-300 z-10 flex flex-col gap-1 pointer-events-none">
+        {/* Bottom Details Content (Clean dark typography on white frosted glass) */}
+        <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 translate-y-2 opacity-0 group-hover/product:translate-y-0 group-hover/product:opacity-100 transition-all duration-300 z-10 flex flex-col gap-1 pointer-events-none">
           {product.category && (
-            <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-indigo-300 font-bold">
+            <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-indigo-600 font-bold">
               {product.category}
             </span>
           )}
 
-          <h3 className="text-sm sm:text-base lg:text-lg font-bold text-white tracking-tight leading-snug">
+          <h3 className="text-sm sm:text-base lg:text-lg font-extrabold text-zinc-950 tracking-tight leading-snug">
             {product.title}
           </h3>
 
           {product.subtitle && (
-            <p className="text-[11px] sm:text-xs text-zinc-300 line-clamp-2 leading-relaxed">
+            <p className="text-[11px] sm:text-xs text-zinc-600 font-medium line-clamp-2 leading-relaxed">
               {product.subtitle}
             </p>
           )}
 
           {product.technologies && product.technologies.length > 0 && (
-            <div className="mt-0.5 flex flex-wrap gap-1 sm:gap-1.5">
+            <div className="mt-1 flex flex-wrap gap-1 sm:gap-1.5">
               {product.technologies.slice(0, 3).map((tech) => (
                 <span
                   key={tech}
-                  className="px-2 py-0.5 rounded-md bg-white/15 text-[9px] sm:text-[10px] font-mono text-zinc-200 backdrop-blur-xs border border-white/10"
+                  className="px-2 py-0.5 rounded-md bg-zinc-100/90 text-[9px] sm:text-[10px] font-mono text-zinc-800 font-semibold border border-zinc-200/90 shadow-2xs"
                 >
                   {tech}
                 </span>
