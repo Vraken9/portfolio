@@ -75,12 +75,12 @@ const INDEX = 0.04; // the index down the right-hand side
 const CULL = 1.6;
 
 /** How much of a wheel-notch or a dragged pixel counts as one item. */
-const WHEEL_UNITS = 900;
-const DRAG_UNITS = 420;
+const WHEEL_UNITS = 1100;
+const DRAG_UNITS = 450;
 /** Quiet time after the last wheel event before the wheel settles on an item. */
-const SETTLE = 140;
+const SETTLE = 240;
 /** Fraction of the remaining distance closed each frame. 1 = no smoothing. */
-const EASE = 0.12;
+const EASE = 0.09;
 
 const clamp = (v: number, lo: number, hi: number) =>
   Math.min(hi, Math.max(lo, v));
@@ -135,8 +135,10 @@ export function WorksWheel({
 
   // The wheel's position, and where it is heading. Only `active` is state -
   // everything else is written to the DOM, so turning the wheel is not a render.
-  const turn = React.useRef(0);
-  const target = React.useRef(0);
+  // Initialized to 1 so the drum is open immediately with the first credential in front.
+  const turn = React.useRef(1);
+  const target = React.useRef(1);
+  const lastActive = React.useRef(0);
   const [active, setActive] = React.useState(0);
   const [stage, setStage] = React.useState<Stage>({ w: 0, h: 0 });
 
@@ -247,13 +249,11 @@ export function WorksWheel({
       if (labelRef.current) labelRef.current.style.opacity = String(1 - m);
       if (titleRef.current) titleRef.current.style.opacity = String(m);
       const near = clamp(Math.round(pos), 0, last);
-      setActive((prev) => {
-        if (prev !== near) {
-          onActiveChange?.(near);
-          return near;
-        }
-        return prev;
-      });
+      if (lastActive.current !== near) {
+        lastActive.current = near;
+        setActive(near);
+        onActiveChange?.(near);
+      }
     };
 
     frame = requestAnimationFrame(draw);
@@ -270,7 +270,10 @@ export function WorksWheel({
       to(next);
       window.clearTimeout(settling.current);
       settling.current = window.setTimeout(
-        () => to(Math.round(target.current)),
+        () => {
+          if (target.current < 0.5) to(0);
+          else to(clamp(Math.round(target.current), 1, last + 1));
+        },
         SETTLE,
       );
     };
@@ -281,12 +284,19 @@ export function WorksWheel({
     };
   }, [to, last]);
 
-  // Keep right index list smoothly scrolled to active item
+  // Keep right index list in view of active item without triggering smooth-scroll jank
   React.useEffect(() => {
     if (indexListRef.current) {
-      const activeEl = indexListRef.current.children[active] as HTMLElement | undefined;
+      const parent = indexListRef.current;
+      const activeEl = parent.children[active] as HTMLElement | undefined;
       if (activeEl) {
-        activeEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        const activeTop = activeEl.offsetTop - parent.offsetTop;
+        const activeBottom = activeTop + activeEl.offsetHeight;
+        if (activeTop < parent.scrollTop) {
+          parent.scrollTop = activeTop - 8;
+        } else if (activeBottom > parent.scrollTop + parent.clientHeight) {
+          parent.scrollTop = activeBottom - parent.clientHeight + 8;
+        }
       }
     }
   }, [active]);
@@ -325,11 +335,12 @@ export function WorksWheel({
         }}
         onPointerUp={() => {
           drag.current = null;
-          if (target.current > 1) to(Math.round(target.current));
+          if (target.current < 0.5) to(0);
+          else to(clamp(Math.round(target.current), 1, last + 1));
         }}
         onKeyDown={(event) => {
-          if (event.key === "ArrowDown") to(Math.round(target.current) + 1);
-          else if (event.key === "ArrowUp") to(Math.round(target.current) - 1);
+          if (event.key === "ArrowDown") to(clamp(Math.round(target.current) + 1, 1, last + 1));
+          else if (event.key === "ArrowUp") to(clamp(Math.round(target.current) - 1, 1, last + 1));
           else return;
           event.preventDefault();
         }}
@@ -350,7 +361,7 @@ export function WorksWheel({
                   onClick={(e) => {
                     if (onCardClick) {
                       e.preventDefault();
-                      if (i !== active) {
+                      if (i !== active || turn.current < 0.5) {
                         to(i + 1);
                       } else {
                         onCardClick(item, i);
@@ -361,7 +372,7 @@ export function WorksWheel({
                     cardRefs.current[i] = node;
                   }}
                   className={cn(
-                    "group absolute [backface-visibility:hidden] cursor-pointer transition-transform duration-200",
+                    "group absolute [backface-visibility:hidden] cursor-pointer will-change-transform select-none [transform-style:preserve-3d]",
                     i === active && "ring-2 ring-primary/40 rounded-xl"
                   )}
                   style={{
@@ -439,7 +450,7 @@ export function WorksWheel({
       {/* Right Index List */}
       <ol
         ref={indexListRef}
-        className="text-muted-foreground absolute top-[8%] right-[2%] max-h-[78%] max-w-[280px] overflow-y-auto text-right leading-[1.8] pointer-events-auto pr-3 pl-2 scroll-smooth z-20 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="text-muted-foreground absolute top-[8%] right-4 sm:right-8 lg:right-12 max-h-[78%] max-w-[280px] overflow-y-auto text-right leading-[1.8] pointer-events-auto pr-3 pl-2 z-20 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         style={{ fontSize: Math.max(metrics.index, 11) }}
       >
         {items.map((item, i) => (

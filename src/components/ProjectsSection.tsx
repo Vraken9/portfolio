@@ -382,7 +382,11 @@ export default function ProjectsSection() {
           </div>
 
           {/* Text Overlay: Crisp dark text matching About Section */}
-          <div className="relative z-10 w-full h-full flex flex-col justify-center px-6 sm:px-10 py-12 pointer-events-none">
+          <div
+            data-cursor-expand
+            data-cursor-scale="1.45"
+            className="relative z-10 w-full h-full flex flex-col justify-center px-6 sm:px-10 py-12 pointer-events-auto cursor-default"
+          >
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight text-zinc-950">
               akhyar&apos;s projects.
             </h2>

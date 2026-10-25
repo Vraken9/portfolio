@@ -67,7 +67,7 @@ export function MagneticCursor({
 
       // Check if mouse is hovering over interactive elements or text designated for inversion
       const target = (e.target as HTMLElement)?.closest(
-        "[data-magnetic], [data-cursor-invert], [data-cursor-logo], [data-cursor-expand], a, button, nav, header, [role='button'], .cursor-pointer"
+        "[data-magnetic], [data-cursor-invert], [data-cursor-logo], [data-cursor-expand], [data-cursor-scale], a, button, nav, header, [role='button'], .cursor-pointer"
       ) as HTMLElement | null;
 
       if (target) {
@@ -79,6 +79,10 @@ export function MagneticCursor({
         const isLogo = !!logoTarget;
         const logoColor = logoTarget?.getAttribute("data-logo-color") || "#38bdf8";
         const isMagnetic = target.hasAttribute("data-magnetic");
+        const expandTarget = (target.hasAttribute("data-cursor-expand") || target.hasAttribute("data-cursor-scale")
+          ? target
+          : target.closest("[data-cursor-expand], [data-cursor-scale]")) as HTMLElement | null;
+        const customScaleAttr = expandTarget?.getAttribute("data-cursor-scale");
 
         // Magnetic attraction if element specifically requests magnetic pull
         if (isMagnetic) {
@@ -106,11 +110,16 @@ export function MagneticCursor({
         }
 
         // Scale factors:
+        // Section expand (custom scale): 1.45x
         // Heading text: 2.5x (inverted difference mode)
-        // Logo lens: 2.4x (~53px diameter circle) to cleanly cover the 34px brand icon
+        // Logo lens: 2.4x (~53px diameter circle)
         // General interactive: 1.85x
         let targetScale = 1.85;
-        if (isInvertText) {
+        if (customScaleAttr) {
+          targetScale = parseFloat(customScaleAttr) || 1.45;
+        } else if (expandTarget) {
+          targetScale = 1.45;
+        } else if (isInvertText) {
           targetScale = 2.5;
         } else if (isLogo) {
           targetScale = 2.4;
