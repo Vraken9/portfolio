@@ -1,3 +1,20 @@
+export interface FlowStep {
+  stepNumber: string;
+  title: string;
+  description: string;
+  imagePath: string;
+  tag?: string;
+  highlights?: string[];
+}
+
+export interface ProjectFlow {
+  roleTitle: string;
+  roleBadge: string;
+  roleIcon?: string;
+  roleDescription?: string;
+  steps: FlowStep[];
+}
+
 export interface ProjectItem {
   id: string;
   title: string;
@@ -16,6 +33,7 @@ export interface ProjectItem {
   githubUrl?: string;
   apkUrl?: string;
   isPaused?: boolean;
+  flows?: ProjectFlow[];
 }
 
 export interface CertificateItem {
@@ -243,7 +261,7 @@ export const PROJECTS: ProjectItem[] = [
     featured: true,
     coverImage: "/gambar-web-modulku/halaman-landing-page.png",
     description: "An AI web platform designed to help teachers create teaching modules, exam questions, and official curriculum documents in seconds.",
-    problemSolved: "Teachers often spend 15 to 20 hours each week making lesson plans, curriculum documents, and test questions by hand. This heavy paperwork takes away valuable time from helping students learn.",
+    problemSolved: "Teachers in Indonesia often spend 15 to 20 hours each week making lesson plans, curriculum documents, and test questions by hand. This heavy paperwork takes away valuable time from helping students learn.",
     solutionRationale: "ModulKu solves this problem by using artificial intelligence to generate national curriculum modules (Kurikulum Merdeka) and quizzes automatically. It also includes an admin dashboard that monitors AI API token usage and costs, keeping the service fast, reliable, and affordable.",
     aiIntegration: "Custom AI Question Generator, Teaching Module Generator, and real-time LLM API token & cost tracking system.",
     liveUrl: "https://modul-ku.vercel.app/",
@@ -258,6 +276,104 @@ export const PROJECTS: ProjectItem[] = [
       { path: "/gambar-web-modulku/halaman-admin-ikhtisar-metrik.png", label: "Admin - Metrics & Growth Analytics" },
       { path: "/gambar-web-modulku/halaman-dashboard-guru.png", label: "Teacher Workspace Overview" },
       { path: "/gambar-web-modulku/halaman-admin-persetujuan-langganan.png", label: "Admin - Subscription Approvals Management" },
+    ],
+    flows: [
+      {
+        roleTitle: "Teacher Workspace & Automated Curriculum",
+        roleBadge: "Educator Journey",
+        roleIcon: "GraduationCap",
+        roleDescription: "How teachers create standardized national curriculum documents and student exams in minutes.",
+        steps: [
+          {
+            stepNumber: "01",
+            title: "EdTech Portal & Kurikulum Merdeka Overview",
+            description: "Teachers explore the platform overview, understanding how AI automation accelerates semester curriculum preparation according to Kemendikbud standards.",
+            imagePath: "/gambar-web-modulku/halaman-landing-page.png",
+            tag: "Landing Portal",
+            highlights: ["Fast Generation", "Standard Guidelines", "Teacher Focused"],
+          },
+          {
+            stepNumber: "02",
+            title: "Teacher Workspace & Official School Letterhead",
+            description: "Teachers set up their educator profile, NIP number, and school header logo (kop surat) so all generated curriculum files look official automatically.",
+            imagePath: "/gambar-web-modulku/halaman-dashboard-guru-profil-sekolah-kop.png",
+            tag: "School Letterhead",
+            highlights: ["Auto Header", "Official Format", "Teacher Profile"],
+          },
+          {
+            stepNumber: "03",
+            title: "Automated Teaching Module (Modul Ajar) Generator",
+            description: "By picking the subject and learning goals (Capaian Pembelajaran), the AI builds complete, multi-week lesson plans with core competencies and step-by-step activities.",
+            imagePath: "/gambar-web-modulku/halaman-dashboard-guru-modul-ajar-bkpdm.png",
+            tag: "Lesson Plan AI",
+            highlights: ["BSKAP Compliant", "Learning Objectives", "Print Ready"],
+          },
+          {
+            stepNumber: "04",
+            title: "Annual & Semester Program Builder (ATP, Prota, Promes)",
+            description: "Generates the complete yearly academic calendar, distributing teaching hours across semester milestones without tedious manual spreadsheets.",
+            imagePath: "/gambar-web-modulku/halaman-dashboard-guru-atp-prota-promes.png",
+            tag: "Academic Timeline",
+            highlights: ["Semester Milestones", "Hour Distribution", "Curriculum Goals"],
+          },
+          {
+            stepNumber: "05",
+            title: "AI Exam & Quiz Generator with Bloom's Taxonomy",
+            description: "Creates customized quiz questions with multiple choice or essay formats, categorized across Bloom cognitive levels (C1 to C6), complete with answer keys and grading rubrics.",
+            imagePath: "/gambar-web-modulku/halaman-dahsboard-guru-soal-generator.png",
+            tag: "Exam Generator",
+            highlights: ["Bloom Taxonomy C1-C6", "Answer Keys", "Rubric Evaluation"],
+          },
+          {
+            stepNumber: "06",
+            title: "Classroom Presentation Slides & Student Worksheets (LKPD)",
+            description: "Produces interactive slide outlines and student activity sheets (LKPD) directly aligned with the generated teaching modules for direct classroom use.",
+            imagePath: "/gambar-web-modulku/halaman-dashboard-guru-slide-tayang-lkpd.png",
+            tag: "Teaching Artifacts",
+            highlights: ["Student Worksheets", "Presentation Slides", "Immediate Download"],
+          },
+          {
+            stepNumber: "07",
+            title: "Centralized Document Bank & 1-Click Export",
+            description: "All generated curriculum artifacts are securely stored in the teacher's cloud repository, downloadable anytime in printable PDF or Word formats.",
+            imagePath: "/gambar-web-modulku/halaman-dashboard-guru-bank-dokumen.png",
+            tag: "Document Bank",
+            highlights: ["Cloud Storage", "PDF & Word Export", "Re-usable Artifacts"],
+          },
+        ],
+      },
+      {
+        roleTitle: "AI Infrastructure & Token Governance",
+        roleBadge: "Superadmin Control",
+        roleIcon: "ShieldCheck",
+        roleDescription: "How platform managers monitor real-time AI token costs, API hit rates, and teacher subscriptions.",
+        steps: [
+          {
+            stepNumber: "08",
+            title: "Real-Time AI Token Hit & Cost Tracking",
+            description: "A specialized admin dashboard showing daily prompt and completion token consumption, estimated USD expenses, and model latency metrics.",
+            imagePath: "/gambar-web-modulku/halaman-admin-pelacakan-hit-dan-biaya-api.png",
+            tag: "Cost Tracker",
+            highlights: ["Token Breakdown", "Daily USD Spend", "Rate Limiting"],
+          },
+          {
+            stepNumber: "09",
+            title: "System Overview & Generation Volume Metrics",
+            description: "High-level summary of active educator accounts, total modules generated this month, and platform growth trends.",
+            imagePath: "/gambar-web-modulku/halaman-admin-ikhtisar-metrik.png",
+            tag: "Analytics Hub",
+            highlights: ["Active Teachers", "Volume Analytics", "System Health"],
+          },
+          {
+            stepNumber: "10",
+            title: "Subscription Management & Quota Provisioning",
+            description: "Admin panel to review teacher subscription requests, approve institution licenses, and adjust AI monthly generation quotas.",
+            imagePath: "/gambar-web-modulku/halaman-admin-persetujuan-langganan.png",
+            tag: "Subscription Engine",
+            highlights: ["License Approvals", "Quota Top-Up", "Access Control"],
+          },
+        ],
+      },
     ],
   },
   {
@@ -284,6 +400,104 @@ export const PROJECTS: ProjectItem[] = [
       { path: "/gambar-web-kos.id/halaman-admin-kelola-kos.png", label: "Admin - Room Inventory & Availability" },
       { path: "/gambar-web-kos.id/halaman-admin-booking.png", label: "Admin - Booking Verification & Approvals" },
     ],
+    flows: [
+      {
+        roleTitle: "Tenant Discovery & Online Reservation",
+        roleBadge: "Renter Journey",
+        roleIcon: "User",
+        roleDescription: "How students and jobseekers discover rooms, book stays, and verify payments digitally.",
+        steps: [
+          {
+            stepNumber: "01",
+            title: "Search Rooms by Gender, Price & Amenities",
+            description: "Renters search boarding houses with easy filters for monthly rent, location, and room rules (Men, Women, or Mixed).",
+            imagePath: "/gambar-web-kos.id/halaman-beranda.png",
+            tag: "Search Portal",
+            highlights: ["Fast Price Filter", "Gender Tagging", "Location Radius"],
+          },
+          {
+            stepNumber: "02",
+            title: "Inspect Room Photos, Amenities & House Rules",
+            description: "Detailed room page displaying interior photos, bathroom type, AC/WiFi amenities, electricity rules, and current availability status.",
+            imagePath: "/gambar-web-kos.id/halaman-user-detail-kos.png",
+            tag: "Room Details",
+            highlights: ["Photo Gallery", "Facility Checklist", "House Guidelines"],
+          },
+          {
+            stepNumber: "03",
+            title: "Online Booking Form & Rental Duration",
+            description: "Renters select check-in date, length of stay (monthly or yearly), and enter tenant identification info to lock their reservation.",
+            imagePath: "/gambar-web-kos.id/halaman-user-pesan-kos.png",
+            tag: "Booking Form",
+            highlights: ["Check-in Date Picker", "Duration Selector", "Tenant Contact"],
+          },
+          {
+            stepNumber: "04",
+            title: "Payment Instructions & Bank Transfer Details",
+            description: "Clear payment page showing the destination bank account, total bill amount, and step-by-step payment instructions.",
+            imagePath: "/gambar-web-kos.id/halaman-user-pembayaran-kos.png",
+            tag: "Payment Flow",
+            highlights: ["Bank Account Details", "Total Bill", "Transfer Instructions"],
+          },
+          {
+            stepNumber: "05",
+            title: "Upload Transfer Receipt Proof & Verification Status",
+            description: "Renters upload a photo of their bank transfer receipt. The system queues the order for landlord review and shows real-time verification status.",
+            imagePath: "/gambar-web-kos.id/halaman-user-setelah-upload-bukti-pembayaran.png",
+            tag: "Receipt Upload",
+            highlights: ["Image Proof Upload", "Real-Time Status", "Instant Confirmation"],
+          },
+          {
+            stepNumber: "06",
+            title: "Check Order History & Download Official PDF Receipt",
+            description: "Once approved, renters can view their confirmed order anytime and generate a printable PDF invoice with an official transaction ID.",
+            imagePath: "/gambar-web-kos.id/halaman-user-cetak-struk-pembayaran.png",
+            tag: "Official PDF Invoice",
+            highlights: ["Printable PDF", "Booking Invoice", "Permanent History"],
+          },
+        ],
+      },
+      {
+        roleTitle: "Landlord & Property Management",
+        roleBadge: "Admin Operations",
+        roleIcon: "ShieldCheck",
+        roleDescription: "How boarding house owners manage rooms, audit payment proofs, and maintain occupancy.",
+        steps: [
+          {
+            stepNumber: "07",
+            title: "Landlord Dashboard & Live Occupancy Metrics",
+            description: "Property owner dashboard displaying total rooms occupied, pending verification orders, and monthly revenue overview.",
+            imagePath: "/gambar-web-kos.id/halaman-dashboard-admin.png",
+            tag: "Operations Hub",
+            highlights: ["Occupancy Rate", "Pending Bookings", "Revenue Summary"],
+          },
+          {
+            stepNumber: "08",
+            title: "Room Inventory & Monthly Rate Management",
+            description: "Admins add new room units, edit monthly prices, assign room numbers, and mark rooms as maintenance or available.",
+            imagePath: "/gambar-web-kos.id/halaman-admin-kelola-kos.png",
+            tag: "Room Inventory",
+            highlights: ["Room Availability", "Rate Adjustments", "Room Numbering"],
+          },
+          {
+            stepNumber: "09",
+            title: "Audit Payment Receipts & 1-Click Verification",
+            description: "Admins inspect the uploaded bank transfer photo side-by-side with booking details and click approve to notify the renter immediately.",
+            imagePath: "/gambar-web-kos.id/halaman-admin-booking-lihat-detail-booking.png",
+            tag: "Payment Audit",
+            highlights: ["Side-by-Side Review", "1-Click Approval", "Fraud Prevention"],
+          },
+          {
+            stepNumber: "10",
+            title: "Amenity & Facility Specifications",
+            description: "Admins manage shared facilities such as communal kitchens, parking spaces, WiFi speed, and security CCTV setups.",
+            imagePath: "/gambar-web-kos.id/halaman-admin-fasilitas-kos.png",
+            tag: "Facilities Setup",
+            highlights: ["Shared Amenities", "CCTV & Security", "Parking Info"],
+          },
+        ],
+      },
+    ],
   },
   {
     id: "nusa-bali",
@@ -305,6 +519,48 @@ export const PROJECTS: ProjectItem[] = [
       { path: "/gambar-web-nusa-bali/halaman-katalog-paket.png", label: "Bali Tour Package Catalog" },
       { path: "/gambar-web-nusa-bali/halaman-detail-paket.png", label: "Package Details, Itinerary & Amenities" },
     ],
+    flows: [
+      {
+        roleTitle: "Traveler Journey & AI Knowledge Exploration",
+        roleBadge: "Tourist Experience",
+        roleIcon: "Globe",
+        roleDescription: "How travelers discover curated Bali packages and receive instant answers from an AI chatbot.",
+        steps: [
+          {
+            stepNumber: "01",
+            title: "Bali Island Inspiration & Curated Destination Hero",
+            description: "Travelers land on an engaging showcase of top Bali destinations (Ubud, Nusa Penida, Uluwatu) with high-definition visuals.",
+            imagePath: "/gambar-web-nusa-bali/halaman-beranda-destinasi.png",
+            tag: "Inspiration Portal",
+            highlights: ["Top Destinations", "Island Highlights", "Engaging UI"],
+          },
+          {
+            stepNumber: "02",
+            title: "Tour Package Catalog with Duration & Activity Filters",
+            description: "Interactive catalog allowing visitors to explore cultural trips, snorkeling tours, and adventure packages with transparent pricing.",
+            imagePath: "/gambar-web-nusa-bali/halaman-katalog-paket.png",
+            tag: "Tour Marketplace",
+            highlights: ["Duration Filters", "Budget Tiers", "Activity Highlights"],
+          },
+          {
+            stepNumber: "03",
+            title: "Comprehensive Day-by-Day Itinerary & Package Specs",
+            description: "Detailed tour page showing daily schedules, included transportation, entrance tickets, and hotel accommodation specs.",
+            imagePath: "/gambar-web-nusa-bali/halaman-detail-paket.png",
+            tag: "Itinerary Breakdown",
+            highlights: ["Day-by-Day Schedule", "Inclusions & Exclusions", "Transparent Pricing"],
+          },
+          {
+            stepNumber: "04",
+            title: "24/7 Contextual AI Assistant (RAG Chatbot Video Demo)",
+            description: "Integrated AI chatbot that reads travel guidebooks and package itineraries to answer tourist inquiries anytime with zero human waiting.",
+            imagePath: "/gambar-web-nusa-bali/Halaman-beranda.png",
+            tag: "RAG AI Chatbot",
+            highlights: ["Vector Grounding", "24/7 Fast Answers", "Contextual Tourism Data"],
+          },
+        ],
+      },
+    ],
   },
   {
     id: "finai",
@@ -312,7 +568,7 @@ export const PROJECTS: ProjectItem[] = [
     subtitle: "AI-Powered Personal Finance & Smart Budgeting Mobile App",
     category: "Mobile App • FinTech & AI",
     featured: true,
-    coverImage: "/parallax-showcase/finai-home.png",
+    coverImage: "/gambar-finai/finai-card-banner.png",
     description: "A modern native mobile app that makes money management effortless with Gemini AI voice input, receipt scanning (OCR), and an AI financial advisor.",
     problemSolved: "Most people quit tracking their daily expenses because typing every purchase manually is slow and boring. Traditional finance apps also only show numbers without explaining how to save better.",
     solutionRationale: "FinAI solves this by letting users record expenses in seconds using their voice or by taking a photo of a receipt. Google Gemini AI automatically reads the price, store, date, and category. Users can also chat with FinAI Advisor for practical saving tips and export reports to Excel.",
@@ -329,6 +585,72 @@ export const PROJECTS: ProjectItem[] = [
       { path: "/gambar-finai/page_10_img_0_Image77.jpg", label: "Transaction Input & Multi-Wallet Manager" },
       { path: "/gambar-finai/page_7_img_2_Image52.jpg", label: "Secure Authentication & User Onboarding" },
       { path: "/gambar-finai/page_12_img_2_Image90.jpg", label: "Account Settings & Excel Report Export" },
+    ],
+    flows: [
+      {
+        roleTitle: "Smart Personal Wealth & Budgeting Journey",
+        roleBadge: "Mobile User Experience",
+        roleIcon: "Smartphone",
+        roleDescription: "How users record daily transactions in seconds and consult an AI advisor for personalized saving strategies.",
+        steps: [
+          {
+            stepNumber: "01",
+            title: "Secure Authentication & Multi-Wallet Onboarding",
+            description: "Users create an account and configure multiple wallets (Cash, Bank Account, E-Wallet) for comprehensive money tracking.",
+            imagePath: "/gambar-finai/page_7_img_2_Image52.jpg",
+            tag: "Onboarding & Auth",
+            highlights: ["Fast Registration", "Multi-Wallet Setup", "Clean Design"],
+          },
+          {
+            stepNumber: "02",
+            title: "Financial Dashboard: Net Worth & Daily Cashflow",
+            description: "Instant view of total current assets, 7-day spending trends graph, recent transaction history, and monthly budget limits.",
+            imagePath: "/gambar-finai/page_8_img_1_Image62.jpg",
+            tag: "Executive Dashboard",
+            highlights: ["Net Worth Glance", "Spending Graph", "Recent Ledger"],
+          },
+          {
+            stepNumber: "03",
+            title: "Multimodal Gemini AI: Voice & Receipt OCR Scanner",
+            description: "Users can record purchases by voice prompt or photograph a receipt. Gemini AI parses the merchant, items, date, and total automatically.",
+            imagePath: "/gambar-finai/page_10_img_3_Image80.jpg",
+            tag: "Smart Input Engine",
+            highlights: ["Voice Recognition", "Instant Receipt OCR", "Zero Manual Typing"],
+          },
+          {
+            stepNumber: "04",
+            title: "Multi-Wallet Transaction Entry & Category Tagging",
+            description: "Manual fallback interface with quick category selector (Food, Transport, Bills) and origin wallet balance deductions.",
+            imagePath: "/gambar-finai/page_10_img_0_Image77.jpg",
+            tag: "Transaction Logger",
+            highlights: ["Custom Categories", "Wallet Selector", "Income / Expense Switch"],
+          },
+          {
+            stepNumber: "05",
+            title: "FinAI Advisor: Conversational Financial Coach",
+            description: "An intelligent chatbot powered by Gemini 1.5 Pro that answers personal finance questions and provides practical tips to save more.",
+            imagePath: "/gambar-finai/page_12_img_1_Image89.jpg",
+            tag: "AI Advisor Chatbot",
+            highlights: ["Contextual Advice", "Over-Budget Alerts", "Friendly Coach"],
+          },
+          {
+            stepNumber: "06",
+            title: "Visual Spending Analytics & Savings Rate Trends",
+            description: "Color-coded category breakdown and month-over-month graphs showing where money goes and how savings grow.",
+            imagePath: "/gambar-finai/page_11_img_0_Image83.jpg",
+            tag: "In-Depth Analytics",
+            highlights: ["Category Pie Chart", "Savings Rate Tracking", "Monthly Trends"],
+          },
+          {
+            stepNumber: "07",
+            title: "Account Settings & 1-Click Excel Spreadsheet Export",
+            description: "Users can export all transaction ledgers into clean CSV / Excel spreadsheets for offline tax or accounting audits.",
+            imagePath: "/gambar-finai/page_12_img_2_Image90.jpg",
+            tag: "Excel Export",
+            highlights: ["CSV / Excel Export", "Backup Security", "Custom Date Ranges"],
+          },
+        ],
+      },
     ],
   },
   {
@@ -352,6 +674,128 @@ export const PROJECTS: ProjectItem[] = [
       { path: "/gambar-web-floramart/halaman-owner-dashboard.png", label: "Store Owner Dashboard & Order Manager" },
       { path: "/gambar-web-floramart/halaman-admin-analitik.png", label: "Superadmin - Sales Analytics & Trends" },
       { path: "/gambar-web-floramart/halaman-admin-ringkasan.png", label: "Superadmin - Ecosystem Summary" },
+    ],
+    flows: [
+      {
+        roleTitle: "Buyer Discovery & Plant Acquisition",
+        roleBadge: "Customer Journey",
+        roleIcon: "ShoppingBag",
+        roleDescription: "How plant enthusiasts explore verified local nurseries, filter nearby plants, and contact sellers directly.",
+        steps: [
+          {
+            stepNumber: "01",
+            title: "Marketplace Homepage & Botanical Category Explorer",
+            description: "Buyers browse featured collections, discover seasonal ornamental plants, and access trending nursery promotions.",
+            imagePath: "/gambar-web-floramart/halaman-beranda.png",
+            tag: "Homepage Portal",
+            highlights: ["Category Showcase", "Trending Botanicals", "Curated Nurseries"],
+          },
+          {
+            stepNumber: "02",
+            title: "Filter Catalog by Nearest Location & Plant Care",
+            description: "Interactive catalog with geographic filters to locate nearby plant nurseries, sorting by watering needs and sunlight tolerance.",
+            imagePath: "/gambar-web-floramart/halaman-katalog-produk.png",
+            tag: "Nearest Location Filter",
+            highlights: ["Proximity Search", "Care Difficulty", "Price Range"],
+          },
+          {
+            stepNumber: "03",
+            title: "Product Specifications & Direct WhatsApp Chat",
+            description: "Product details include pot dimensions, soil recommendations, and a direct WhatsApp button to negotiate instant delivery with the seller.",
+            imagePath: "/gambar-web-floramart/halaman-detail-produk.png",
+            tag: "Instant WA Direct",
+            highlights: ["Botanical Specs", "Direct WhatsApp Link", "Stock Availability"],
+          },
+          {
+            stepNumber: "04",
+            title: "Curate Favorite Botanicals to User Wishlist",
+            description: "Buyers click the heart icon to save favorite plants into their personal dashboard for future purchases or price drop alerts.",
+            imagePath: "/gambar-web-floramart/halaman-user-dashboard-favorit.png",
+            tag: "Saved Favorites",
+            highlights: ["Personal Wishlist", "Fast Re-Order", "Price Alerts"],
+          },
+        ],
+      },
+      {
+        roleTitle: "Store Owner & Nursery Merchant Flow",
+        roleBadge: "Vendor Ecosystem",
+        roleIcon: "Store",
+        roleDescription: "How local nursery owners apply for seller accounts, customize storefronts, and manage inventory.",
+        steps: [
+          {
+            stepNumber: "05",
+            title: "Register as Certified Store Nursery Partner",
+            description: "A streamlined merchant onboarding form where nursery owners submit shop details, garden location, and contact information.",
+            imagePath: "/gambar-web-floramart/halaman-user-=daftar-menjadi-owner.png",
+            tag: "Merchant Onboarding",
+            highlights: ["Easy Sign-Up", "Garden Verification", "Business Profile"],
+          },
+          {
+            stepNumber: "06",
+            title: "Dedicated Vendor Storefront Profile & Ratings",
+            description: "Each certified nursery receives an official digital storefront displaying customer ratings, shop bio, and all active plant listings.",
+            imagePath: "/gambar-web-floramart/halaman-toko.png",
+            tag: "Vendor Storefront",
+            highlights: ["Public Store URL", "Reputation Badges", "Full Catalog"],
+          },
+          {
+            stepNumber: "07",
+            title: "Store Owner Dashboard & Inventory Manager",
+            description: "A private merchant dashboard where sellers add new plants, monitor stock levels, and review incoming customer inquiries.",
+            imagePath: "/gambar-web-floramart/halaman-owner-dashboard.png",
+            tag: "Vendor Operations",
+            highlights: ["Stock Management", "Order Tracking", "Price Controls"],
+          },
+          {
+            stepNumber: "08",
+            title: "Real-Time Product Editing & Pricing Adjustments",
+            description: "Sellers can quickly update plant descriptions, add care tips, and adjust seasonal discounts on the fly.",
+            imagePath: "/gambar-web-floramart/halaman-owner-edit-produk.png",
+            tag: "Listing Editor",
+            highlights: ["Live Pricing", "Description Updates", "Discount Badges"],
+          },
+        ],
+      },
+      {
+        roleTitle: "Superadmin Control Center",
+        roleBadge: "Platform Oversight",
+        roleIcon: "ShieldCheck",
+        roleDescription: "How system administrators oversee transactions, approve vendor stores, and maintain marketplace security.",
+        steps: [
+          {
+            stepNumber: "09",
+            title: "Ecosystem Summary & Multi-Vendor Overview",
+            description: "A centralized control center showing total active merchants, gross marketplace orders, and total registered plant species.",
+            imagePath: "/gambar-web-floramart/halaman-admin-ringkasan.png",
+            tag: "Admin Overview",
+            highlights: ["Total Stores", "Platform Volume", "System Health"],
+          },
+          {
+            stepNumber: "10",
+            title: "Sales Analytics & Botanical Category Trends",
+            description: "Detailed analytics displaying fastest-selling plant types, high-volume regions, and seasonal demand fluctuations.",
+            imagePath: "/gambar-web-floramart/halaman-admin-analitik.png",
+            tag: "Marketplace Analytics",
+            highlights: ["Revenue Breakdown", "Regional Demand", "Popular Species"],
+          },
+          {
+            stepNumber: "11",
+            title: "Store Approvals & Merchant Operations",
+            description: "Admin panel to audit new nursery applications, approve trusted sellers, or suspend fraudulent store accounts.",
+            imagePath: "/gambar-web-floramart/halamna-admin-kelola-toko.png",
+            tag: "Store Moderation",
+            highlights: ["Merchant Approvals", "Trust Badges", "Quality Control"],
+          },
+          {
+            stepNumber: "12",
+            title: "User Account Security & Customer Moderation",
+            description: "Admin oversight over buyer accounts, resolving disputes, and maintaining marketplace integrity.",
+            imagePath: "/gambar-web-floramart/halaman-admin-kelola-pengguna.png",
+            tag: "User Management",
+            highlights: ["Account Safety", "Dispute Resolution", "Activity Logs"],
+          },
+        ],
+      },
     ],
   },
 ];

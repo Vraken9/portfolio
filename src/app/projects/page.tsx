@@ -133,25 +133,31 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Hexaa Header Banner with Original Almoayyed Background */}
+      {/* Hexaa Header Banner with About Section Gradient */}
       <section className="w-full border-b border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl min-h-[250px] border-x border-zinc-200/80 overflow-hidden flex items-center">
+        <div className="relative mx-auto max-w-7xl min-h-[250px] border-x border-zinc-200/80 overflow-hidden flex items-center bg-white">
           <PlusSeparator
             position={["top-left", "top-right", "bottom-left", "bottom-right"]}
             className="z-20"
           />
 
-          {/* Original Almoayyed Gradient Background */}
-          <div className="absolute inset-0 z-0">
-            <GradientBackground className="w-full h-full" />
+          {/* Authentic Gradient Background Matching About Section */}
+          <div className="absolute inset-0 z-0 pointer-events-none select-none">
+            <div
+              className="w-full h-full"
+              style={{
+                background:
+                  "radial-gradient(135% 100% at 50% 100%, #ebdffc 0%, #f7f3fe 42%, #ffffff 82%)",
+              }}
+            />
           </div>
 
-          {/* Text Overlay: Uses text-white with mix-blend-difference */}
-          <div className="relative z-10 w-full h-full text-white mix-blend-difference flex flex-col justify-center px-6 sm:px-10 py-12 pointer-events-none">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+          {/* Text Overlay: Crisp dark text matching About Section */}
+          <div className="relative z-10 w-full h-full flex flex-col justify-center px-6 sm:px-10 py-12 pointer-events-none">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight text-zinc-950">
               akhyar&apos;s projects.
             </h1>
-            <p className="max-w-2xl text-xs sm:text-sm md:text-base mt-2.5 leading-relaxed font-normal">
+            <p className="max-w-2xl text-xs sm:text-sm md:text-base mt-2.5 leading-relaxed font-normal text-zinc-600">
               here are the projects I&apos;ve worked on, showcasing my skills and passion for software development. each project reflects my commitment to creating impactful solutions and continuous learning.
             </p>
           </div>

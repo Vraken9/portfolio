@@ -362,34 +362,40 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* 3. Header Banner with Original Almoayyed Background */}
+      {/* 3. Header Banner with About Section Gradient */}
       <div className="w-full border-b border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl min-h-[250px] border-x border-zinc-200/80 overflow-hidden flex items-center">
+        <div className="relative mx-auto max-w-7xl min-h-[250px] border-x border-zinc-200/80 overflow-hidden flex items-center bg-white">
           <PlusSeparator
             position={["top-left", "top-right", "bottom-left", "bottom-right"]}
             className="z-20"
           />
 
-          {/* Original Almoayyed Gradient Background */}
-          <div className="absolute inset-0 z-0">
-            <GradientBackground className="w-full h-full" />
+          {/* Authentic Gradient Background Matching About Section */}
+          <div className="absolute inset-0 z-0 pointer-events-none select-none">
+            <div
+              className="w-full h-full"
+              style={{
+                background:
+                  "radial-gradient(135% 100% at 50% 100%, #ebdffc 0%, #f7f3fe 42%, #ffffff 82%)",
+              }}
+            />
           </div>
 
-          {/* Text Overlay: Uses text-white with mix-blend-difference matching hexaa.sh */}
-          <div className="relative z-10 w-full h-full text-white mix-blend-difference flex flex-col justify-center px-6 sm:px-10 py-12 pointer-events-none">
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+          {/* Text Overlay: Crisp dark text matching About Section */}
+          <div className="relative z-10 w-full h-full flex flex-col justify-center px-6 sm:px-10 py-12 pointer-events-none">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight text-zinc-950">
               akhyar&apos;s projects.
             </h2>
-            <p className="max-w-2xl text-xs sm:text-sm md:text-base mt-2.5 leading-relaxed font-normal">
+            <p className="max-w-2xl text-xs sm:text-sm md:text-base mt-2.5 leading-relaxed font-normal text-zinc-600">
               here are the projects I&apos;ve worked on, showcasing my skills and passion for software development. each project reflects my commitment to creating impactful solutions and continuous learning.
             </p>
           </div>
         </div>
       </div>
 
-      {/* 4. Projects Grid: 4 Projects with Requested Images & Bottom White Fade Gradient */}
+      {/* 4. Projects Grid: 4 Projects with Requested Images & Raised Bottom White Fade Gradient */}
       <div className="relative w-full border-b border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl border-x border-zinc-200/80 p-2 pb-28 grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div className="relative mx-auto max-w-7xl border-x border-zinc-200/80 p-2 pb-20 grid grid-cols-1 md:grid-cols-2 gap-2">
           <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
 
           {HOMEPAGE_PROJECTS.map((project) => (
@@ -482,18 +488,18 @@ export default function ProjectsSection() {
             </div>
           ))}
 
-          {/* Smooth White Gradient Overlay covering the bottom of project 3 & 4 */}
-          <div className="absolute inset-x-0 bottom-0 h-48 sm:h-64 bg-gradient-to-t from-white via-white/90 to-transparent flex flex-col items-center justify-end pb-8 z-20 pointer-events-none">
+          {/* Smooth Raised White Gradient Overlay covering higher up on projects 3 & 4 */}
+          <div className="absolute inset-x-0 bottom-0 h-[440px] sm:h-[500px] bg-gradient-to-t from-white via-white/95 via-35% to-transparent flex flex-col items-center justify-end pb-12 sm:pb-16 z-20 pointer-events-none">
             {/* Styled button in cohesive Bauhaus / Hexaa theme */}
             <Link
               href="/projects"
               data-cursor-expand
-              className="pointer-events-auto group inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-zinc-900 bg-white/95 text-zinc-950 font-mono text-xs sm:text-sm font-semibold tracking-wider hover:bg-zinc-950 hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg active:scale-95 backdrop-blur-md"
+              className="pointer-events-auto group inline-flex items-center gap-2.5 px-7 py-3 rounded-full border border-zinc-900 bg-white/95 text-zinc-950 font-mono text-xs sm:text-sm font-semibold tracking-wider hover:bg-zinc-950 hover:text-white transition-all duration-300 shadow-md hover:shadow-xl active:scale-95 backdrop-blur-md"
             >
               <span>[explore all projects on /projects]</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
             </Link>
-            <span className="text-[11px] font-mono text-zinc-500 mt-2 pointer-events-none">
+            <span className="text-[11px] font-mono text-zinc-500 mt-2.5 pointer-events-none">
               Showing 4 featured projects — click to explore the full directory
             </span>
           </div>

@@ -2,10 +2,12 @@ import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { PROJECTS, ProjectItem } from "@/data/portfolioData";
+import { PROJECTS, ProjectItem, ProjectFlow, FlowStep } from "@/data/portfolioData";
+import { PlusSeparator } from "@/components/ui/plus-separator";
 import {
   ArrowLeft,
   ArrowRight,
+  ArrowUpRight,
   ExternalLink,
   Download,
   Sparkles,
@@ -18,6 +20,11 @@ import {
   AlertCircle,
   Clock,
   ShieldCheck,
+  ShoppingBag,
+  Store,
+  GraduationCap,
+  User,
+  Check,
 } from "lucide-react";
 
 function GithubIcon({ className = "w-4 h-4" }: { className?: string }) {
@@ -30,6 +37,26 @@ function GithubIcon({ className = "w-4 h-4" }: { className?: string }) {
       />
     </svg>
   );
+}
+
+function RoleIcon({ name, className = "w-4 h-4" }: { name?: string; className?: string }) {
+  switch (name) {
+    case "Store":
+      return <Store className={className} />;
+    case "ShoppingBag":
+      return <ShoppingBag className={className} />;
+    case "GraduationCap":
+      return <GraduationCap className={className} />;
+    case "ShieldCheck":
+      return <ShieldCheck className={className} />;
+    case "Smartphone":
+      return <Smartphone className={className} />;
+    case "Globe":
+      return <Globe className={className} />;
+    case "User":
+    default:
+      return <User className={className} />;
+  }
 }
 
 interface PageProps {
@@ -52,7 +79,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${project.title} — Case Study & Details | Akhyar Mualif`,
+    title: `${project.title} — Case Study & Engineering Flow | Akhyar Mualif`,
     description: project.description,
   };
 }
@@ -72,28 +99,28 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const isMobile = project.category.toLowerCase().includes("mobile");
 
   return (
-    <main className="min-h-screen bg-[#fafafa] text-zinc-900 selection:bg-zinc-900 selection:text-white">
-      {/* Top Sticky Navigation */}
+    <main className="min-h-screen bg-[#faf9fc] text-zinc-900 selection:bg-zinc-900 selection:text-white">
+      {/* 1. Top Sticky Navigation matching Hexaa / Bauhaus Clean Standards */}
       <nav className="sticky top-0 z-50 w-full border-b border-zinc-200/90 bg-white/80 backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between font-mono text-xs">
           <Link
-            href="/#projects"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono font-medium text-zinc-600 hover:text-zinc-950 transition-colors group"
+            href="/projects"
+            className="inline-flex items-center gap-2 text-zinc-600 hover:text-zinc-950 transition-colors group"
           >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            <span>Back to All Projects</span>
+            <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
+            <span>[all projects]</span>
           </Link>
 
-          <div className="flex items-center gap-3">
-            {project.liveUrl && (
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            {project.liveUrl && !project.isPaused && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-950 text-white text-xs font-semibold hover:bg-zinc-800 transition-colors shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-950 text-white font-medium hover:bg-zinc-800 transition-colors shadow-xs"
               >
-                <span>Visit Website</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+                <span>[visit website]</span>
+                <ArrowUpRight className="w-3 h-3" />
               </a>
             )}
 
@@ -102,10 +129,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 href={project.apkUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-700 transition-colors shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-colors shadow-xs"
               >
-                <Download className="w-3.5 h-3.5" />
-                <span>Download APK</span>
+                <Download className="w-3 h-3" />
+                <span>[download apk]</span>
               </a>
             )}
 
@@ -114,281 +141,325 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-zinc-200 bg-white text-zinc-800 text-xs font-semibold hover:bg-zinc-100 transition-colors shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-200 bg-white text-zinc-800 font-medium hover:bg-zinc-100 transition-colors shadow-xs"
               >
-                <GithubIcon className="w-3.5 h-3.5" />
-                <span>GitHub</span>
+                <GithubIcon className="w-3 h-3" />
+                <span>[github]</span>
               </a>
             )}
           </div>
         </div>
       </nav>
 
-      {/* Hero Header Section */}
-      <section className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pb-12">
-        {/* Badges Bar */}
-        <div className="flex flex-wrap items-center gap-2.5 mb-5">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-700 text-xs font-mono font-semibold">
-            {isMobile ? <Smartphone className="w-3.5 h-3.5 text-indigo-600" /> : <Globe className="w-3.5 h-3.5 text-blue-600" />}
-            {project.category}
-          </span>
-
-          {project.liveUrl && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-semibold">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              Live Production
-            </span>
-          )}
-
-          {project.apkUrl && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-800 text-xs font-mono font-semibold">
-              <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
-              Android APK Ready
-            </span>
-          )}
-
-          {project.isPaused && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-mono font-semibold">
-              <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
-              Demo Paused / Maintenance
-            </span>
-          )}
+      {/* Grid Spacer Line with Plus Separator */}
+      <div className="w-full border-b border-zinc-200/80">
+        <div className="relative mx-auto max-w-7xl h-10 border-x border-zinc-200/80 flex items-center justify-between px-6 sm:px-10">
+          <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
+          <span className="font-mono text-xs text-zinc-400">/projects/{project.id}</span>
+          <span className="font-mono text-xs text-zinc-500">Case Study & User Flows</span>
         </div>
+      </div>
 
-        {/* Title & Subtitle */}
-        <div className="max-w-4xl">
+      {/* 2. Hero Header Section */}
+      <section className="w-full border-b border-zinc-200/80 bg-white">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 pt-10 sm:pt-14 pb-12 border-x border-zinc-200/80">
+          <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
+
+          {/* Status Badges */}
+          <div className="flex flex-wrap items-center gap-2 mb-4 font-mono text-xs">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-zinc-950 text-white font-medium">
+              {isMobile ? <Smartphone className="w-3 h-3" /> : <Globe className="w-3 h-3" />}
+              {project.category}
+            </span>
+
+            {project.liveUrl && !project.isPaused && (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-emerald-100 text-emerald-900 font-medium border border-emerald-200">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                Live Production
+              </span>
+            )}
+
+            {project.apkUrl && (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-indigo-100 text-indigo-900 font-medium border border-indigo-200">
+                <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+                Android APK Ready
+              </span>
+            )}
+
+            {project.isPaused && (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-amber-100 text-amber-900 font-medium border border-amber-200">
+                <AlertCircle className="w-3 h-3 text-amber-600" />
+                Live Demo Paused / Maintenance
+              </span>
+            )}
+          </div>
+
+          {/* Title & One-Sentence Proposition */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-950 leading-[1.1]">
             {project.title}
           </h1>
-          <p className="mt-4 text-base sm:text-xl text-zinc-600 font-medium leading-relaxed">
+          <p className="mt-3.5 text-base sm:text-lg text-zinc-600 max-w-3xl leading-relaxed">
             {project.subtitle}
           </p>
-        </div>
 
-        {/* Action Link Buttons */}
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-zinc-950 text-white text-sm font-semibold hover:bg-zinc-800 transition-all shadow-sm hover:shadow"
-            >
-              <span>Open Live Website</span>
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          )}
-
-          {project.apkUrl && (
-            <a
-              href={project.apkUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-all shadow-sm hover:shadow"
-            >
-              <Download className="w-4 h-4" />
-              <span>Download APK (Google Drive)</span>
-            </a>
-          )}
-
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl border border-zinc-300 bg-white text-zinc-800 text-sm font-semibold hover:bg-zinc-100 transition-all shadow-xs"
-            >
-              <GithubIcon className="w-4 h-4" />
-              <span>GitHub Repository</span>
-            </a>
-          )}
-
-          {project.isPaused && (
-            <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-sm font-medium">
-              <Clock className="w-4 h-4 text-amber-600" />
-              <span>Live deployment is currently paused for database maintenance.</span>
+          {/* Bento Metadata Strip */}
+          <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-2 border border-zinc-200/80 bg-zinc-50/70 p-2 rounded-xs font-mono text-xs">
+            <div className="p-3 bg-white rounded-xs border border-zinc-200/60">
+              <span className="text-zinc-400 block text-[10px] uppercase">Domain</span>
+              <span className="font-semibold text-zinc-900 mt-0.5 block">{project.category.split("•")[1] || project.category}</span>
             </div>
-          )}
-        </div>
-
-        {/* Featured Showcase Media */}
-        <div className="mt-10 rounded-3xl overflow-hidden border border-zinc-200/90 bg-white shadow-xl">
-          {project.videoDemo ? (
-            <div className="space-y-0">
-              <div className="px-5 py-3 bg-zinc-900 text-white text-xs font-mono flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <Play className="w-4 h-4 text-emerald-400" />
-                  Interactive Video Demonstration: AI RAG Chatbot
-                </span>
-                <span className="text-zinc-400 text-xs">HTML5 Video</span>
-              </div>
-              <video
-                src={project.videoDemo}
-                controls
-                className="w-full max-h-[640px] object-cover bg-black"
-              />
+            <div className="p-3 bg-white rounded-xs border border-zinc-200/60">
+              <span className="text-zinc-400 block text-[10px] uppercase">Architecture</span>
+              <span className="font-semibold text-zinc-900 mt-0.5 block">{isMobile ? "Flutter & Supabase" : "Next.js & Full-Stack"}</span>
             </div>
-          ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={project.coverImage}
-              alt={project.title}
-              className="w-full max-h-[640px] object-cover object-top"
-            />
-          )}
+            <div className="p-3 bg-white rounded-xs border border-zinc-200/60">
+              <span className="text-zinc-400 block text-[10px] uppercase">AI Integration</span>
+              <span className="font-semibold text-zinc-900 mt-0.5 block truncate">{project.aiIntegration.split(",")[0] || "AI Orchestrated"}</span>
+            </div>
+            <div className="p-3 bg-white rounded-xs border border-zinc-200/60">
+              <span className="text-zinc-400 block text-[10px] uppercase">Repository</span>
+              {project.githubUrl ? (
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline font-semibold mt-0.5 inline-flex items-center gap-1">
+                  <span>github.com</span>
+                  <ArrowUpRight className="w-3 h-3" />
+                </a>
+              ) : (
+                <span className="font-semibold text-zinc-500 mt-0.5 block">Private</span>
+              )}
+            </div>
+          </div>
         </div>
+      </section>
 
-        {/* Problem Statement & Logical Solution Rationale Cards */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Card 1: The Problem */}
-          <div className="p-7 rounded-3xl bg-red-50/50 border border-red-200/80 shadow-xs">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-red-700 mb-3">
+      {/* 3. Problem vs Solution Bento Cards */}
+      <section className="w-full border-b border-zinc-200/80">
+        <div className="relative mx-auto max-w-7xl p-2 border-x border-zinc-200/80 grid grid-cols-1 md:grid-cols-2 gap-2">
+          <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
+
+          {/* Problem Card */}
+          <div className="p-6 sm:p-8 bg-white border border-red-200/80 rounded-xs shadow-2xs relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-red-500/80" />
+            <div className="flex items-center gap-2 font-mono text-xs font-semibold text-red-700 uppercase tracking-wider mb-2">
               <AlertCircle className="w-4 h-4 text-red-600" />
-              The Real-World Problem
+              <span>[the real-world problem]</span>
             </div>
-            <h3 className="text-xl font-bold text-zinc-950 mb-3">
-              Why Existing Solutions Fall Short
-            </h3>
-            <p className="text-sm sm:text-base text-zinc-700 leading-relaxed font-normal">
+            <h2 className="text-xl sm:text-2xl font-bold text-zinc-950 mb-3 tracking-tight">
+              Why Existing Methods Fall Short
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-normal">
               {project.problemSolved}
             </p>
           </div>
 
-          {/* Card 2: Logical Solution Rationale */}
-          <div className="p-7 rounded-3xl bg-emerald-50/50 border border-emerald-200/80 shadow-xs">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-emerald-800 mb-3">
+          {/* Solution Rationale Card */}
+          <div className="p-6 sm:p-8 bg-white border border-emerald-200/80 rounded-xs shadow-2xs relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-emerald-500/80" />
+            <div className="flex items-center gap-2 font-mono text-xs font-semibold text-emerald-800 uppercase tracking-wider mb-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              The Logical Solution Rationale
+              <span>[the logical solution]</span>
             </div>
-            <h3 className="text-xl font-bold text-zinc-950 mb-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-zinc-950 mb-3 tracking-tight">
               How This Application Solves It
-            </h3>
-            <p className="text-sm sm:text-base text-zinc-700 leading-relaxed font-normal">
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-normal">
               {project.solutionRationale}
             </p>
           </div>
         </div>
+      </section>
 
-        {/* Detailed Breakdown: Overview & AI Integration */}
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-xs">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 mb-3">
-              <Layers className="w-4 h-4 text-indigo-600" />
-              System Architecture & Core Flow
+      {/* 4. THE CORE FEATURE FLOWS (STEP-BY-STEP ORDERED JOURNEYS) */}
+      {project.flows && project.flows.length > 0 && (
+        <section className="w-full border-b border-zinc-200/80">
+          <div className="relative mx-auto max-w-7xl border-x border-zinc-200/80 px-4 sm:px-6 lg:px-10 py-12 sm:py-16">
+            <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
+
+            {/* Section Header */}
+            <div className="max-w-3xl mb-12">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 font-mono text-xs text-zinc-700 mb-3">
+                <Layers className="w-3.5 h-3.5 text-zinc-950" />
+                <span>[APPLICATION FLOWS & STEP-BY-STEP WALKTHROUGH]</span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-black text-zinc-950 tracking-tight">
+                Chronological System & User Experience Flows
+              </h2>
+              <p className="text-sm sm:text-base text-zinc-600 mt-2 leading-relaxed">
+                Walk through every interface and operational step designed to solve the problem—from initial discovery to deep administration.
+              </p>
             </div>
-            <p className="text-sm sm:text-base text-zinc-700 leading-relaxed">
-              {project.description}
-            </p>
+
+            {/* Interactive Video Demonstration for Nusa AI */}
+            {project.videoDemo && (
+              <div className="mb-14 rounded-xs border border-zinc-200 bg-white overflow-hidden shadow-sm">
+                <div className="px-5 py-3 bg-zinc-950 text-white font-mono text-xs flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Play className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400" />
+                    <span>Interactive Video Demo: 24/7 Contextual AI RAG Chatbot</span>
+                  </div>
+                  <span className="text-zinc-400 text-[11px]">[HTML5 VIDEO]</span>
+                </div>
+                <video
+                  src={project.videoDemo}
+                  controls
+                  className="w-full max-h-[600px] object-cover bg-black"
+                />
+              </div>
+            )}
+
+            {/* Flows Grouped by Roles */}
+            <div className="space-y-16">
+              {project.flows.map((flowGroup, groupIdx) => (
+                <div key={flowGroup.roleTitle + groupIdx} className="space-y-8">
+                  {/* Role Group Banner */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b-2 border-zinc-950 gap-2">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-xs bg-zinc-950 text-white flex items-center justify-center">
+                        <RoleIcon name={flowGroup.roleIcon} className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg sm:text-xl font-bold text-zinc-950">
+                          {flowGroup.roleTitle}
+                        </h3>
+                        {flowGroup.roleDescription && (
+                          <p className="text-xs text-zinc-500 font-mono mt-0.5">
+                            {flowGroup.roleDescription}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    <span className="font-mono text-xs px-2.5 py-1 rounded-xs bg-zinc-100 border border-zinc-200 text-zinc-800 font-semibold self-start sm:self-auto">
+                      [{flowGroup.roleBadge}]
+                    </span>
+                  </div>
+
+                  {/* Steps Grid */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+                    {flowGroup.steps.map((step) => (
+                      <div
+                        key={step.stepNumber + step.title}
+                        className="group flex flex-col rounded-xs border border-zinc-200/90 bg-white hover:border-zinc-400 transition-all shadow-xs overflow-hidden"
+                      >
+                        {/* Step Top Bar */}
+                        <div className="px-5 py-3.5 border-b border-zinc-100 flex items-center justify-between bg-zinc-50/60 font-mono text-xs">
+                          <span className="font-bold text-zinc-950 px-2 py-0.5 rounded-xs bg-zinc-200/80">
+                            STEP {step.stepNumber}
+                          </span>
+                          {step.tag && (
+                            <span className="text-blue-600 font-medium">
+                              [{step.tag}]
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Image Showcase */}
+                        <div className="relative aspect-[16/10] w-full overflow-hidden bg-zinc-100 border-b border-zinc-100">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={step.imagePath}
+                            alt={step.title}
+                            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                        </div>
+
+                        {/* Content Area */}
+                        <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-3">
+                          <div>
+                            <h4 className="text-base sm:text-lg font-bold text-zinc-950 leading-snug">
+                              {step.title}
+                            </h4>
+                            <p className="text-xs sm:text-sm text-zinc-600 mt-2 leading-relaxed">
+                              {step.description}
+                            </p>
+                          </div>
+
+                          {/* Highlights */}
+                          {step.highlights && step.highlights.length > 0 && (
+                            <div className="flex flex-wrap gap-1.5 pt-2 border-t border-zinc-100 font-mono text-[11px]">
+                              {step.highlights.map((item) => (
+                                <span
+                                  key={item}
+                                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-xs bg-zinc-100 text-zinc-700"
+                                >
+                                  <Check className="w-3 h-3 text-emerald-600" />
+                                  {item}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 5. Technologies & Architecture Grid */}
+      <section className="w-full border-b border-zinc-200/80 bg-white">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-12 border-x border-zinc-200/80">
+          <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
+
+          <div className="flex items-center gap-2 font-mono text-xs text-zinc-500 uppercase tracking-wider mb-4">
+            <Layers className="w-4 h-4 text-zinc-950" />
+            <span>[ENGINEERING STACK & TOOLS USED]</span>
           </div>
 
-          <div className="p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-xs">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 mb-3">
-              <Bot className="w-4 h-4 text-emerald-600" />
-              AI & Automation Capabilities
-            </div>
-            <p className="text-sm sm:text-base text-zinc-700 leading-relaxed">
-              {project.aiIntegration}
-            </p>
-          </div>
-        </div>
-
-        {/* Technologies Used */}
-        <div className="mt-12 p-8 rounded-3xl bg-white border border-zinc-200/90 shadow-xs">
-          <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 mb-4">
-            Technologies & Frameworks
-          </h3>
-          <div className="flex flex-wrap gap-2.5">
+          <div className="flex flex-wrap gap-2">
             {project.technologies.map((tech) => (
               <span
                 key={tech}
-                className="px-4 py-2 rounded-2xl bg-zinc-100 border border-zinc-200/90 text-xs sm:text-sm font-mono text-zinc-800 font-medium"
+                className="px-3.5 py-1.5 rounded-xs bg-zinc-100 border border-zinc-200 text-xs sm:text-sm font-mono text-zinc-800 font-medium hover:bg-zinc-200 transition-colors"
               >
                 {tech}
               </span>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Full Gallery Section */}
-        {project.galleryImages.length > 0 && (
-          <div className="mt-16">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight">
-                  Application Screenshots
-                </h3>
-                <p className="text-xs sm:text-sm text-zinc-500 mt-1 font-mono">
-                  {project.galleryImages.length} detailed interface captures
-                </p>
-              </div>
-            </div>
+      {/* 6. Project Switcher Footer (Prev / Next Project) */}
+      <section className="w-full border-b border-zinc-200/80 bg-zinc-50/70">
+        <div className="relative mx-auto max-w-7xl p-2 border-x border-zinc-200/80 grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {project.galleryImages.map((image, idx) => (
-                <div
-                  key={image.path + idx}
-                  className="group rounded-3xl overflow-hidden border border-zinc-200 bg-white shadow-xs hover:shadow-lg transition-all"
-                >
-                  <div className="relative aspect-[16/10] overflow-hidden bg-zinc-100">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={image.path}
-                      alt={image.label}
-                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-4 border-t border-zinc-100 bg-white">
-                    <p className="text-xs sm:text-sm font-medium text-zinc-800">
-                      {image.label}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Project Navigation Footer */}
-        <div className="mt-20 pt-10 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-6">
+          {/* Previous Project */}
           <Link
             href={`/projects/${prevProject.id}`}
-            className="w-full sm:w-auto p-4 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-400 transition-all flex items-center gap-4 group"
+            className="p-5 bg-white border border-zinc-200/80 rounded-xs hover:border-zinc-950 transition-all flex items-center gap-4 group"
           >
-            <div className="w-10 h-10 rounded-xl bg-zinc-100 flex items-center justify-center text-zinc-700 group-hover:bg-zinc-950 group-hover:text-white transition-colors shrink-0">
-              <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
+            <div className="w-9 h-9 rounded-xs bg-zinc-100 flex items-center justify-center text-zinc-800 group-hover:bg-zinc-950 group-hover:text-white transition-colors shrink-0">
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             </div>
-            <div className="text-left">
-              <span className="block text-[11px] font-mono text-zinc-400 uppercase">
-                Previous Project
+            <div>
+              <span className="block font-mono text-[10px] text-zinc-400 uppercase tracking-wider">
+                [PREVIOUS PROJECT]
               </span>
-              <span className="text-sm font-bold text-zinc-900">
+              <span className="text-sm font-bold text-zinc-950 group-hover:underline">
                 {prevProject.title}
               </span>
             </div>
           </Link>
 
-          <Link
-            href="/#projects"
-            className="px-5 py-2.5 rounded-xl text-xs font-mono font-medium text-zinc-500 hover:text-zinc-950 transition-colors"
-          >
-            Back to All Projects Overview
-          </Link>
-
+          {/* Next Project */}
           <Link
             href={`/projects/${nextProject.id}`}
-            className="w-full sm:w-auto p-4 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-400 transition-all flex items-center justify-between sm:justify-start gap-4 group text-right"
+            className="p-5 bg-white border border-zinc-200/80 rounded-xs hover:border-zinc-950 transition-all flex items-center justify-between group text-right"
           >
-            <div className="text-right">
-              <span className="block text-[11px] font-mono text-zinc-400 uppercase">
-                Next Project
+            <div className="text-left sm:text-right flex-1">
+              <span className="block font-mono text-[10px] text-zinc-400 uppercase tracking-wider">
+                [NEXT PROJECT]
               </span>
-              <span className="text-sm font-bold text-zinc-900">
+              <span className="text-sm font-bold text-zinc-950 group-hover:underline">
                 {nextProject.title}
               </span>
             </div>
-            <div className="w-10 h-10 rounded-xl bg-zinc-100 flex items-center justify-center text-zinc-700 group-hover:bg-zinc-950 group-hover:text-white transition-colors shrink-0">
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            <div className="w-9 h-9 rounded-xs bg-zinc-100 flex items-center justify-center text-zinc-800 group-hover:bg-zinc-950 group-hover:text-white transition-colors shrink-0 ml-4">
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </div>
           </Link>
         </div>
