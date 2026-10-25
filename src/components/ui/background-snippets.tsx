@@ -1,12 +1,20 @@
 import React from "react";
 
-export const Component = ({ className }: { className?: string } = {}) => {
+export const Component = ({
+  className,
+  style,
+}: {
+  className?: string;
+  style?: React.CSSProperties;
+} = {}) => {
   return (
     <div
-      className={`absolute inset-0 -z-10 h-full w-full pointer-events-none select-none bg-white ${className || ""}`}
+      aria-hidden="true"
+      className={`absolute inset-0 -z-10 h-full w-full pointer-events-none select-none ${className || ""}`}
       style={{
         background:
-          "radial-gradient(135% 100% at 50% 100%, #ebdffc 0%, #f7f3fe 42%, #ffffff 82%)",
+          "linear-gradient(180deg, #eddcfc 0%, #f5edfd 25%, #faf5fe 55%, #fbf9ff 80%, rgba(251, 249, 255, 0.5) 100%)",
+        ...style,
       }}
     />
   );

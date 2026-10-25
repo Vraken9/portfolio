@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { HeroParallax, ProductItem } from "@/components/ui/hero-parallax";
@@ -234,29 +234,28 @@ export const ROW_KOS_NUSA: ProductItem[] = [
 ];
 
 // ==========================================
-// 2. PROJECT CARDS (DASHBOARD USER SCREENSHOTS)
+// 2. PROJECT CARDS (REQUESTED HOMEPAGE IMAGES)
 // ==========================================
 export interface ProjectCardItem {
   id: string;
   title: string;
   description: string;
-  dashboardImage: string;
+  imageId: string;
   badge: string[];
   link?: string;
   apkLink?: string;
   repo: string;
   caseStudy?: string;
-  unmaintained?: boolean;
 }
 
-// 4 Featured Projects on Homepage (with Dashboard Screenshots)
+// 4 Featured Projects on Homepage
 export const HOMEPAGE_PROJECTS: ProjectCardItem[] = [
   {
     id: "modulku",
     title: "ModulKu",
     description:
       "AI-powered educational platform that generates Kurikulum Merdeka teaching modules and exam questions in seconds with API token cost monitoring.",
-    dashboardImage: "/gambar-web-modulku/halaman-dashboard-guru.png",
+    imageId: "/gambar-web-modulku/halaman-landing-page.png",
     badge: ["EdTech", "Generative AI", "Next.js"],
     link: "https://modul-ku.vercel.app/",
     repo: "https://github.com/Vraken9/modulku",
@@ -267,7 +266,7 @@ export const HOMEPAGE_PROJECTS: ProjectCardItem[] = [
     title: "Kos.id",
     description:
       "A full-stack boarding house reservation and management system with room filters, payment proof upload, and automated PDF receipt generator.",
-    dashboardImage: "/gambar-web-kos.id/halaman-dashboard-admin.png",
+    imageId: "/gambar-web-kos.id/halaman-beranda.png",
     badge: ["Property Tech", "Booking Engine", "Full-Stack"],
     link: "https://kos-id.vercel.app/",
     repo: "https://github.com/Vraken9/kos-id",
@@ -278,7 +277,7 @@ export const HOMEPAGE_PROJECTS: ProjectCardItem[] = [
     title: "Nusa AI",
     description:
       "Smart Bali tourism marketplace featuring an interactive AI chatbot powered by Retrieval-Augmented Generation (RAG) answering visitor questions 24/7.",
-    dashboardImage: "/gambar-web-nusa-bali/halaman-detail-paket.png",
+    imageId: "/gambar-web-nusa-bali/halaman-beranda-destinasi.png",
     badge: ["Tourism Tech", "RAG AI", "Chatbot"],
     link: "https://learning-ai-dun.vercel.app/",
     repo: "https://github.com/Vraken9/nusa-bali",
@@ -288,8 +287,8 @@ export const HOMEPAGE_PROJECTS: ProjectCardItem[] = [
     id: "finai",
     title: "FinAI Mobile",
     description:
-      "AI-powered personal finance and budgeting mobile app built with Flutter, featuring Gemini AI voice input, receipt OCR scanner, and an intelligent advisor.",
-    dashboardImage: "/gambar-finai/page_8_img_1_Image62.jpg",
+      "An AI-powered personal finance and budgeting mobile app built with Flutter, featuring Gemini AI voice input, receipt OCR scanner, and an intelligent advisor.",
+    imageId: "/gambar-finai/finai-card-banner.png",
     badge: ["Mobile App", "Flutter", "Gemini AI", "FinTech"],
     link: "https://drive.google.com/file/d/1qz8Gfuc_c4nQW1kQnTP53cSR44I87wCM/view?usp=sharing",
     apkLink: "https://drive.google.com/file/d/1qz8Gfuc_c4nQW1kQnTP53cSR44I87wCM/view?usp=sharing",
@@ -316,7 +315,7 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* 1. 3D Auto-Running Showcase Container (Kept Intact) */}
+      {/* 1. 3D Auto-Running Showcase Container (HeroParallax) */}
       <div className="w-full">
         <HeroParallax
           row1={ROW_MODULKU}
@@ -388,9 +387,9 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* 4. Projects Grid: 4 Projects with Dashboard Screenshots & Bottom White Fade Gradient */}
+      {/* 4. Projects Grid: 4 Projects with Requested Images & Bottom White Fade Gradient */}
       <div className="relative w-full border-b border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl border-x border-zinc-200/80 p-2 pb-24 grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div className="relative mx-auto max-w-7xl border-x border-zinc-200/80 p-2 pb-28 grid grid-cols-1 md:grid-cols-2 gap-2">
           <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
 
           {HOMEPAGE_PROJECTS.map((project) => (
@@ -398,11 +397,11 @@ export default function ProjectsSection() {
               key={project.id}
               className="group relative overflow-hidden rounded-xs border border-zinc-200/80 bg-white transition-all hover:border-zinc-400"
             >
-              {/* User Dashboard Screenshot Section */}
+              {/* Image Section */}
               <div className="relative h-60 sm:h-64 w-full overflow-hidden bg-zinc-100">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={project.dashboardImage}
+                  src={project.imageId}
                   alt={project.title}
                   className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                   loading="lazy"
@@ -484,14 +483,15 @@ export default function ProjectsSection() {
           ))}
 
           {/* Smooth White Gradient Overlay covering the bottom of project 3 & 4 */}
-          <div className="absolute inset-x-0 bottom-0 h-48 sm:h-64 bg-gradient-to-t from-white via-white/85 to-transparent flex flex-col items-center justify-end pb-8 z-20 pointer-events-none">
+          <div className="absolute inset-x-0 bottom-0 h-48 sm:h-64 bg-gradient-to-t from-white via-white/90 to-transparent flex flex-col items-center justify-end pb-8 z-20 pointer-events-none">
+            {/* Styled button in cohesive Bauhaus / Hexaa theme */}
             <Link
               href="/projects"
               data-cursor-expand
-              className="pointer-events-auto inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-zinc-950 text-white font-mono text-xs sm:text-sm font-semibold hover:bg-zinc-800 transition-all shadow-xl hover:scale-105 active:scale-95 group"
+              className="pointer-events-auto group inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-zinc-900 bg-white/95 text-zinc-950 font-mono text-xs sm:text-sm font-semibold tracking-wider hover:bg-zinc-950 hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg active:scale-95 backdrop-blur-md"
             >
-              <span>Explore all projects on /projects</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <span>[explore all projects on /projects]</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
             </Link>
             <span className="text-[11px] font-mono text-zinc-500 mt-2 pointer-events-none">
               Showing 4 featured projects — click to explore the full directory

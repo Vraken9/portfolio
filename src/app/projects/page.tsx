@@ -4,14 +4,16 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { PlusSeparator } from "@/components/ui/plus-separator";
 import { GradientBackground } from "@/components/ui/almoayyed";
+import { BackgroundSnippets } from "@/components/ui/background-snippets";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, AlertCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export interface ProjectCardItem {
   id: string;
   title: string;
   description: string;
-  dashboardImage: string;
+  imageId: string;
   badge: string[];
   link?: string;
   apkLink?: string;
@@ -26,7 +28,7 @@ export const ALL_PROJECTS: ProjectCardItem[] = [
     title: "ModulKu",
     description:
       "AI-powered educational platform that generates Kurikulum Merdeka teaching modules and exam questions in seconds with API token cost monitoring.",
-    dashboardImage: "/gambar-web-modulku/halaman-dashboard-guru.png",
+    imageId: "/gambar-web-modulku/halaman-landing-page.png",
     badge: ["EdTech", "Generative AI", "Next.js"],
     link: "https://modul-ku.vercel.app/",
     repo: "https://github.com/Vraken9/modulku",
@@ -37,7 +39,7 @@ export const ALL_PROJECTS: ProjectCardItem[] = [
     title: "Kos.id",
     description:
       "A full-stack boarding house reservation and management system with room filters, payment proof upload, and automated PDF receipt generator.",
-    dashboardImage: "/gambar-web-kos.id/halaman-dashboard-admin.png",
+    imageId: "/gambar-web-kos.id/halaman-beranda.png",
     badge: ["Property Tech", "Booking Engine", "Full-Stack"],
     link: "https://kos-id.vercel.app/",
     repo: "https://github.com/Vraken9/kos-id",
@@ -48,7 +50,7 @@ export const ALL_PROJECTS: ProjectCardItem[] = [
     title: "Nusa AI",
     description:
       "Smart Bali tourism marketplace featuring an interactive AI chatbot powered by Retrieval-Augmented Generation (RAG) answering visitor questions 24/7.",
-    dashboardImage: "/gambar-web-nusa-bali/halaman-detail-paket.png",
+    imageId: "/gambar-web-nusa-bali/halaman-beranda-destinasi.png",
     badge: ["Tourism Tech", "RAG AI", "Chatbot"],
     link: "https://learning-ai-dun.vercel.app/",
     repo: "https://github.com/Vraken9/nusa-bali",
@@ -58,8 +60,8 @@ export const ALL_PROJECTS: ProjectCardItem[] = [
     id: "finai",
     title: "FinAI Mobile",
     description:
-      "AI-powered personal finance and budgeting mobile app built with Flutter, featuring Gemini AI voice input, receipt OCR scanner, and an intelligent advisor.",
-    dashboardImage: "/gambar-finai/page_8_img_1_Image62.jpg",
+      "An AI-powered personal finance and budgeting mobile app built with Flutter, featuring Gemini AI voice input, receipt OCR scanner, and an intelligent advisor.",
+    imageId: "/gambar-finai/finai-card-banner.png",
     badge: ["Mobile App", "Flutter", "Gemini AI", "FinTech"],
     link: "https://drive.google.com/file/d/1qz8Gfuc_c4nQW1kQnTP53cSR44I87wCM/view?usp=sharing",
     apkLink: "https://drive.google.com/file/d/1qz8Gfuc_c4nQW1kQnTP53cSR44I87wCM/view?usp=sharing",
@@ -71,23 +73,12 @@ export const ALL_PROJECTS: ProjectCardItem[] = [
     title: "FloraMart",
     description:
       "A multi-vendor botanical marketplace connecting ornamental plant nurseries with buyers, complete with vendor storefronts, cart checkout, and store analytics.",
-    dashboardImage: "/gambar-web-floramart/halaman-owner-dashboard.png",
+    imageId: "/gambar-web-floramart/halaman-beranda.png",
     badge: ["E-Commerce", "Multi-Vendor", "Paused"],
     link: "https://floramart.vercel.app/",
     repo: "https://github.com/Vraken9/floramart",
     caseStudy: "/projects/floramart",
     unmaintained: true,
-  },
-  {
-    id: "ai-lab",
-    title: "AI Agent & RAG Lab",
-    description:
-      "Research experiments in autonomous AI agents, multi-step prompt orchestration, and vector knowledge retrieval pipelines.",
-    dashboardImage: "/parallax-showcase/modulku-6-admin-api-cost.png",
-    badge: ["AI Agents", "Research", "Open Source"],
-    link: "https://github.com/Vraken9",
-    repo: "https://github.com/Vraken9",
-    caseStudy: "https://github.com/Vraken9",
   },
 ];
 
@@ -95,7 +86,10 @@ export default function ProjectsPage() {
   const [unmaintainedModalProject, setUnmaintainedModalProject] = useState<ProjectCardItem | null>(null);
 
   return (
-    <main className="min-h-screen bg-white text-zinc-900 selection:bg-zinc-900 selection:text-white">
+    <main className="min-h-screen relative bg-[#faf7fe] text-zinc-900 selection:bg-zinc-900 selection:text-white">
+      {/* Top-to-Bottom Bright Purple Gradient Background Snippets */}
+      <BackgroundSnippets className="pointer-events-none opacity-90" />
+
       {/* Top Navbar matching hexaa.sh */}
       <nav className="sticky top-0 z-50 w-full border-b border-zinc-200/90 bg-white/80 backdrop-blur-md">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between font-mono text-xs">
@@ -135,7 +129,7 @@ export default function ProjectsPage() {
         <div className="relative mx-auto max-w-7xl h-14 border-x border-zinc-200/80 flex items-center justify-between px-6 sm:px-10">
           <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
           <span className="font-mono text-xs text-zinc-400">/projects</span>
-          <span className="font-mono text-xs text-zinc-500">6 Projects</span>
+          <span className="font-mono text-xs text-zinc-500">5 Projects</span>
         </div>
       </section>
 
@@ -164,110 +158,117 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Full Projects Grid: 2 columns, all 6 projects, no fade */}
+      {/* Projects Grid: 5 Projects total, with the 5th project centered in the middle */}
       <section className="w-full border-b border-zinc-200/80">
         <div className="relative mx-auto max-w-7xl border-x border-zinc-200/80 p-2 grid grid-cols-1 md:grid-cols-2 gap-2">
           <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
 
-          {ALL_PROJECTS.map((project) => (
-            <div
-              key={project.id}
-              className="group relative overflow-hidden rounded-xs border border-zinc-200/80 bg-white transition-all hover:border-zinc-400"
-            >
-              {/* User Dashboard Screenshot Section */}
-              <div className="relative h-60 sm:h-64 w-full overflow-hidden bg-zinc-100">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={project.dashboardImage}
-                  alt={project.title}
-                  className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
+          {ALL_PROJECTS.map((project, idx) => {
+            const isLastOdd = idx === ALL_PROJECTS.length - 1 && ALL_PROJECTS.length % 2 !== 0;
 
-              {/* Content Section */}
-              <div className="flex flex-col gap-3.5 p-6">
-                {/* Badges */}
-                {project.badge && project.badge.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.badge.map((badgeText) => (
-                      <span
-                        key={badgeText}
-                        className="inline-flex items-center justify-center rounded-xs px-2 py-0.5 text-xs font-mono font-medium bg-zinc-950 text-white"
-                      >
-                        {badgeText}
-                      </span>
-                    ))}
-                  </div>
+            return (
+              <div
+                key={project.id}
+                className={cn(
+                  "group relative overflow-hidden rounded-xs border border-zinc-200/80 bg-white transition-all hover:border-zinc-400 shadow-xs",
+                  isLastOdd && "md:col-span-2 md:max-w-2xl md:w-full md:mx-auto"
                 )}
+              >
+                {/* Image Section */}
+                <div className="relative h-60 sm:h-64 w-full overflow-hidden bg-zinc-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={project.imageId}
+                    alt={project.title}
+                    className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
 
-                {/* Title */}
-                <h2 className="font-semibold text-lg md:text-xl text-zinc-950 leading-tight">
-                  {project.title}
-                </h2>
-
-                {/* Description */}
-                <p className="max-w-lg text-zinc-600 text-sm leading-relaxed">
-                  {project.description}
-                </p>
-
-                {/* Links */}
-                <div className="flex flex-wrap items-center gap-4 pt-2 font-mono text-sm">
-                  {project.repo && (
-                    <a
-                      href={project.repo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-blue-600 hover:underline"
-                    >
-                      [github]
-                    </a>
+                {/* Content Section */}
+                <div className="flex flex-col gap-3.5 p-6">
+                  {/* Badges */}
+                  {project.badge && project.badge.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.badge.map((badgeText) => (
+                        <span
+                          key={badgeText}
+                          className="inline-flex items-center justify-center rounded-xs px-2 py-0.5 text-xs font-mono font-medium bg-zinc-950 text-white"
+                        >
+                          {badgeText}
+                        </span>
+                      ))}
+                    </div>
                   )}
 
-                  {project.link && (
-                    project.unmaintained ? (
-                      <button
-                        type="button"
-                        onClick={() => setUnmaintainedModalProject(project)}
-                        className="font-medium text-blue-600 hover:underline cursor-pointer"
-                      >
-                        [live demo]
-                      </button>
-                    ) : (
+                  {/* Title */}
+                  <h2 className="font-semibold text-lg md:text-xl text-zinc-950 leading-tight">
+                    {project.title}
+                  </h2>
+
+                  {/* Description */}
+                  <p className="max-w-lg text-zinc-600 text-sm leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  {/* Links */}
+                  <div className="flex flex-wrap items-center gap-4 pt-2 font-mono text-sm">
+                    {project.repo && (
                       <a
-                        href={project.link}
+                        href={project.repo}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-medium text-blue-600 hover:underline"
                       >
-                        [live demo]
+                        [github]
                       </a>
-                    )
-                  )}
+                    )}
 
-                  {project.apkLink && (
-                    <a
-                      href={project.apkLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-blue-600 hover:underline"
-                    >
-                      [download apk]
-                    </a>
-                  )}
+                    {project.link && (
+                      project.unmaintained ? (
+                        <button
+                          type="button"
+                          onClick={() => setUnmaintainedModalProject(project)}
+                          className="font-medium text-blue-600 hover:underline cursor-pointer"
+                        >
+                          [live demo]
+                        </button>
+                      ) : (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-medium text-blue-600 hover:underline"
+                        >
+                          [live demo]
+                        </a>
+                      )
+                    )}
 
-                  {project.caseStudy && (
-                    <Link
-                      href={project.caseStudy}
-                      className="font-medium text-zinc-500 hover:text-zinc-950 hover:underline"
-                    >
-                      [case study]
-                    </Link>
-                  )}
+                    {project.apkLink && (
+                      <a
+                        href={project.apkLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium text-blue-600 hover:underline"
+                      >
+                        [download apk]
+                      </a>
+                    )}
+
+                    {project.caseStudy && (
+                      <Link
+                        href={project.caseStudy}
+                        className="font-medium text-zinc-500 hover:text-zinc-950 hover:underline"
+                      >
+                        [case study]
+                      </Link>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
