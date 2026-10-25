@@ -8,6 +8,7 @@ import { Marquee } from "@/components/ui/marquee";
 import { MagneticCursor } from "@/components/ui/magnetic-cursor";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
+import CertificatesSection from "@/components/CertificatesSection";
 import { ArrowDown } from "lucide-react";
 
 export default function Home() {
@@ -79,6 +80,9 @@ export default function Home() {
 
         {/* Selected Works - 3D Hero Parallax Architecture */}
         <ProjectsSection />
+
+        {/* Continuous Learning & Verified Credentials - WorksWheel + ShaderMetal */}
+        <CertificatesSection />
       </main>
     </MagneticCursor>
   );

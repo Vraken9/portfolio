@@ -16,12 +16,16 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export interface WorksWheelItem {
-  /** Project name. Shown beside the front card and in the index. */
+  /** Project/Certificate name. Shown beside the front card and in the index. */
   title: string;
   /** Cover art. Any src an <img> takes. */
   image: string;
   /** Where the card links to. Omit for a wheel that only browses. */
   href?: string;
+  /** Badge chip text (e.g. issuer or category) */
+  badge?: string;
+  /** Additional metadata */
+  [key: string]: any;
 }
 
 export interface WorksWheelProps extends Omit<
@@ -33,6 +37,16 @@ export interface WorksWheelProps extends Omit<
   label?: string;
   /** Label on the card's hover affordance. Omit to drop it. @default undefined */
   action?: string;
+  /** Called when the active front item changes */
+  onActiveChange?: (index: number) => void;
+  /** Called when a card is clicked */
+  onCardClick?: (item: WorksWheelItem, index: number) => void;
+  /** Target index to rotate the wheel to from outside (0-based) */
+  targetIndex?: number;
+  /** Whether to show the side active title text (default true) */
+  showSideTitle?: boolean;
+  /** Custom background or overlay elements */
+  children?: React.ReactNode;
 }
 
 /* Geometry. The card is measured against the stage; everything else is measured
@@ -104,7 +118,12 @@ export function WorksWheel({
   items,
   label = "Works '26",
   action = "View",
+  onActiveChange,
+  onCardClick,
+  targetIndex,
+  showSideTitle = true,
   className,
+  children,
   ...props
 }: WorksWheelProps) {
   const stageRef = React.useRef<HTMLDivElement>(null);
@@ -112,6 +131,7 @@ export function WorksWheel({
   const cardRefs = React.useRef<(HTMLElement | null)[]>([]);
   const labelRef = React.useRef<HTMLDivElement>(null);
   const titleRef = React.useRef<HTMLDivElement>(null);
+  const indexListRef = React.useRef<HTMLOListElement>(null);
 
   // The wheel's position, and where it is heading. Only `active` is state -
   // everything else is written to the DOM, so turning the wheel is not a render.
@@ -169,6 +189,20 @@ export function WorksWheel({
     };
   }, [stage, count]);
 
+  // Handle outside targetIndex jump
+  const to = React.useCallback(
+    (next: number) => {
+      target.current = clamp(next, 0, last + 1);
+    },
+    [last],
+  );
+
+  React.useEffect(() => {
+    if (targetIndex !== undefined && targetIndex >= 0 && targetIndex < count) {
+      to(targetIndex + 1);
+    }
+  }, [targetIndex, count, to]);
+
   // One pass per frame: ease toward the target, then write every transform.
   React.useEffect(() => {
     if (!stage.h) return;
@@ -186,8 +220,6 @@ export function WorksWheel({
       const pos = Math.max(0, t - 1);
 
       // The drum is pulled back so its front face lands on the picture plane.
-      // That set-back has to arrive with the drum, or the ring would sit at the
-      // far side of the perspective and render at half its size.
       if (wheelRef.current) {
         wheelRef.current.style.transform = `translateZ(${-m * drumR}px)`;
       }
@@ -205,9 +237,6 @@ export function WorksWheel({
             bow,
             m,
           );
-          // Culled by distance, not by angle: at a full turn the far side comes
-          // back round to face us, and everything past the neighbours lands on
-          // the vanishing point in a heap.
           card.style.opacity = m > 0.5 && Math.abs(d) > CULL ? "0" : "1";
           card.style.zIndex = String(Math.round(100 - Math.abs(d) * 2));
         }
@@ -218,23 +247,20 @@ export function WorksWheel({
       if (labelRef.current) labelRef.current.style.opacity = String(1 - m);
       if (titleRef.current) titleRef.current.style.opacity = String(m);
       const near = clamp(Math.round(pos), 0, last);
-      setActive((prev) => (prev === near ? prev : near));
+      setActive((prev) => {
+        if (prev !== near) {
+          onActiveChange?.(near);
+          return near;
+        }
+        return prev;
+      });
     };
 
     frame = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(frame);
-  }, [metrics, stage.h, count, last, reduced]);
+  }, [metrics, stage.h, count, last, reduced, onActiveChange]);
 
-  const to = React.useCallback(
-    (next: number) => {
-      target.current = clamp(next, 0, last + 1);
-    },
-    [last],
-  );
-
-  // Native listener, because the wheel has to be cancellable - and it only
-  // cancels while it still has somewhere to go, so the page scrolls on at
-  // either end instead of trapping the reader.
+  // Native listener for smooth cancellable wheel scrolling
   React.useEffect(() => {
     const el = stageRef.current;
     if (!el) return;
@@ -242,10 +268,6 @@ export function WorksWheel({
       const next = target.current + event.deltaY / WHEEL_UNITS;
       if (next > 0 && next < last + 1) event.preventDefault();
       to(next);
-      // A wheel gesture arrives as a burst of events with no end of its own, so
-      // the rest position is whatever notch it happened to stop on. Left there
-      // the drum sits between two cards - nothing at the front, and the pair
-      // either side of the gap both turned half away. Settle onto an item.
       window.clearTimeout(settling.current);
       settling.current = window.setTimeout(
         () => to(Math.round(target.current)),
@@ -259,6 +281,16 @@ export function WorksWheel({
     };
   }, [to, last]);
 
+  // Keep right index list smoothly scrolled to active item
+  React.useEffect(() => {
+    if (indexListRef.current) {
+      const activeEl = indexListRef.current.children[active] as HTMLElement | undefined;
+      if (activeEl) {
+        activeEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+  }, [active]);
+
   const drag = React.useRef<number | null>(null);
   const settling = React.useRef(0);
 
@@ -266,18 +298,21 @@ export function WorksWheel({
     <section
       aria-label={label}
       className={cn(
-        "bg-background text-foreground relative h-full min-h-[24rem] w-full overflow-hidden select-none",
+        "bg-background text-foreground relative h-full min-h-[30rem] w-full overflow-hidden select-none",
         className,
       )}
       {...props}
     >
+      {/* Background or overlay children passed in */}
+      {children}
+
       <div
         ref={stageRef}
         tabIndex={0}
         role="listbox"
         aria-label={label}
         aria-activedescendant={`works-wheel-${active}`}
-        className="focus-visible:outline-foreground absolute inset-0 cursor-grab touch-pan-x outline-none focus-visible:outline-2 focus-visible:-outline-offset-4 active:cursor-grabbing"
+        className="focus-visible:outline-foreground absolute inset-0 cursor-grab touch-pan-x outline-none focus-visible:outline-2 focus-visible:-outline-offset-4 active:cursor-grabbing z-10"
         style={{ perspective: `${metrics.depth}px` }}
         onPointerDown={(event) => {
           drag.current = event.clientY;
@@ -289,7 +324,6 @@ export function WorksWheel({
           drag.current = event.clientY;
         }}
         onPointerUp={() => {
-          // Land on an item rather than between two.
           drag.current = null;
           if (target.current > 1) to(Math.round(target.current));
         }}
@@ -307,16 +341,29 @@ export function WorksWheel({
           {items.map((item, i) => {
             const Tag = (item.href ? "a" : "div") as "a";
             return (
-              <React.Fragment key={item.title}>
+              <React.Fragment key={`${item.title}-${i}`}>
                 <Tag
                   id={`works-wheel-${i}`}
                   role="option"
                   aria-selected={i === active}
                   href={item.href}
+                  onClick={(e) => {
+                    if (onCardClick) {
+                      e.preventDefault();
+                      if (i !== active) {
+                        to(i + 1);
+                      } else {
+                        onCardClick(item, i);
+                      }
+                    }
+                  }}
                   ref={(node: HTMLElement | null) => {
                     cardRefs.current[i] = node;
                   }}
-                  className="group absolute [backface-visibility:hidden]"
+                  className={cn(
+                    "group absolute [backface-visibility:hidden] cursor-pointer transition-transform duration-200",
+                    i === active && "ring-2 ring-primary/40 rounded-xl"
+                  )}
                   style={{
                     width: metrics.cardW,
                     height: metrics.cardH,
@@ -324,15 +371,20 @@ export function WorksWheel({
                     marginTop: -metrics.cardH / 2,
                   }}
                 >
-                  <span className="bg-muted shadow-foreground/12 relative block size-full overflow-hidden rounded-lg shadow-[0_18px_40px_-18px_var(--tw-shadow-color)]">
+                  <span className="bg-muted shadow-foreground/12 relative block size-full overflow-hidden rounded-xl border border-black/10 dark:border-white/10 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.18)] transition-all duration-300 group-hover:shadow-[0_25px_60px_-10px_rgba(139,92,246,0.3)]">
                     <img
                       src={item.image}
                       alt={item.title}
                       draggable={false}
-                      className="size-full object-cover"
+                      className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                     />
-                    {action && item.href ? (
-                      <span className="bg-background/80 text-foreground pointer-events-none absolute right-3 bottom-3 flex translate-y-1 items-center gap-1 rounded-full px-2.5 py-1 text-[0.7rem] opacity-0 backdrop-blur-sm transition group-hover:translate-y-0 group-hover:opacity-100">
+                    {item.badge ? (
+                      <span className="absolute top-2.5 left-2.5 rounded-md bg-black/80 backdrop-blur-md px-2 py-0.5 font-mono text-[9px] font-medium uppercase tracking-wider text-white shadow-sm border border-white/10">
+                        {item.badge}
+                      </span>
+                    ) : null}
+                    {action ? (
+                      <span className="bg-background/90 text-foreground pointer-events-none absolute right-3 bottom-3 flex translate-y-1 items-center gap-1 rounded-full px-2.5 py-1 text-[0.72rem] font-medium opacity-0 shadow-md backdrop-blur-md transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
                         <svg
                           viewBox="0 0 12 12"
                           className="size-2.5"
@@ -358,38 +410,53 @@ export function WorksWheel({
         </div>
       </div>
 
-      {/* Ring title and front-card title trade places across the transition.
-          Type is sized off the measured stage, not vh, so the wheel keeps its
-          proportions inside a card as well as at full bleed. */}
+      {/* Ring title and front-card title trade places across the transition */}
       <div
         ref={labelRef}
-        className="pointer-events-none absolute inset-0 grid place-items-center tracking-tight"
+        className="pointer-events-none absolute inset-0 grid place-items-center tracking-tight font-light text-foreground/80 z-20"
         style={{ fontSize: metrics.title }}
       >
         {label}
       </div>
-      <div
-        ref={titleRef}
-        className="pointer-events-none absolute top-1/2 left-[8%] -translate-y-1/2 tracking-tight opacity-0"
-        style={{ fontSize: metrics.title }}
-      >
-        {items[active]?.title}
-      </div>
 
+      {showSideTitle && (
+        <div
+          ref={titleRef}
+          className="pointer-events-none absolute top-1/2 left-[5%] md:left-[8%] -translate-y-1/2 tracking-tight opacity-0 max-w-[28%] md:max-w-[32%] z-20"
+          style={{ fontSize: Math.max(metrics.title * 0.85, 20) }}
+        >
+          <span className="font-semibold text-foreground block leading-tight drop-shadow-sm">
+            {items[active]?.title}
+          </span>
+          {items[active]?.badge && (
+            <span className="inline-block mt-2 font-mono text-xs uppercase tracking-wider px-2 py-0.5 bg-foreground/10 text-foreground rounded">
+              {items[active]?.badge}
+            </span>
+          )}
+        </div>
+      )}
+
+      {/* Right Index List */}
       <ol
-        className="text-muted-foreground absolute top-[7.5%] right-[2.5%] text-right leading-[1.75]"
-        style={{ fontSize: metrics.index }}
+        ref={indexListRef}
+        className="text-muted-foreground absolute top-[8%] right-[2%] max-h-[78%] max-w-[280px] overflow-y-auto text-right leading-[1.8] pointer-events-auto pr-3 pl-2 scroll-smooth z-20 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        style={{ fontSize: Math.max(metrics.index, 11) }}
       >
         {items.map((item, i) => (
-          <li key={item.title}>
+          <li key={`${item.title}-${i}`} className="py-0.5">
             <button
               type="button"
               onClick={() => to(i + 1)}
               className={cn(
-                "focus-visible:outline-foreground cursor-pointer transition-colors outline-none focus-visible:outline-1",
-                i === active && "text-foreground font-medium",
+                "focus-visible:outline-foreground cursor-pointer transition-all duration-200 outline-none text-right block w-full truncate hover:text-foreground",
+                i === active
+                  ? "text-foreground font-bold tracking-tight scale-[1.02] origin-right"
+                  : "opacity-60 hover:opacity-100",
               )}
             >
+              <span className="font-mono text-[9px] mr-1.5 opacity-40">
+                {String(i + 1).padStart(2, "0")}.
+              </span>
               {item.title}
             </button>
           </li>
@@ -400,3 +467,4 @@ export function WorksWheel({
 }
 
 export default WorksWheel;
+
