@@ -7,6 +7,7 @@ import { AuroraBackground } from "@/components/ui/aurora-background";
 import { Marquee } from "@/components/ui/marquee";
 import { MagneticCursor } from "@/components/ui/magnetic-cursor";
 import AboutSection from "@/components/AboutSection";
+import ProjectsSection from "@/components/ProjectsSection";
 import { ArrowDown } from "lucide-react";
 
 export default function Home() {
@@ -75,6 +76,9 @@ export default function Home() {
 
         {/* About Me Section - Inspired by Hexaa.sh Architecture */}
         <AboutSection />
+
+        {/* Selected Works - 3D Hero Parallax Architecture */}
+        <ProjectsSection />
       </main>
     </MagneticCursor>
   );
