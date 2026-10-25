@@ -67,7 +67,7 @@ export function MagneticCursor({
 
       // Check if mouse is hovering over interactive elements or text designated for inversion
       const target = (e.target as HTMLElement)?.closest(
-        "[data-magnetic], [data-cursor-invert], a, button, nav, header, [role='button'], .cursor-pointer"
+        "[data-magnetic], [data-cursor-invert], [data-cursor-expand], a, button, nav, header, [role='button'], .cursor-pointer"
       ) as HTMLElement | null;
 
       if (target) {
@@ -90,7 +90,7 @@ export function MagneticCursor({
           pos.current.targetY = centerY + distY * (1 - magneticFactor);
         }
 
-        // Slightly enlarge on hover (1.85x on nav/buttons, 2.1x on running text) for a clear, stunning inversion lens
+        // Enlarge on hover (1.85x on interactive elements, 2.1x on running text) for clear fluid black cursor
         const targetScale = isMarquee ? 2.1 : 1.85;
 
         if (!isHovered.current || currentScale.current !== targetScale) {

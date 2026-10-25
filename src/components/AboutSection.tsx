@@ -18,6 +18,7 @@ interface SkillContent {
   tools: Array<{
     name: string;
     icon: React.ComponentType<{ size?: number; className?: string }>;
+    color: string;
   }>;
 }
 
@@ -28,11 +29,11 @@ const skillsData: Record<string, SkillContent> = {
     subtitle:
       "Designing autonomous multi-agent systems, function-calling workflows, and tool-augmented LLM architectures.",
     tools: [
-      { name: "LangChain", icon: BrandIcons.LangChain },
-      { name: "Python", icon: BrandIcons.Python },
-      { name: "OpenAI", icon: BrandIcons.OpenAI },
-      { name: "Claude", icon: BrandIcons.Claude },
-      { name: "FastAPI", icon: BrandIcons.FastAPI },
+      { name: "LangChain", icon: BrandIcons.LangChain, color: "#10B981" },
+      { name: "Python", icon: BrandIcons.Python, color: "#3776AB" },
+      { name: "OpenAI", icon: BrandIcons.OpenAI, color: "#10A37F" },
+      { name: "Claude", icon: BrandIcons.Claude, color: "#D97706" },
+      { name: "FastAPI", icon: BrandIcons.FastAPI, color: "#009688" },
     ],
   },
   fullstack: {
@@ -41,12 +42,12 @@ const skillsData: Record<string, SkillContent> = {
     subtitle:
       "Engineering type-safe, resilient web applications with Next.js 15, TypeScript, Tailwind CSS, and scalable databases.",
     tools: [
-      { name: "Next.js", icon: BrandIcons.Nextjs },
-      { name: "TypeScript", icon: BrandIcons.TypeScript },
-      { name: "React", icon: BrandIcons.React },
-      { name: "Tailwind CSS", icon: BrandIcons.Tailwind },
-      { name: "PostgreSQL", icon: BrandIcons.PostgreSQL },
-      { name: "Docker", icon: BrandIcons.Docker },
+      { name: "Next.js", icon: BrandIcons.Nextjs, color: "#18181B" },
+      { name: "TypeScript", icon: BrandIcons.TypeScript, color: "#3178C6" },
+      { name: "React", icon: BrandIcons.React, color: "#61DAFB" },
+      { name: "Tailwind CSS", icon: BrandIcons.Tailwind, color: "#38BDF8" },
+      { name: "PostgreSQL", icon: BrandIcons.PostgreSQL, color: "#336791" },
+      { name: "Docker", icon: BrandIcons.Docker, color: "#2496ED" },
     ],
   },
   rag_automation: {
@@ -55,11 +56,11 @@ const skillsData: Record<string, SkillContent> = {
     subtitle:
       "Building Retrieval-Augmented Generation pipelines, vector embeddings search, and end-to-end intelligent automation flows.",
     tools: [
-      { name: "Vector DB", icon: BrandIcons.VectorDB },
-      { name: "LangGraph", icon: BrandIcons.LangGraph },
-      { name: "Automation Flow", icon: BrandIcons.AutomationFlow },
-      { name: "FastAPI RAG", icon: BrandIcons.FastAPI },
-      { name: "Python", icon: BrandIcons.Python },
+      { name: "Vector DB", icon: BrandIcons.VectorDB, color: "#6366F1" },
+      { name: "LangGraph", icon: BrandIcons.LangGraph, color: "#0EA5E9" },
+      { name: "Automation Flow", icon: BrandIcons.AutomationFlow, color: "#F59E0B" },
+      { name: "FastAPI RAG", icon: BrandIcons.FastAPI, color: "#009688" },
+      { name: "Python", icon: BrandIcons.Python, color: "#3776AB" },
     ],
   },
   technopreneur: {
@@ -68,10 +69,10 @@ const skillsData: Record<string, SkillContent> = {
     subtitle:
       "Transforming curious ideas into real-world software, completing rigorous courses, and building production-ready final projects.",
     tools: [
-      { name: "Product Strategy", icon: BrandIcons.ProductStrategy },
-      { name: "System Design", icon: BrandIcons.SystemDesign },
-      { name: "Course Projects", icon: BrandIcons.CourseProjects },
-      { name: "Innovation", icon: BrandIcons.Innovation },
+      { name: "Product Strategy", icon: BrandIcons.ProductStrategy, color: "#EF4444" },
+      { name: "System Design", icon: BrandIcons.SystemDesign, color: "#3B82F6" },
+      { name: "Course Projects", icon: BrandIcons.CourseProjects, color: "#8B5CF6" },
+      { name: "Innovation", icon: BrandIcons.Innovation, color: "#EC4899" },
     ],
   },
   uiux: {
@@ -80,10 +81,10 @@ const skillsData: Record<string, SkillContent> = {
     subtitle:
       "Designing intuitive user experiences and beautiful interfaces. Focused on user-centered design principles and modern design systems.",
     tools: [
-      { name: "Figma", icon: BrandIcons.Figma },
-      { name: "Framer", icon: BrandIcons.Framer },
-      { name: "LottieFiles", icon: BrandIcons.LottieFiles },
-      { name: "Tailwind CSS", icon: BrandIcons.Tailwind },
+      { name: "Figma", icon: BrandIcons.Figma, color: "#F24E1E" },
+      { name: "Framer", icon: BrandIcons.Framer, color: "#0055FF" },
+      { name: "LottieFiles", icon: BrandIcons.LottieFiles, color: "#00DDB3" },
+      { name: "Tailwind CSS", icon: BrandIcons.Tailwind, color: "#38BDF8" },
     ],
   },
 };
@@ -295,20 +296,27 @@ export default function AboutSection() {
                 {currentContent.subtitle}
               </p>
 
-              {/* Tools & Tech Icons - Grayscale by default, bursting into authentic brand colors on hover */}
-              <div className="mt-9 flex flex-wrap items-center justify-center gap-7 sm:gap-11">
+              {/* Tools & Tech Icons - Bold, crisp, solid opacity without bounding box, bursting into authentic brand colors on hover */}
+              <div
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                className="mt-10 flex flex-wrap items-center justify-center gap-7 sm:gap-11"
+              >
                 {currentContent.tools.map((tool) => {
                   const Icon = tool.icon;
                   return (
                     <div
                       key={tool.name}
                       data-cursor-expand
-                      className="group flex flex-col items-center gap-2.5 cursor-pointer transition-all duration-300 hover:-translate-y-1.5"
+                      className="group relative flex flex-col items-center gap-2 cursor-pointer transition-transform duration-300 hover:-translate-y-1.5 select-none"
                     >
-                      <div className="w-11 h-11 flex items-center justify-center transition-all duration-300 filter grayscale opacity-45 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 group-hover:drop-shadow-[0_6px_14px_rgba(0,0,0,0.12)]">
-                        <Icon size={34} className="w-8 h-8 sm:w-9 sm:h-9 transition-transform duration-300" />
+                      {/* Logo Vector - Clean, sharp, solid opacity in idle (grayscale opacity-90), smoothly revealing authentic original brand colors on hover */}
+                      <div className="relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300 filter grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-108">
+                        <Icon size={36} className="w-8 h-8 sm:w-9 sm:h-9 transition-transform duration-300" />
                       </div>
-                      <span className="text-xs sm:text-sm font-sans text-zinc-400 group-hover:text-zinc-950 transition-colors duration-200 font-medium tracking-tight">
+
+                      {/* Tool Name Label - Clean and readable */}
+                      <span className="text-xs sm:text-sm font-sans font-medium text-zinc-500 group-hover:text-zinc-900 group-hover:font-semibold transition-colors duration-200 tracking-tight">
                         {tool.name}
                       </span>
                     </div>

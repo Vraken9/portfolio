@@ -38,12 +38,12 @@ export const BrandIcons = {
       className={className}
       {...props}
     >
-      <circle cx="6.5" cy="12" r="3.5" stroke="#10B981" strokeWidth="2.2" />
-      <circle cx="17.5" cy="12" r="3.5" stroke="#059669" strokeWidth="2.2" />
+      <circle cx="6.5" cy="12" r="3.5" stroke="#10B981" strokeWidth="2" />
+      <circle cx="17.5" cy="12" r="3.5" stroke="#059669" strokeWidth="2" />
       <path
         d="M10 12h4m-2-2v4"
         stroke="#10B981"
-        strokeWidth="2.2"
+        strokeWidth="2"
         strokeLinecap="round"
       />
       <path
@@ -148,7 +148,7 @@ export const BrandIcons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="#61DAFB"
-      strokeWidth="1.6"
+      strokeWidth="1.5"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
@@ -262,14 +262,14 @@ export const BrandIcons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="#6366F1"
-      strokeWidth="2"
+      strokeWidth="1.8"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
     >
       <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
-      <polyline points="3.27 6.96 12 12.01 20.73 6.96" stroke="#4F46E5" />
-      <line x1="12" y1="22.08" x2="12" y2="12" stroke="#818CF8" />
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96" stroke="#4F46E5" strokeWidth="1.8" />
+      <line x1="12" y1="22.08" x2="12" y2="12" stroke="#818CF8" strokeWidth="1.8" />
     </svg>
   ),
 
@@ -287,9 +287,9 @@ export const BrandIcons = {
       <circle cx="12" cy="5" r="3" fill="#0EA5E9" />
       <circle cx="5" cy="18" r="3" fill="#38BDF8" />
       <circle cx="19" cy="18" r="3" fill="#0284C7" />
-      <line x1="10" y1="7" x2="6.5" y2="15.5" stroke="#0284C7" strokeWidth="2" />
-      <line x1="14" y1="7" x2="17.5" y2="15.5" stroke="#0284C7" strokeWidth="2" />
-      <line x1="8" y1="18" x2="16" y2="18" stroke="#38BDF8" strokeWidth="2" />
+      <line x1="10" y1="7" x2="6.5" y2="15.5" stroke="#0284C7" strokeWidth="1.8" />
+      <line x1="14" y1="7" x2="17.5" y2="15.5" stroke="#0284C7" strokeWidth="1.8" />
+      <line x1="8" y1="18" x2="16" y2="18" stroke="#38BDF8" strokeWidth="1.8" />
     </svg>
   ),
 
@@ -307,7 +307,7 @@ export const BrandIcons = {
       <rect x="3" y="4" width="6" height="6" rx="1.5" fill="#F59E0B" />
       <rect x="15" y="4" width="6" height="6" rx="1.5" fill="#D97706" />
       <rect x="9" y="14" width="6" height="6" rx="1.5" fill="#B45309" />
-      <path d="M6 10v2a2 2 0 002 2h1M18 10v2a2 2 0 01-2 2h-1" stroke="#F59E0B" strokeWidth="2" />
+      <path d="M6 10v2a2 2 0 002 2h1M18 10v2a2 2 0 01-2 2h-1" stroke="#F59E0B" strokeWidth="1.8" />
     </svg>
   ),
 
@@ -346,8 +346,8 @@ export const BrandIcons = {
       {...props}
     >
       <polygon points="12 2 2 7 12 12 22 7 12 2" fill="#3B82F6" />
-      <polyline points="2 12 12 17 22 12" stroke="#2563EB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <polyline points="2 17 12 22 22 17" stroke="#1D4ED8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <polyline points="2 12 12 17 22 12" stroke="#2563EB" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <polyline points="2 17 12 22 22 17" stroke="#1D4ED8" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
 
@@ -362,8 +362,8 @@ export const BrandIcons = {
       className={className}
       {...props}
     >
-      <path d="M22 10v6M2 10l10-5 10 5-10 5z" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="#8B5CF6" fillOpacity="0.2" />
-      <path d="M6 12v5c3 3 9 3 12 0v-5" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M22 10v6M2 10l10-5 10 5-10 5z" stroke="#8B5CF6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="#8B5CF6" fillOpacity="0.25" />
+      <path d="M6 12v5c3 3 9 3 12 0v-5" stroke="#7C3AED" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
 
