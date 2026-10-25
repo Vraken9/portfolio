@@ -311,6 +311,7 @@ export default function AboutSection() {
                     <div
                       key={tool.name}
                       data-cursor-logo
+                      data-logo-color={tool.color}
                       className="group relative flex flex-col items-center gap-2 cursor-pointer transition-transform duration-300 hover:-translate-y-1.5 select-none"
                     >
                       {/* Logo Vector - Idle grayscale opacity-90, revealing authentic original brand colors cleanly on hover */}

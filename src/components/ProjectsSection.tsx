@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { HeroParallax, ProductItem } from "@/components/ui/hero-parallax";
 import { PlusSeparator } from "@/components/ui/plus-separator";
-import { BauhausGenerator } from "@/components/ui/bauhaus-generator";
 import { PROJECTS, ProjectItem as DetailedProjectItem } from "@/data/portfolioData";
 import { X, Sparkles, CheckCircle2, Layers, Bot, ArrowUpRight, Play } from "lucide-react";
 
@@ -233,25 +232,8 @@ export default function ProjectsSection() {
 
   return (
     <section id="projects" className="relative z-0 isolate w-full overflow-hidden text-zinc-900 border-t border-zinc-200/80 bg-white">
-      
-      {/* 1. Header Bar: Grid Header consistent with About Section */}
-      <div className="w-full border-b border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-3 border-x border-zinc-200/80 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs text-zinc-500 tracking-wider">
-              [02 // PORTFOLIO SHOWCASE]
-            </span>
-          </div>
 
-          <div data-cursor-expand>
-            <BauhausGenerator width={4} height={2} size={18} />
-          </div>
-
-          <PlusSeparator position={["top-left", "top-right"]} />
-        </div>
-      </div>
-
-      {/* 2. 3D Auto-Running Showcase Container (No Scroll-Trapping) */}
+      {/* 3D Auto-Running Showcase Container (No Scroll-Trapping) */}
       <div className="w-full">
         <HeroParallax
           row1={ROW_MODULKU}
@@ -264,11 +246,6 @@ export default function ProjectsSection() {
                 
                 {/* Soft Radial White Gradient Glow behind text for supreme readability over moving cards */}
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-white/95 via-white/85 to-white/0 backdrop-blur-xs rounded-3xl border border-white/60 shadow-sm pointer-events-none" />
-
-                {/* Minimalist Monospace Category Tag */}
-                <span className="font-mono text-xs font-bold text-indigo-600 tracking-widest uppercase mb-2 inline-block">
-                  [SELECTED WORKS // PRODUCTION APPS]
-                </span>
 
                 {/* Main Heading with Enhanced Weight and Invert Cursor */}
                 <h2

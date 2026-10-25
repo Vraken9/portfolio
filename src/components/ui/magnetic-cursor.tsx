@@ -75,7 +75,9 @@ export function MagneticCursor({
         if (idleTimer.current) clearTimeout(idleTimer.current);
 
         const isInvertText = target.hasAttribute("data-cursor-invert") || target.closest("[data-cursor-invert]");
-        const isLogo = target.hasAttribute("data-cursor-logo") || target.closest("[data-cursor-logo]");
+        const logoTarget = target.hasAttribute("data-cursor-logo") ? target : target.closest("[data-cursor-logo]");
+        const isLogo = !!logoTarget;
+        const logoColor = logoTarget?.getAttribute("data-logo-color") || "#38bdf8";
         const isMagnetic = target.hasAttribute("data-magnetic");
 
         // Magnetic attraction if element specifically requests magnetic pull
@@ -91,20 +93,20 @@ export function MagneticCursor({
           pos.current.targetY = centerY + distY * (1 - magneticFactor);
         }
 
-        // Enlarge on hover: 2.5x on inverted text headings, 2.2x on logo lens, 1.85x on general interactive elements
+        // Enlarge on hover: 2.5x on inverted text headings, 2.1x on logo lens, 1.85x on general interactive elements
         let targetScale = 1.85;
         if (isInvertText) {
           targetScale = 2.5;
         } else if (isLogo) {
-          targetScale = 2.2;
+          targetScale = 2.1;
         }
 
         if (isLogo) {
-          // Switch to transparent lens with subtle ring so authentic logo colors shine 100% inside the circle
+          // Inside of fluid cursor remains solid black, while radiating the logo's authentic brand color
           cursor.style.mixBlendMode = "normal";
-          cursor.style.backgroundColor = "transparent";
-          cursor.style.border = "1.5px solid rgba(24, 24, 27, 0.45)";
-          cursor.style.boxShadow = "0 0 16px rgba(0, 0, 0, 0.08)";
+          cursor.style.backgroundColor = "#09090b";
+          cursor.style.border = `2px solid ${logoColor}`;
+          cursor.style.boxShadow = `0 0 16px 3px ${logoColor}99, 0 0 35px 8px ${logoColor}44`;
         } else {
           // Standard difference inversion mode
           cursor.style.mixBlendMode = blendMode;
