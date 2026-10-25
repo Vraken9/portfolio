@@ -2,16 +2,245 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { HeroParallax, ProductItem } from "@/components/ui/hero-parallax";
 import { PlusSeparator } from "@/components/ui/plus-separator";
 import { GradientBackground } from "@/components/ui/almoayyed";
-import { AnimatePresence, motion } from "framer-motion";
-import { X, AlertCircle, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
+// ==========================================
+// 1. 3D RUNNING PARALLAX SHOWCASE (ROWS 1-3)
+// ==========================================
+
+// ROW 1: Exclusively ModulKu AI (6 images)
+export const ROW_MODULKU: ProductItem[] = [
+  {
+    id: "modulku-landing",
+    projectId: "modulku",
+    title: "ModulKu AI — Landing & Platform Portal",
+    subtitle: "AI-Powered Curriculum & Lesson Plan Hub for Indonesian Educators",
+    tag: "MODULKU AI",
+    category: "EdTech & Generative AI",
+    technologies: ["Next.js", "AI Generator", "Tailwind CSS"],
+    thumbnail: "/parallax-showcase/modulku-1-landing.png",
+    link: "/projects/modulku",
+  },
+  {
+    id: "modulku-dashboard",
+    projectId: "modulku",
+    title: "ModulKu — Teacher Workspace Suite",
+    subtitle: "Centralized Educator Dashboard for Curriculum Management",
+    tag: "TEACHER SUITE",
+    category: "EdTech SaaS",
+    technologies: ["React", "Dashboard UI", "Zustand"],
+    thumbnail: "/parallax-showcase/modulku-2-dashboard.png",
+    link: "/projects/modulku",
+  },
+  {
+    id: "modulku-bank",
+    projectId: "modulku",
+    title: "ModulKu — Curriculum Bank & Artifacts",
+    subtitle: "Digital Repository for Modul Ajar, Prota, Promes & Teaching Artifacts",
+    tag: "CURRICULUM BANK",
+    category: "Curriculum Engine",
+    technologies: ["Cloud Storage", "PDF Exporter", "TypeScript"],
+    thumbnail: "/parallax-showcase/modulku-3-bank-dokumen.png",
+    link: "/projects/modulku",
+  },
+  {
+    id: "modulku-soal",
+    projectId: "modulku",
+    title: "ModulKu — AI Question Generator",
+    subtitle: "Automated Exam & Assessment Builder Powered by LLM Orchestration",
+    tag: "AI GENERATOR",
+    category: "Generative AI",
+    technologies: ["LLM API", "Prompt Eng.", "TypeScript"],
+    thumbnail: "/parallax-showcase/modulku-4-soal-generator.png",
+    link: "/projects/modulku",
+  },
+  {
+    id: "modulku-metrik",
+    projectId: "modulku",
+    title: "ModulKu — Platform Analytics & Metrics",
+    subtitle: "Admin System Overview, User Engagement & Curriculum Generation Metrics",
+    tag: "SUPERADMIN",
+    category: "Enterprise Analytics",
+    technologies: ["Chart.js", "Metrics Engine", "PostgreSQL"],
+    thumbnail: "/parallax-showcase/modulku-5-admin-metrik.png",
+    link: "/projects/modulku",
+  },
+  {
+    id: "modulku-cost",
+    projectId: "modulku",
+    title: "ModulKu — API Hit & Cost Tracking",
+    subtitle: "Real-time AI Token Usage, API Cost Tracking & Quota Monitoring",
+    tag: "COST MONITOR",
+    category: "AI Infrastructure",
+    technologies: ["Token Tracking", "API Rate Limiter", "Next.js"],
+    thumbnail: "/parallax-showcase/modulku-6-admin-api-cost.png",
+    link: "/projects/modulku",
+  },
+];
+
+// ROW 2: Exclusively FloraMart (4 images)
+export const ROW_FLORAMART: ProductItem[] = [
+  {
+    id: "floramart-home",
+    projectId: "floramart",
+    title: "FloraMart — Botanical Marketplace",
+    subtitle: "Multi-Vendor Ornamental Plants & Gardening E-Commerce Platform",
+    tag: "FLORAMART",
+    category: "E-Commerce",
+    technologies: ["Multi-Vendor", "Cart System", "Tailwind CSS"],
+    thumbnail: "/parallax-showcase/floramart-1-beranda.png",
+    link: "/projects/floramart",
+  },
+  {
+    id: "floramart-katalog",
+    projectId: "floramart",
+    title: "FloraMart — Plant Catalog & Filter Hub",
+    subtitle: "Dynamic Filtering by Plant Care, Sun Exposure & Price Range",
+    tag: "CATALOG HUB",
+    category: "E-Commerce",
+    technologies: ["Facet Search", "Filter Engine", "React"],
+    thumbnail: "/parallax-showcase/floramart-2-katalog.png",
+    link: "/projects/floramart",
+  },
+  {
+    id: "floramart-favorit",
+    projectId: "floramart",
+    title: "FloraMart — Wishlist & Saved Flora",
+    subtitle: "Customer Dashboard for Favorite Botanicals & Repurchase Alerts",
+    tag: "USER FAVORITES",
+    category: "Customer Experience",
+    technologies: ["LocalStorage", "Zustand", "Next.js"],
+    thumbnail: "/parallax-showcase/floramart-3-favorit.png",
+    link: "/projects/floramart",
+  },
+  {
+    id: "floramart-detail",
+    projectId: "floramart",
+    title: "FloraMart — Plant Specs & Direct Order",
+    subtitle: "Comprehensive Plant Care Specs, Pot Sizing, Delivery & Instant Checkout",
+    tag: "PRODUCT DETAIL",
+    category: "E-Commerce",
+    technologies: ["Cart System", "Responsive UI", "TypeScript"],
+    thumbnail: "/parallax-showcase/floramart-4-detail.png",
+    link: "/projects/floramart",
+  },
+];
+
+// ROW 3: Kos.id, Nusa Bali, and FinAI Mobile (9 images)
+export const ROW_KOS_NUSA: ProductItem[] = [
+  {
+    id: "finai-home",
+    projectId: "finai",
+    title: "FinAI — Smart Mobile Finance & Gemini AI",
+    subtitle: "Personal Finance & Budgeting with Voice & Receipt OCR",
+    tag: "FINAI MOBILE",
+    category: "Mobile App • FinTech & AI",
+    technologies: ["Flutter", "Gemini AI", "Receipt OCR"],
+    thumbnail: "/parallax-showcase/finai-home.png",
+    link: "/projects/finai",
+  },
+  {
+    id: "kos-id-home",
+    projectId: "kos-id",
+    title: "Kos.id — Smart Discovery Platform",
+    subtitle: "Modern Boarding House Discovery & Property Rental Management",
+    tag: "KOS.ID",
+    category: "Property Tech",
+    technologies: ["Next.js", "Catalog Engine", "Tailwind CSS"],
+    thumbnail: "/parallax-showcase/kos-1-beranda.png",
+    link: "/projects/kos-id",
+  },
+  {
+    id: "kos-id-detail",
+    projectId: "kos-id",
+    title: "Kos.id — Room Details & Virtual Tour",
+    subtitle: "Immersive Room Breakdown, Facility Amenities & Live Availability",
+    tag: "ROOM SHOWCASE",
+    category: "Property Booking",
+    technologies: ["Image Gallery", "Responsive UI", "TypeScript"],
+    thumbnail: "/parallax-showcase/kos-2-detail.png",
+    link: "/projects/kos-id",
+  },
+  {
+    id: "kos-id-admin",
+    projectId: "kos-id",
+    title: "Kos.id — Admin Property Operations",
+    subtitle: "Landlord Management Dashboard for Room Inventory & Occupancy Leases",
+    tag: "ADMIN PORTAL",
+    category: "Operations SaaS",
+    technologies: ["CRUD Engine", "Status Tracker", "PostgreSQL"],
+    thumbnail: "/parallax-showcase/kos-3-admin-kelola.png",
+    link: "/projects/kos-id",
+  },
+  {
+    id: "nusa-bali-hero",
+    projectId: "nusa-bali",
+    title: "Nusa AI — Travel Marketplace Portal",
+    subtitle: "Curated Tour Package Booking & Digital Tourism Platform for Bali",
+    tag: "NUSA AI",
+    category: "Tourism Tech",
+    technologies: ["Next.js", "Hero Section", "Tailwind CSS"],
+    thumbnail: "/parallax-showcase/nusa-bali-1-beranda-hero.png",
+    link: "/projects/nusa-bali",
+  },
+  {
+    id: "nusa-bali-destinasi",
+    projectId: "nusa-bali",
+    title: "Nusa AI — Destinasi Impian Showcase",
+    subtitle: "Featured Destinations, Hidden Gems & Island Activity Guides",
+    tag: "DESTINASI BALI",
+    category: "Travel Guide",
+    technologies: ["Grid Layout", "Framer Motion", "Video Player"],
+    thumbnail: "/parallax-showcase/nusa-bali-2-beranda-destinasi.png",
+    link: "/projects/nusa-bali",
+  },
+  {
+    id: "nusa-bali-detail",
+    projectId: "nusa-bali",
+    title: "Nusa AI — AI RAG Assistant & Details",
+    subtitle: "Tour Package Itinerary with Integrated Retrieval-Augmented Chatbot",
+    tag: "RAG ARCHITECTURE",
+    category: "AI Travel Assistant",
+    technologies: ["RAG Engine", "Vector Search", "Gemini API"],
+    thumbnail: "/parallax-showcase/nusa-bali-3-detail-paket.png",
+    link: "/projects/nusa-bali",
+  },
+  {
+    id: "nusa-bali-katalog",
+    projectId: "nusa-bali",
+    title: "Nusa AI — Tour Package Exploration",
+    subtitle: "Interactive Tour Catalog with Duration, Difficulty & Price Filters",
+    tag: "TOUR CATALOG",
+    category: "Travel Marketplace",
+    technologies: ["Search Filters", "Catalog UI", "Next.js"],
+    thumbnail: "/parallax-showcase/nusa-bali-4-katalog-header.png",
+    link: "/projects/nusa-bali",
+  },
+  {
+    id: "nusa-bali-grid",
+    projectId: "nusa-bali",
+    title: "Nusa AI — Curated Packages Grid",
+    subtitle: "Comprehensive List of Bali Island Escapes, Snorkeling & Cultural Tours",
+    tag: "PACKAGES GRID",
+    category: "Tourism Tech",
+    technologies: ["Card System", "Responsive UI", "TypeScript"],
+    thumbnail: "/parallax-showcase/nusa-bali-5-katalog-grid.png",
+    link: "/projects/nusa-bali",
+  },
+];
+
+// ==========================================
+// 2. PROJECT CARDS (DASHBOARD USER SCREENSHOTS)
+// ==========================================
 export interface ProjectCardItem {
   id: string;
   title: string;
   description: string;
-  imageId: string;
+  dashboardImage: string;
   badge: string[];
   link?: string;
   apkLink?: string;
@@ -20,13 +249,14 @@ export interface ProjectCardItem {
   unmaintained?: boolean;
 }
 
-export const HEXAA_PROJECTS: ProjectCardItem[] = [
+// 4 Featured Projects on Homepage (with Dashboard Screenshots)
+export const HOMEPAGE_PROJECTS: ProjectCardItem[] = [
   {
     id: "modulku",
     title: "ModulKu",
     description:
       "AI-powered educational platform that generates Kurikulum Merdeka teaching modules and exam questions in seconds with API token cost monitoring.",
-    imageId: "/parallax-showcase/modulku-home.png",
+    dashboardImage: "/gambar-web-modulku/halaman-dashboard-guru.png",
     badge: ["EdTech", "Generative AI", "Next.js"],
     link: "https://modul-ku.vercel.app/",
     repo: "https://github.com/Vraken9/modulku",
@@ -37,7 +267,7 @@ export const HEXAA_PROJECTS: ProjectCardItem[] = [
     title: "Kos.id",
     description:
       "A full-stack boarding house reservation and management system with room filters, payment proof upload, and automated PDF receipt generator.",
-    imageId: "/parallax-showcase/kos-id-home.png",
+    dashboardImage: "/gambar-web-kos.id/halaman-dashboard-admin.png",
     badge: ["Property Tech", "Booking Engine", "Full-Stack"],
     link: "https://kos-id.vercel.app/",
     repo: "https://github.com/Vraken9/kos-id",
@@ -48,7 +278,7 @@ export const HEXAA_PROJECTS: ProjectCardItem[] = [
     title: "Nusa AI",
     description:
       "Smart Bali tourism marketplace featuring an interactive AI chatbot powered by Retrieval-Augmented Generation (RAG) answering visitor questions 24/7.",
-    imageId: "/parallax-showcase/nusa-bali-home.png",
+    dashboardImage: "/gambar-web-nusa-bali/halaman-detail-paket.png",
     badge: ["Tourism Tech", "RAG AI", "Chatbot"],
     link: "https://learning-ai-dun.vercel.app/",
     repo: "https://github.com/Vraken9/nusa-bali",
@@ -56,113 +286,100 @@ export const HEXAA_PROJECTS: ProjectCardItem[] = [
   },
   {
     id: "finai",
-    title: "FinAI",
+    title: "FinAI Mobile",
     description:
-      "An AI-powered personal finance and budgeting mobile app built with Flutter, featuring Gemini AI voice input, receipt OCR scanner, and an intelligent advisor.",
-    imageId: "/parallax-showcase/finai-home.png",
+      "AI-powered personal finance and budgeting mobile app built with Flutter, featuring Gemini AI voice input, receipt OCR scanner, and an intelligent advisor.",
+    dashboardImage: "/gambar-finai/page_8_img_1_Image62.jpg",
     badge: ["Mobile App", "Flutter", "Gemini AI", "FinTech"],
     link: "https://drive.google.com/file/d/1qz8Gfuc_c4nQW1kQnTP53cSR44I87wCM/view?usp=sharing",
     apkLink: "https://drive.google.com/file/d/1qz8Gfuc_c4nQW1kQnTP53cSR44I87wCM/view?usp=sharing",
     repo: "https://github.com/Vraken9/FinAI.git",
     caseStudy: "/projects/finai",
   },
-  {
-    id: "floramart",
-    title: "FloraMart",
-    description:
-      "A multi-vendor botanical marketplace connecting ornamental plant nurseries with buyers, complete with vendor storefronts, cart checkout, and store analytics.",
-    imageId: "/parallax-showcase/floramart-home.png",
-    badge: ["E-Commerce", "Multi-Vendor", "Paused"],
-    link: "https://floramart.vercel.app/",
-    repo: "https://github.com/Vraken9/floramart",
-    caseStudy: "/projects/floramart",
-    unmaintained: true,
-  },
-  {
-    id: "ai-lab",
-    title: "AI Agent & RAG Lab",
-    description:
-      "Research experiments in autonomous AI agents, multi-step prompt orchestration, and vector knowledge retrieval pipelines.",
-    imageId: "/parallax-showcase/modulku-6-admin-api-cost.png",
-    badge: ["AI Agents", "Research", "Open Source"],
-    link: "https://github.com/Vraken9",
-    repo: "https://github.com/Vraken9",
-    caseStudy: "https://github.com/Vraken9",
-  },
 ];
 
 export default function ProjectsSection() {
-  const [unmaintainedModalProject, setUnmaintainedModalProject] = useState<ProjectCardItem | null>(null);
-  const [useAlmoayyedBg, setUseAlmoayyedBg] = useState(false);
+  const router = useRouter();
+
+  const handleCardSelect = (item: ProductItem) => {
+    if (item.projectId) {
+      router.push(`/projects/${item.projectId}`);
+    }
+  };
 
   return (
-    <section id="projects" className="relative z-0 w-full overflow-hidden text-zinc-900 bg-white">
-      {/* 1. Header Grid Spacer */}
-      <div className="w-full border-zinc-200/80 border-b">
-        <div className="relative mx-auto max-w-7xl h-14 border-zinc-200/80 border-x flex items-center justify-between px-4">
+    <section id="projects" className="relative z-0 isolate w-full overflow-hidden text-zinc-900 border-t border-zinc-200/80 bg-white">
+      {/* Structural Spacing & Grid Separation between Skills and Projects */}
+      <div className="w-full border-b border-zinc-200/80">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-5 sm:py-7 border-x border-zinc-200/80 flex items-center justify-between">
           <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
-          <span className="font-mono text-xs text-zinc-400">/projects</span>
-          <button
-            type="button"
-            onClick={() => setUseAlmoayyedBg(!useAlmoayyedBg)}
-            className="font-mono text-[11px] text-zinc-500 hover:text-zinc-950 px-2 py-0.5 rounded border border-zinc-200 bg-zinc-50 transition-colors"
-          >
-            {useAlmoayyedBg ? "Switch to Hexaa Blue Grain" : "Switch to Almoayyed Grain"}
-          </button>
         </div>
       </div>
 
-      {/* 2. Hexaa Header Banner */}
-      <div className="w-full border-zinc-200/80 border-b">
-        <div className="relative mx-auto max-w-7xl min-h-[250px] border-zinc-200/80 border-x overflow-hidden flex items-center">
+      {/* 1. 3D Auto-Running Showcase Container (Kept Intact) */}
+      <div className="w-full">
+        <HeroParallax
+          row1={ROW_MODULKU}
+          row2={ROW_FLORAMART}
+          row3={ROW_KOS_NUSA}
+          onSelectProduct={handleCardSelect}
+          header={
+            <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 pt-10 sm:pt-16 lg:pt-20 pb-6 sm:pb-8 border-x border-zinc-200/80 w-full left-0 top-0 pointer-events-none">
+              <div className="max-w-3xl relative pointer-events-auto p-4 sm:p-6 lg:p-7 rounded-3xl">
+                {/* Soft Radial White Gradient Glow behind text for supreme readability over moving cards */}
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-white/95 via-white/85 to-white/0 backdrop-blur-xs rounded-3xl border border-white/60 shadow-sm pointer-events-none" />
+
+                <h2
+                  data-cursor-invert
+                  className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-950 leading-[1.1] drop-shadow-xs cursor-default select-none"
+                >
+                  Crafted Software & AI Agent Ecosystems
+                </h2>
+
+                <p className="mt-3 text-xs sm:text-sm md:text-base text-zinc-700 font-semibold leading-relaxed max-w-2xl">
+                  Explore practical web and mobile applications engineered to solve everyday problems with modern full-stack development, AI Agent workflows, and RAG architectures.
+                </p>
+              </div>
+
+              <PlusSeparator position={["bottom-left", "bottom-right"]} />
+            </div>
+          }
+        />
+      </div>
+
+      {/* 2. Divider Line with /projects indicator */}
+      <div className="w-full border-t border-b border-zinc-200/80">
+        <div className="relative mx-auto max-w-7xl h-14 border-x border-zinc-200/80 flex items-center justify-between px-6 sm:px-10">
+          <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
+          <span className="font-mono text-xs text-zinc-400">/projects</span>
+          <Link
+            href="/projects"
+            data-cursor-expand
+            className="font-mono text-xs text-blue-600 hover:underline inline-flex items-center gap-1"
+          >
+            <span>[view all projects]</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+      </div>
+
+      {/* 3. Header Banner with Original Almoayyed Background */}
+      <div className="w-full border-b border-zinc-200/80">
+        <div className="relative mx-auto max-w-7xl min-h-[250px] border-x border-zinc-200/80 overflow-hidden flex items-center">
           <PlusSeparator
             position={["top-left", "top-right", "bottom-left", "bottom-right"]}
             className="z-20"
           />
 
-          {/* Background Layer: Blue-Violet Shader Grain Gradient or Almoayyed Grain */}
-          {useAlmoayyedBg ? (
-            <div className="absolute inset-0 z-0">
-              <GradientBackground className="w-full h-full" />
-            </div>
-          ) : (
-            <div className="absolute inset-0 z-0">
-              {/* Authentic hexaa.sh blue-purple grainy gradient: ["#3930c6", "#4151be", "#392d39"] */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundColor: "#3930c6",
-                  backgroundImage: `
-                    radial-gradient(circle at 72% 28%, rgba(65, 81, 190, 0.95) 0%, rgba(65, 81, 190, 0.6) 35%, transparent 70%),
-                    radial-gradient(circle at 18% 75%, rgba(57, 45, 57, 0.95) 0%, rgba(57, 45, 57, 0.7) 40%, transparent 75%),
-                    radial-gradient(circle at 50% 50%, rgba(57, 48, 198, 1) 0%, rgba(57, 48, 198, 0.8) 50%, transparent 100%),
-                    linear-gradient(135deg, #3930c6 0%, #4151be 50%, #2b1f48 100%)
-                  `,
-                }}
-              />
-              {/* Film Grain Noise Pass */}
-              <svg
-                aria-hidden="true"
-                className="absolute inset-0 w-full h-full opacity-35 mix-blend-overlay pointer-events-none"
-              >
-                <filter id="hexaa-grain-overlay">
-                  <feTurbulence
-                    type="fractalNoise"
-                    baseFrequency="0.75"
-                    numOctaves="3"
-                    stitchTiles="stitch"
-                  />
-                  <feColorMatrix type="saturate" values="0" />
-                </filter>
-                <rect width="100%" height="100%" filter="url(#hexaa-grain-overlay)" />
-              </svg>
-            </div>
-          )}
+          {/* Original Almoayyed Gradient Background */}
+          <div className="absolute inset-0 z-0">
+            <GradientBackground className="w-full h-full" />
+          </div>
 
-          {/* Text Overlay: Uses text-white with mix-blend-difference, exactly matching hexaa.sh */}
+          {/* Text Overlay: Uses text-white with mix-blend-difference matching hexaa.sh */}
           <div className="relative z-10 w-full h-full text-white mix-blend-difference flex flex-col justify-center px-6 sm:px-10 py-12 pointer-events-none">
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
-              akhyar's projects.
+              akhyar&apos;s projects.
             </h2>
             <p className="max-w-2xl text-xs sm:text-sm md:text-base mt-2.5 leading-relaxed font-normal">
               here are the projects I&apos;ve worked on, showcasing my skills and passion for software development. each project reflects my commitment to creating impactful solutions and continuous learning.
@@ -171,23 +388,23 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* 3. Projects Grid: 2 columns matching hexaa.sh */}
-      <div className="w-full border-zinc-200/80 border-b">
-        <div className="relative mx-auto max-w-7xl border-zinc-200/80 border-x p-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+      {/* 4. Projects Grid: 4 Projects with Dashboard Screenshots & Bottom White Fade Gradient */}
+      <div className="relative w-full border-b border-zinc-200/80">
+        <div className="relative mx-auto max-w-7xl border-x border-zinc-200/80 p-2 pb-24 grid grid-cols-1 md:grid-cols-2 gap-2">
           <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
 
-          {HEXAA_PROJECTS.map((project) => (
+          {HOMEPAGE_PROJECTS.map((project) => (
             <div
               key={project.id}
               className="group relative overflow-hidden rounded-xs border border-zinc-200/80 bg-white transition-all hover:border-zinc-400"
             >
-              {/* Image Section */}
+              {/* User Dashboard Screenshot Section */}
               <div className="relative h-60 sm:h-64 w-full overflow-hidden bg-zinc-100">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={project.imageId}
+                  src={project.dashboardImage}
                   alt={project.title}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                   loading="lazy"
                 />
               </div>
@@ -232,24 +449,14 @@ export default function ProjectsSection() {
                   )}
 
                   {project.link && (
-                    project.unmaintained ? (
-                      <button
-                        type="button"
-                        onClick={() => setUnmaintainedModalProject(project)}
-                        className="font-medium text-blue-600 hover:underline cursor-pointer"
-                      >
-                        [live demo]
-                      </button>
-                    ) : (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-medium text-blue-600 hover:underline"
-                      >
-                        [live demo]
-                      </a>
-                    )
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-blue-600 hover:underline"
+                    >
+                      [live demo]
+                    </a>
                   )}
 
                   {project.apkLink && (
@@ -275,105 +482,41 @@ export default function ProjectsSection() {
               </div>
             </div>
           ))}
-        </div>
-      </div>
 
-      {/* 4. Bottom Grid Footer matching hexaa.sh */}
-      <div className="w-full border-zinc-200/80 border-b">
-        <div className="relative mx-auto max-w-7xl border-zinc-200/80 border-x px-6 sm:px-10 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <PlusSeparator position={["top-left", "top-right", "bottom-left", "bottom-right"]} />
-
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-black text-xl tracking-tight text-zinc-950">akhyar.</span>
-            </div>
-            <p className="text-xs text-zinc-500 mt-1 font-mono">
-              software developer & AI agent enthusiast
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-6 font-mono text-xs text-blue-600">
-            <Link href="/#tentang" className="hover:underline">[about me]</Link>
-            <Link href="/#projects" className="hover:underline">[projects]</Link>
-            <Link href="/#sertifikat" className="hover:underline">[certificates]</Link>
-            <a
-              href="https://github.com/Vraken9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline inline-flex items-center gap-1"
+          {/* Smooth White Gradient Overlay covering the bottom of project 3 & 4 */}
+          <div className="absolute inset-x-0 bottom-0 h-48 sm:h-64 bg-gradient-to-t from-white via-white/85 to-transparent flex flex-col items-center justify-end pb-8 z-20 pointer-events-none">
+            <Link
+              href="/projects"
+              data-cursor-expand
+              className="pointer-events-auto inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-zinc-950 text-white font-mono text-xs sm:text-sm font-semibold hover:bg-zinc-800 transition-all shadow-xl hover:scale-105 active:scale-95 group"
             >
-              <span>[github]</span>
-              <ArrowUpRight className="w-3 h-3" />
-            </a>
+              <span>Explore all projects on /projects</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <span className="text-[11px] font-mono text-zinc-500 mt-2 pointer-events-none">
+              Showing 4 featured projects — click to explore the full directory
+            </span>
           </div>
         </div>
       </div>
 
-      {/* 5. Unmaintained Alert Dialog (matches hexaa.sh) */}
-      <AnimatePresence>
-        {unmaintainedModalProject && (
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setUnmaintainedModalProject(null)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-xs"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              transition={{ duration: 0.2 }}
-              className="relative w-full max-w-md bg-white rounded-xl shadow-2xl border border-zinc-200 p-6 z-10"
-            >
-              <div className="flex items-start gap-3">
-                <div className="w-9 h-9 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-                  <AlertCircle className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-base font-bold text-zinc-950">
-                    Unmaintained Project
-                  </h4>
-                  <p className="text-sm text-zinc-600 mt-2 leading-relaxed">
-                    The project <b>{unmaintainedModalProject.title}</b> is currently paused and the live demo may be <b>outdated or undergoing database maintenance</b>. Are you sure you want to continue?
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-6 flex items-center justify-end gap-3 font-mono text-xs">
-                <button
-                  type="button"
-                  onClick={() => setUnmaintainedModalProject(null)}
-                  className="px-4 py-2 rounded border border-zinc-200 text-zinc-700 hover:bg-zinc-100 transition-colors"
-                >
-                  Cancel
-                </button>
-                {unmaintainedModalProject.link && (
-                  <a
-                    href={unmaintainedModalProject.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setUnmaintainedModalProject(null)}
-                    className="px-4 py-2 rounded bg-zinc-950 text-white hover:bg-zinc-800 transition-colors"
-                  >
-                    Continue anyway
-                  </a>
-                )}
-                {unmaintainedModalProject.caseStudy && (
-                  <Link
-                    href={unmaintainedModalProject.caseStudy}
-                    onClick={() => setUnmaintainedModalProject(null)}
-                    className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
-                  >
-                    View Case Study
-                  </Link>
-                )}
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+      {/* 5. Section Bottom Bar */}
+      <div className="w-full border-zinc-200/80">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 py-5 border-x border-zinc-200/80 flex items-center justify-between">
+          <span className="font-mono text-xs text-zinc-400 tracking-wider">
+            [END OF FEATURED SHOWCASE]
+          </span>
+          <Link
+            href="/projects"
+            data-cursor-expand
+            className="font-mono text-xs text-blue-600 hover:underline inline-flex items-center gap-1.5"
+          >
+            <span>View full project directory</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
+          <PlusSeparator position={["bottom-left", "bottom-right"]} />
+        </div>
+      </div>
     </section>
   );
 }
