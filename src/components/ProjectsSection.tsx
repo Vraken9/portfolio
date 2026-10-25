@@ -9,8 +9,8 @@ import { BauhausGenerator } from "@/components/ui/bauhaus-generator";
 import { PROJECTS, ProjectItem as DetailedProjectItem } from "@/data/portfolioData";
 import { X, Sparkles, CheckCircle2, Layers, Bot, ArrowUpRight, Play } from "lucide-react";
 
-export const PARALLAX_PRODUCTS: ProductItem[] = [
-  // ROW 1: (7 items) - Balanced mix
+// ROW 1: Exclusively ModulKu AI (6 images)
+export const ROW_MODULKU: ProductItem[] = [
   {
     id: "modulku-landing",
     projectId: "modulku",
@@ -20,6 +20,28 @@ export const PARALLAX_PRODUCTS: ProductItem[] = [
     category: "EdTech & Generative AI",
     technologies: ["Next.js", "AI Generator", "Tailwind CSS"],
     thumbnail: "/parallax-showcase/modulku-1-landing.png",
+    link: "#projects",
+  },
+  {
+    id: "modulku-dashboard",
+    projectId: "modulku",
+    title: "ModulKu — Teacher Workspace Suite",
+    subtitle: "Centralized Educator Dashboard for Curriculum Management & Schemes",
+    tag: "TEACHER SUITE",
+    category: "EdTech SaaS",
+    technologies: ["React", "Dashboard UI", "Zustand"],
+    thumbnail: "/parallax-showcase/modulku-2-dashboard.png",
+    link: "#projects",
+  },
+  {
+    id: "modulku-bank",
+    projectId: "modulku",
+    title: "ModulKu — Curriculum Bank & Artifacts",
+    subtitle: "Digital Repository for Modul Ajar, Prota, Promes & Teaching Artifacts",
+    tag: "BANK DOKUMEN",
+    category: "Curriculum Engine",
+    technologies: ["Cloud Storage", "PDF Exporter", "TypeScript"],
+    thumbnail: "/parallax-showcase/modulku-3-bank-dokumen.png",
     link: "#projects",
   },
   {
@@ -33,6 +55,80 @@ export const PARALLAX_PRODUCTS: ProductItem[] = [
     thumbnail: "/parallax-showcase/modulku-4-soal-generator.png",
     link: "#projects",
   },
+  {
+    id: "modulku-metrik",
+    projectId: "modulku",
+    title: "ModulKu — Platform Analytics & Metrics",
+    subtitle: "Admin System Overview, User Engagement & Curriculum Generation Metrics",
+    tag: "SUPERADMIN",
+    category: "Enterprise Analytics",
+    technologies: ["Chart.js", "Metrics Engine", "PostgreSQL"],
+    thumbnail: "/parallax-showcase/modulku-5-admin-metrik.png",
+    link: "#projects",
+  },
+  {
+    id: "modulku-cost",
+    projectId: "modulku",
+    title: "ModulKu — API Hit & Cost Tracking",
+    subtitle: "Real-time AI Token Usage, API Cost Tracking & Quota Monitoring",
+    tag: "COST MONITOR",
+    category: "AI Infrastructure",
+    technologies: ["Token Tracking", "API Rate Limiter", "Next.js"],
+    thumbnail: "/parallax-showcase/modulku-6-admin-api-cost.png",
+    link: "#projects",
+  },
+];
+
+// ROW 2: Exclusively FloraMart (4 images, removed admin-kelola-product)
+export const ROW_FLORAMART: ProductItem[] = [
+  {
+    id: "floramart-home",
+    projectId: "floramart",
+    title: "FloraMart — Botanical Marketplace",
+    subtitle: "Multi-Vendor Ornamental Plants & Gardening E-Commerce Platform",
+    tag: "FLORAMART",
+    category: "E-Commerce",
+    technologies: ["Multi-Vendor", "Cart System", "Tailwind CSS"],
+    thumbnail: "/parallax-showcase/floramart-1-beranda.png",
+    link: "#projects",
+  },
+  {
+    id: "floramart-katalog",
+    projectId: "floramart",
+    title: "FloraMart — Plant Catalog & Filter Hub",
+    subtitle: "Dynamic Filtering by Plant Care, Sun Exposure & Price Range",
+    tag: "CATALOG HUB",
+    category: "E-Commerce",
+    technologies: ["Facet Search", "Filter Engine", "React"],
+    thumbnail: "/parallax-showcase/floramart-2-katalog.png",
+    link: "#projects",
+  },
+  {
+    id: "floramart-favorit",
+    projectId: "floramart",
+    title: "FloraMart — Wishlist & Saved Flora",
+    subtitle: "Customer Dashboard for Favorite Botanicals & Repurchase Alerts",
+    tag: "USER FAVORITES",
+    category: "Customer Experience",
+    technologies: ["LocalStorage", "Zustand", "Next.js"],
+    thumbnail: "/parallax-showcase/floramart-3-favorit.png",
+    link: "#projects",
+  },
+  {
+    id: "floramart-detail",
+    projectId: "floramart",
+    title: "FloraMart — Plant Specs & Direct Order",
+    subtitle: "Comprehensive Plant Care Specs, Pot Sizing, Delivery & Instant Checkout",
+    tag: "PRODUCT DETAIL",
+    category: "E-Commerce",
+    technologies: ["Cart System", "Responsive UI", "TypeScript"],
+    thumbnail: "/parallax-showcase/floramart-4-detail.png",
+    link: "#projects",
+  },
+];
+
+// ROW 3: Exclusively Kos.id & Nusa Bali (8 images, removed pesan-kos)
+export const ROW_KOS_NUSA: ProductItem[] = [
   {
     id: "kos-id-home",
     projectId: "kos-id",
@@ -56,6 +152,17 @@ export const PARALLAX_PRODUCTS: ProductItem[] = [
     link: "#projects",
   },
   {
+    id: "kos-id-admin",
+    projectId: "kos-id",
+    title: "Kos.id — Admin Property Operations",
+    subtitle: "Landlord Management Dashboard for Room Inventory & Occupancy Leases",
+    tag: "ADMIN PORTAL",
+    category: "Operations SaaS",
+    technologies: ["CRUD Engine", "Status Tracker", "PostgreSQL"],
+    thumbnail: "/parallax-showcase/kos-3-admin-kelola.png",
+    link: "#projects",
+  },
+  {
     id: "nusa-bali-hero",
     projectId: "nusa-bali",
     title: "Nusa Bali — Travel Marketplace Portal",
@@ -67,49 +174,14 @@ export const PARALLAX_PRODUCTS: ProductItem[] = [
     link: "#projects",
   },
   {
-    id: "floramart-home",
-    projectId: "floramart",
-    title: "FloraMart — Botanical Marketplace",
-    subtitle: "Multi-Vendor Ornamental Plants & Gardening E-Commerce Platform",
-    tag: "FLORAMART",
-    category: "E-Commerce",
-    technologies: ["Multi-Vendor", "Cart System", "Tailwind CSS"],
-    thumbnail: "/parallax-showcase/floramart-1-beranda.png",
-    link: "#projects",
-  },
-  {
-    id: "floramart-katalog",
-    projectId: "floramart",
-    title: "FloraMart — Plant Catalog & Filter Hub",
-    subtitle: "Dynamic Filtering by Plant Care, Sun Exposure & Price Range",
-    tag: "CATALOG HUB",
-    category: "E-Commerce",
-    technologies: ["Facet Search", "Filter Engine", "React"],
-    thumbnail: "/parallax-showcase/floramart-2-katalog.png",
-    link: "#projects",
-  },
-
-  // ROW 2: (7 items) - Balanced mix
-  {
-    id: "floramart-detail",
-    projectId: "floramart",
-    title: "FloraMart — Plant Specs & Direct Order",
-    subtitle: "Comprehensive Plant Care Specs, Pot Sizing, Delivery & Instant Checkout",
-    tag: "PRODUCT DETAIL",
-    category: "E-Commerce",
-    technologies: ["Cart System", "Responsive UI", "TypeScript"],
-    thumbnail: "/parallax-showcase/floramart-4-detail.png",
-    link: "#projects",
-  },
-  {
-    id: "floramart-admin",
-    projectId: "floramart",
-    title: "FloraMart — Merchant Product Hub",
-    subtitle: "Store Owner Inventory Control, Pricing & Live Plant Stock Management",
-    tag: "MERCHANT SUITE",
-    category: "Vendor SaaS",
-    technologies: ["Stock Manager", "Image Upload", "Tailwind CSS"],
-    thumbnail: "/parallax-showcase/floramart-5-admin-kelola.png",
+    id: "nusa-bali-destinasi",
+    projectId: "nusa-bali",
+    title: "Nusa Bali — Destinasi Impian Showcase",
+    subtitle: "Featured Destinations, Hidden Gems & Island Activity Guides",
+    tag: "DESTINASI BALI",
+    category: "Travel Guide",
+    technologies: ["Grid Layout", "Framer Motion", "Video Player"],
+    thumbnail: "/parallax-showcase/nusa-bali-2-beranda-destinasi.png",
     link: "#projects",
   },
   {
@@ -135,52 +207,6 @@ export const PARALLAX_PRODUCTS: ProductItem[] = [
     link: "#projects",
   },
   {
-    id: "kos-id-booking",
-    projectId: "kos-id",
-    title: "Kos.id — Streamlined Reservation Flow",
-    subtitle: "Multi-Step Tenant Booking, Move-in Date Selection & Lease Agreement",
-    tag: "RESERVATION",
-    category: "Property Booking",
-    technologies: ["Form Validation", "Real-Time DB", "TypeScript"],
-    thumbnail: "/parallax-showcase/kos-4-pesan.png",
-    link: "#projects",
-  },
-  {
-    id: "modulku-dashboard",
-    projectId: "modulku",
-    title: "ModulKu — Teacher Workspace Suite",
-    subtitle: "Centralized Educator Dashboard for Curriculum Management & Schemes",
-    tag: "TEACHER SUITE",
-    category: "EdTech SaaS",
-    technologies: ["React", "Dashboard UI", "Zustand"],
-    thumbnail: "/parallax-showcase/modulku-2-dashboard.png",
-    link: "#projects",
-  },
-  {
-    id: "modulku-bank",
-    projectId: "modulku",
-    title: "ModulKu — Curriculum Bank & Artifacts",
-    subtitle: "Digital Repository for Modul Ajar, Prota, Promes & Teaching Artifacts",
-    tag: "BANK DOKUMEN",
-    category: "Curriculum Engine",
-    technologies: ["Cloud Storage", "PDF Exporter", "TypeScript"],
-    thumbnail: "/parallax-showcase/modulku-3-bank-dokumen.png",
-    link: "#projects",
-  },
-
-  // ROW 3: (6 items) - Balanced mix
-  {
-    id: "nusa-bali-destinasi",
-    projectId: "nusa-bali",
-    title: "Nusa Bali — Destinasi Impian Showcase",
-    subtitle: "Featured Destinations, Hidden Gems & Island Activity Guides",
-    tag: "DESTINASI BALI",
-    category: "Travel Guide",
-    technologies: ["Grid Layout", "Framer Motion", "Video Player"],
-    thumbnail: "/parallax-showcase/nusa-bali-2-beranda-destinasi.png",
-    link: "#projects",
-  },
-  {
     id: "nusa-bali-grid",
     projectId: "nusa-bali",
     title: "Nusa Bali — Curated Packages Grid",
@@ -189,50 +215,6 @@ export const PARALLAX_PRODUCTS: ProductItem[] = [
     category: "Tourism Tech",
     technologies: ["Card System", "Responsive UI", "TypeScript"],
     thumbnail: "/parallax-showcase/nusa-bali-5-katalog-grid.png",
-    link: "#projects",
-  },
-  {
-    id: "kos-id-admin",
-    projectId: "kos-id",
-    title: "Kos.id — Admin Property Operations",
-    subtitle: "Landlord Management Dashboard for Room Inventory & Occupancy Leases",
-    tag: "ADMIN PORTAL",
-    category: "Operations SaaS",
-    technologies: ["CRUD Engine", "Status Tracker", "PostgreSQL"],
-    thumbnail: "/parallax-showcase/kos-3-admin-kelola.png",
-    link: "#projects",
-  },
-  {
-    id: "floramart-favorit",
-    projectId: "floramart",
-    title: "FloraMart — Wishlist & Saved Flora",
-    subtitle: "Customer Dashboard for Favorite Botanicals & Repurchase Alerts",
-    tag: "USER FAVORITES",
-    category: "Customer Experience",
-    technologies: ["LocalStorage", "Zustand", "Next.js"],
-    thumbnail: "/parallax-showcase/floramart-3-favorit.png",
-    link: "#projects",
-  },
-  {
-    id: "modulku-metrik",
-    projectId: "modulku",
-    title: "ModulKu — Platform Analytics & Metrics",
-    subtitle: "Admin System Overview, User Engagement & Curriculum Generation Metrics",
-    tag: "SUPERADMIN",
-    category: "Enterprise Analytics",
-    technologies: ["Chart.js", "Metrics Engine", "PostgreSQL"],
-    thumbnail: "/parallax-showcase/modulku-5-admin-metrik.png",
-    link: "#projects",
-  },
-  {
-    id: "modulku-cost",
-    projectId: "modulku",
-    title: "ModulKu — API Hit & Cost Tracking",
-    subtitle: "Real-time AI Token Usage, API Cost Tracking & Quota Monitoring",
-    tag: "COST MONITOR",
-    category: "AI Infrastructure",
-    technologies: ["Token Tracking", "API Rate Limiter", "Next.js"],
-    thumbnail: "/parallax-showcase/modulku-6-admin-api-cost.png",
     link: "#projects",
   },
 ];
@@ -269,58 +251,64 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* 2. Parallax Showcase Container */}
+      {/* 2. 3D Auto-Running Showcase Container (No Scroll-Trapping) */}
       <div className="w-full">
         <HeroParallax
-          products={PARALLAX_PRODUCTS}
+          row1={ROW_MODULKU}
+          row2={ROW_FLORAMART}
+          row3={ROW_KOS_NUSA}
           onSelectProduct={handleCardSelect}
           header={
-            <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 pt-16 sm:pt-24 pb-8 border-x border-zinc-200/80 w-full left-0 top-0">
-              <div className="max-w-4xl">
+            <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 pt-4 sm:pt-6 lg:pt-8 pb-2 border-x border-zinc-200/80 w-full left-0 top-0 pointer-events-none">
+              <div className="max-w-3xl relative pointer-events-auto p-4 sm:p-6 lg:p-7 rounded-3xl">
+                
+                {/* Soft Radial White Gradient Glow behind text for supreme readability over moving cards */}
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-white/95 via-white/85 to-white/0 backdrop-blur-xs rounded-3xl border border-white/60 shadow-sm pointer-events-none" />
+
                 {/* Category Pill Tag */}
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="px-3 py-1 rounded-full bg-zinc-100 text-zinc-800 text-xs font-mono font-medium tracking-wide border border-zinc-200/80 inline-flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="px-3 py-1 rounded-full bg-white/95 text-zinc-900 text-xs font-mono font-bold tracking-wide border border-zinc-200/90 inline-flex items-center gap-1.5 shadow-xs backdrop-blur-md">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     SELECTED WORKS & ECOSYSTEMS
                   </span>
-                  <span className="text-xs font-mono text-zinc-400">
+                  <span className="text-xs font-mono font-semibold text-zinc-500 bg-white/70 px-2 py-0.5 rounded-md backdrop-blur-xs">
                     • 4 PRODUCTION APPS
                   </span>
                 </div>
 
-                {/* Main Heading */}
-                <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-950 leading-[1.1]">
+                {/* Main Heading with Enhanced Weight and Crispness */}
+                <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-950 leading-[1.1] drop-shadow-xs">
                   Crafted Software & AI Agent Ecosystems
                 </h2>
 
-                {/* Subtitle */}
-                <p className="mt-5 text-sm sm:text-base md:text-lg text-zinc-600 leading-relaxed max-w-3xl">
+                {/* Subtitle with High Legibility */}
+                <p className="mt-3 text-xs sm:text-sm md:text-base text-zinc-700 font-semibold leading-relaxed max-w-2xl">
                   Membangun aplikasi digital berdaya guna tinggi dengan mengombinasikan arsitektur full-stack modern, alur orkestrasi AI Agent, integrasi RAG kontekstual, dan antarmuka ramah pengguna.
                 </p>
 
                 {/* Feature Highlights Pills */}
-                <div className="mt-8 flex flex-wrap gap-2.5 sm:gap-3">
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-zinc-50 border border-zinc-200/80 text-xs font-medium text-zinc-700">
+                <div className="mt-5 flex flex-wrap gap-2 sm:gap-2.5">
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-zinc-200/90 text-xs font-bold text-zinc-800 shadow-xs">
                     <Layers className="w-3.5 h-3.5 text-indigo-600" />
                     <span>4 Full-Stack Platforms</span>
                   </div>
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-zinc-50 border border-zinc-200/80 text-xs font-medium text-zinc-700">
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-zinc-200/90 text-xs font-bold text-zinc-800 shadow-xs">
                     <Bot className="w-3.5 h-3.5 text-emerald-600" />
                     <span>RAG & Generative AI</span>
                   </div>
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-zinc-50 border border-zinc-200/80 text-xs font-medium text-zinc-700">
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-zinc-200/90 text-xs font-bold text-zinc-800 shadow-xs">
                     <Sparkles className="w-3.5 h-3.5 text-amber-500" />
                     <span>Production Grade Architecture</span>
                   </div>
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-zinc-50 border border-zinc-200/80 text-xs font-medium text-zinc-700">
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-zinc-200/90 text-xs font-bold text-zinc-800 shadow-xs">
                     <CheckCircle2 className="w-3.5 h-3.5 text-blue-600" />
                     <span>Next.js, TypeScript & Python</span>
                   </div>
                 </div>
 
-                <div className="mt-6 flex items-center gap-2 text-xs font-mono text-zinc-400">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-zinc-400" />
-                  <span>Scroll down to explore 3D parallax perspectives • Click any card for detailed case study</span>
+                <div className="mt-4 flex items-center gap-2 text-[11px] font-mono text-zinc-500">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>3D Continuous Showcase • Hover row to pause • Click card for detailed case study</span>
                 </div>
               </div>
 
