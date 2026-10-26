@@ -150,7 +150,7 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section id="tentang" className="relative z-0 isolate w-full overflow-hidden text-zinc-900 border-t border-zinc-200/80 bg-white">
+    <section id="tentang" className="relative z-0 isolate w-full overflow-hidden text-zinc-900 border-t border-zinc-200/80 bg-white/60 backdrop-blur-xs">
       
       {/* 1. Header Bar: [Time] on Left, Bauhaus Artwork on Right */}
       <div className="w-full border-b border-zinc-200/80">

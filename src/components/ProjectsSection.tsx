@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { PlusSeparator } from "@/components/ui/plus-separator";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { MagnetizeButton } from "@/components/magnetize-button";
 
 // Re-export showcase rows from dedicated data module
 export { ROW_MODULKU, ROW_FLORAMART, ROW_KOS_NUSA } from "@/data/parallaxShowcaseData";
@@ -80,7 +81,7 @@ export const HOMEPAGE_PROJECTS: ProjectCardItem[] = [
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="relative z-0 isolate w-full overflow-hidden text-zinc-900 border-t border-zinc-200/80 bg-white">
+    <section id="projects" className="relative z-0 isolate w-full overflow-hidden text-zinc-900 border-t border-zinc-200/80 bg-white/60 backdrop-blur-xs">
       {/* 1. Divider Line with /projects indicator */}
       <div className="w-full border-b border-zinc-200/80">
         <div className="relative mx-auto max-w-7xl h-14 border-x border-zinc-200/80 flex items-center justify-between px-6 sm:px-10">
@@ -99,7 +100,7 @@ export default function ProjectsSection() {
 
       {/* 3. Header Banner with About Section Gradient */}
       <div className="w-full border-b border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl min-h-[250px] border-x border-zinc-200/80 overflow-hidden flex items-center bg-white">
+        <div className="relative mx-auto max-w-7xl min-h-[250px] border-x border-zinc-200/80 overflow-hidden flex items-center bg-white/80 backdrop-blur-sm">
           <PlusSeparator
             position={["top-left", "top-right", "bottom-left", "bottom-right"]}
             className="z-20"
@@ -229,15 +230,19 @@ export default function ProjectsSection() {
 
           {/* Smooth Raised White Gradient Overlay covering higher up on projects 3 & 4 */}
           <div className="absolute inset-x-0 bottom-0 h-[440px] sm:h-[500px] bg-gradient-to-t from-white via-white/95 via-35% to-transparent flex flex-col items-center justify-end pb-12 sm:pb-16 z-20 pointer-events-none">
-            {/* Styled button in cohesive Bauhaus / Hexaa theme */}
-            <Link
-              href="/projects"
-              data-cursor-expand
-              className="pointer-events-auto group inline-flex items-center gap-2.5 px-7 py-3 rounded-full border border-zinc-900 bg-white/95 text-zinc-950 font-mono text-xs sm:text-sm font-semibold tracking-wider hover:bg-zinc-950 hover:text-white transition-all duration-300 shadow-md hover:shadow-xl active:scale-95 backdrop-blur-md"
-            >
-              <span>[explore all projects on /projects]</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-            </Link>
+            {/* Magnetize button with magnetic particle attraction */}
+            <div className="pointer-events-auto">
+              <MagnetizeButton
+                href="/projects"
+                particleCount={16}
+                particleColor="bg-zinc-800"
+                data-cursor-expand
+                className="group relative inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full border border-zinc-900 bg-white text-zinc-950 font-mono text-xs sm:text-sm font-semibold tracking-wider hover:bg-zinc-950 hover:text-white transition-all duration-300 shadow-md hover:shadow-xl active:scale-95 backdrop-blur-md cursor-pointer"
+              >
+                <span>[explore all projects on /projects]</span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              </MagnetizeButton>
+            </div>
             <span className="text-[11px] font-mono text-zinc-500 mt-2.5 pointer-events-none">
               Showing 4 featured projects — click to explore the full directory
             </span>
