@@ -62,7 +62,7 @@ export function HalftoneWordmarkFooter({
       if (!container) return;
       const rect = container.getBoundingClientRect();
       width = rect.width;
-      height = 240; // Height of wordmark canvas banner
+      height = 320; // Taller wordmark canvas banner
       const dpr = window.devicePixelRatio || 1;
       canvas.width = width * dpr;
       canvas.height = height * dpr;
@@ -77,26 +77,27 @@ export function HalftoneWordmarkFooter({
       const offCtx = offCanvas.getContext("2d");
       if (!offCtx) return;
 
-      const fontSize = Math.min(width / (wordmark.length * 0.65), 180);
-      offCtx.font = `900 ${fontSize}px sans-serif`;
+      // Taller, more impactful font size
+      const fontSize = Math.min(width / (wordmark.length * 0.48), 260);
+      offCtx.font = `900 ${fontSize}px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
       offCtx.textAlign = "center";
       offCtx.textBaseline = "middle";
       offCtx.fillStyle = "#ffffff";
-      offCtx.fillText(wordmark, width / 2, height * 0.55);
+      offCtx.fillText(wordmark, width / 2, height * 0.52);
 
       const imgData = offCtx.getImageData(0, 0, width, height);
       const data = imgData.data;
 
-      // Sample grid points for halftone
-      const gap = Math.max(8, Math.floor(width / 120));
+      // Sample grid points for halftone - smaller dots, higher density (more dots)
+      const gap = Math.max(4, Math.floor(width / 240));
       const newDots: Dot[] = [];
 
       for (let y = 0; y < height; y += gap) {
         for (let x = 0; x < width; x += gap) {
           const index = (y * width + x) * 4;
           const alpha = data[index + 3];
-          if (alpha > 80) {
-            const rad = ((alpha / 255) * (gap * 0.42));
+          if (alpha > 70) {
+            const rad = Math.max((alpha / 255) * (gap * 0.38), 0.9);
             newDots.push({
               x,
               y,
@@ -361,7 +362,7 @@ export function HalftoneWordmarkFooter({
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             onClick={handleClick}
-            className="w-full h-[220px] select-none block"
+            className="w-full h-[260px] sm:h-[300px] lg:h-[320px] select-none block"
             title="Klik untuk efek shockwave!"
           />
           <p className="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mt-1">

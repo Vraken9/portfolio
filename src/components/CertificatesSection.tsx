@@ -63,8 +63,8 @@ export function CertificatesSection() {
         </div>
       </div>
 
-      {/* 3D Wheel Interactive Full-Bleed Stage (Pure Radiant Light Mode - Compact Height for Laptop Screen Fit) */}
-      <div className="relative w-full h-[500px] sm:h-[550px] lg:h-[600px] overflow-hidden select-none bg-[#fdfcff]">
+      {/* 3D Wheel Interactive Full-Bleed Stage (Expansive Height - No Cutting Off) */}
+      <div className="relative w-full h-[660px] sm:h-[740px] lg:h-[820px] overflow-hidden select-none bg-[#fdfcff]">
         {/* Liquid Chrome Shader Metal Background */}
         <ShaderMetal
           metal="chrome"
@@ -86,12 +86,12 @@ export function CertificatesSection() {
           }}
         />
 
-        {/* 3D WorksWheel Component */}
+        {/* 3D WorksWheel Component with Side Title and Right Index */}
         <WorksWheel
           items={wheelItems}
           label="Certifications '24-'26"
           action="Inspect"
-          showSideTitle={false}
+          showSideTitle={true}
           targetIndex={targetIndex}
           onActiveChange={(idx) => setActiveIndex(idx)}
           onCardClick={(item) => {
@@ -100,51 +100,6 @@ export function CertificatesSection() {
           }}
           className="size-full bg-transparent"
         />
-
-        {/* Sleek Minimalist Floating Glass Pill (Bottom Left) */}
-        {activeCert && (
-          <div className="absolute bottom-8 sm:bottom-10 left-6 sm:left-10 z-30 max-w-[320px] sm:max-w-md p-4 sm:p-5 rounded-2xl bg-white/95 backdrop-blur-xl border border-black/10 shadow-xl transition-all duration-300 pointer-events-auto">
-            <div className="flex items-center justify-between gap-3 mb-2">
-              <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-violet-700 bg-violet-50 px-2.5 py-0.5 rounded-full border border-violet-200">
-                {activeCert.groupLabel}
-              </span>
-              <span className="font-mono text-xs text-zinc-400 font-medium">
-                {String(activeIndex + 1).padStart(2, "0")} / {String(CERTIFICATES_DATA.length).padStart(2, "0")}
-              </span>
-            </div>
-
-            <h4 className="font-bold text-sm sm:text-base text-zinc-900 leading-snug line-clamp-2">
-              {activeCert.title}
-            </h4>
-            <p className="text-xs text-zinc-500 mt-1 font-normal">
-              Issuer: <span className="font-medium text-zinc-700">{activeCert.issuer}</span>
-            </p>
-
-            {/* Actions */}
-            <div className="flex items-center gap-2 mt-3.5 pt-3 border-t border-black/5">
-              <button
-                type="button"
-                id="inspect-active-cert"
-                onClick={() => setInspectItem(activeCert)}
-                className="cursor-pointer flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900 text-white font-medium text-xs hover:bg-zinc-800 transition-colors shadow-xs"
-              >
-                <Award className="w-3.5 h-3.5" />
-                <span>Inspect</span>
-              </button>
-              <a
-                href={activeCert.documentUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cursor-pointer inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-zinc-100 text-zinc-700 font-medium text-xs hover:bg-zinc-200 transition-colors border border-black/5"
-                title="Open original PDF / PNG"
-              >
-                <FileText className="w-3.5 h-3.5" />
-                <span>Document</span>
-                <ExternalLink className="w-3 h-3 opacity-60" />
-              </a>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Lightbox Modal Preview */}

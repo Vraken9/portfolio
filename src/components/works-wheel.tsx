@@ -433,16 +433,23 @@ export function WorksWheel({
       {showSideTitle && (
         <div
           ref={titleRef}
-          className="pointer-events-none absolute top-1/2 left-[5%] md:left-[8%] -translate-y-1/2 tracking-tight opacity-0 max-w-[28%] md:max-w-[32%] z-20"
-          style={{ fontSize: Math.max(metrics.title * 0.85, 20) }}
+          className="pointer-events-none absolute top-1/2 left-[4%] sm:left-[6%] lg:left-[8%] -translate-y-1/2 z-20 max-w-[28%] md:max-w-[30%] select-none tracking-tight"
         >
-          <span className="font-semibold text-zinc-950 block leading-tight drop-shadow-sm">
-            {items[active]?.title}
-          </span>
           {items[active]?.badge && (
-            <span className="inline-block mt-2 font-mono text-xs uppercase tracking-wider px-2 py-0.5 bg-black/5 text-zinc-700 rounded border border-black/10">
+            <span className="font-mono text-[11px] uppercase font-bold tracking-widest text-violet-700 block mb-2">
               {items[active]?.badge}
             </span>
+          )}
+          <h3
+            className="font-extrabold text-zinc-950 block leading-[1.15] drop-shadow-xs"
+            style={{ fontSize: Math.max(metrics.title * 0.95, 24) }}
+          >
+            {items[active]?.title}
+          </h3>
+          {items[active]?.certData?.issuer && (
+            <p className="text-xs sm:text-sm text-zinc-500 font-medium mt-2.5 leading-relaxed">
+              Issuer: <span className="text-zinc-800 font-semibold">{items[active]?.certData?.issuer}</span>
+            </p>
           )}
         </div>
       )}

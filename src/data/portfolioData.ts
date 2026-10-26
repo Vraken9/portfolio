@@ -64,13 +64,13 @@ export const PERSONAL_INFO = {
   department: "Teknik Informatika",
   semester: "Semester 5",
   location: "Kebumen, Jawa Tengah, Indonesia",
-  email: "akhyarmualif2004@gmail.com",
+  email: "akhyarmualif422006@gmail.com",
   bio: "Mahasiswa Teknik Informatika yang berfokus membangun produk digital berbasis AI Agent. Menggabungkan pola pikir Technopreneurship, arsitektur RAG, dan pengembangan Full-Stack untuk menciptakan solusi software yang berdampak nyata.",
   socials: {
     github: "https://github.com/Vraken9",
     linkedin: "https://www.linkedin.com/in/akhyar-mualif",
-    whatsapp: "https://wa.me/628930123608",
-    whatsappDisplay: "+62 893-0123-608",
+    whatsapp: "https://wa.me/6289530123608",
+    whatsappDisplay: "0895-3012-3608",
   },
   stats: [
     { label: "Aplikasi Web Full-Stack", value: "4", description: "EdTech AI, RAG Chatbot, Booking Kos, Multi-Vendor" },
