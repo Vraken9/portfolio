@@ -55,8 +55,8 @@ export interface WorksWheelProps extends Omit<
    swinging on a huge drum. The three that matter are tuned together: STEP
    against DRUM sets how hard the neighbours rotate away, and DRUM against LENS
    decides whether they land inside the frame or run off it. */
-const CARD_H = 0.48; // front card height enlarged for better readability
-const CARD_MAX_W = 0.44; // allow wider card width
+const CARD_H = 0.43; // front card height (scaled down ~4.5% for laptop responsive harmony)
+const CARD_MAX_W = 0.38; // card max width (scaled down to prevent side title overlap)
 const CARD_RATIO = 1.45; // card width / height
 const STEP = 40; // degrees between cards on the drum
 const DRUM = 2.22; // drum radius, in card heights - and everything below likewise
@@ -302,6 +302,8 @@ export function WorksWheel({
   }, [active]);
 
   const drag = React.useRef<number | null>(null);
+  const dragStartY = React.useRef<number | null>(null);
+  const isDragging = React.useRef(false);
   const settling = React.useRef(0);
 
   return (
@@ -325,18 +327,35 @@ export function WorksWheel({
         className="focus-visible:outline-foreground absolute inset-0 cursor-grab touch-pan-x outline-none focus-visible:outline-2 focus-visible:-outline-offset-4 active:cursor-grabbing z-10"
         style={{ perspective: `${metrics.depth}px` }}
         onPointerDown={(event) => {
+          dragStartY.current = event.clientY;
           drag.current = event.clientY;
-          event.currentTarget.setPointerCapture(event.pointerId);
+          isDragging.current = false;
         }}
         onPointerMove={(event) => {
-          if (drag.current === null) return;
-          to(target.current + (drag.current - event.clientY) / DRAG_UNITS);
-          drag.current = event.clientY;
+          if (drag.current === null || dragStartY.current === null) return;
+          const delta = Math.abs(event.clientY - dragStartY.current);
+          if (delta > 4 && !isDragging.current) {
+            isDragging.current = true;
+            try {
+              event.currentTarget.setPointerCapture(event.pointerId);
+            } catch {}
+          }
+          if (isDragging.current) {
+            to(target.current + (drag.current - event.clientY) / DRAG_UNITS);
+            drag.current = event.clientY;
+          }
         }}
-        onPointerUp={() => {
+        onPointerUp={(event) => {
+          if (isDragging.current) {
+            try {
+              event.currentTarget.releasePointerCapture(event.pointerId);
+            } catch {}
+            if (target.current < 0.5) to(0);
+            else to(clamp(Math.round(target.current), 1, last + 1));
+          }
           drag.current = null;
-          if (target.current < 0.5) to(0);
-          else to(clamp(Math.round(target.current), 1, last + 1));
+          dragStartY.current = null;
+          isDragging.current = false;
         }}
         onKeyDown={(event) => {
           if (event.key === "ArrowDown") to(clamp(Math.round(target.current) + 1, 1, last + 1));
@@ -359,13 +378,12 @@ export function WorksWheel({
                   aria-selected={i === active}
                   href={item.href}
                   onClick={(e) => {
-                    if (onCardClick) {
-                      e.preventDefault();
-                      if (i !== active || turn.current < 0.5) {
-                        to(i + 1);
-                      } else {
-                        onCardClick(item, i);
-                      }
+                    e.preventDefault();
+                    if (isDragging.current) return;
+                    if (i !== active || turn.current < 0.5) {
+                      to(i + 1);
+                    } else if (onCardClick) {
+                      onCardClick(item, i);
                     }
                   }}
                   ref={(node: HTMLElement | null) => {
@@ -395,23 +413,30 @@ export function WorksWheel({
                       </span>
                     ) : null}
                     {action ? (
-                      <span className="bg-white/95 text-zinc-900 border border-black/10 pointer-events-none absolute right-3 bottom-3 flex translate-y-1 items-center gap-1 rounded-full px-2.5 py-1 text-[0.72rem] font-medium opacity-0 shadow-md backdrop-blur-md transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          onCardClick?.(item, i);
+                        }}
+                        className="bg-white/95 hover:bg-white text-zinc-900 border border-black/10 cursor-pointer pointer-events-auto absolute right-3 bottom-3 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[0.75rem] font-semibold opacity-95 shadow-md backdrop-blur-md transition-all duration-200 group-hover:scale-105 z-30"
+                        title="View Document"
+                      >
                         <svg
-                          viewBox="0 0 12 12"
-                          className="size-2.5"
-                          aria-hidden="true"
+                          viewBox="0 0 24 24"
+                          className="size-3.5 text-violet-600"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
-                          <path
-                            d="M3 9 9 3M4 3h5v5"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.4"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
+                          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                          <circle cx="12" cy="12" r="3" />
                         </svg>
-                        {action}
-                      </span>
+                        <span>{action}</span>
+                      </button>
                     ) : null}
                   </span>
                 </Tag>
@@ -433,21 +458,21 @@ export function WorksWheel({
       {showSideTitle && (
         <div
           ref={titleRef}
-          className="pointer-events-none absolute top-1/2 left-[4%] sm:left-[6%] lg:left-[8%] -translate-y-1/2 z-20 max-w-[28%] md:max-w-[30%] select-none tracking-tight"
+          className="pointer-events-none absolute top-1/2 left-[2.5%] sm:left-[3.5%] lg:left-[4.5%] -translate-y-1/2 z-20 max-w-[24%] xl:max-w-[27%] select-none tracking-tight"
         >
           {items[active]?.badge && (
-            <span className="font-mono text-[11px] uppercase font-bold tracking-widest text-violet-700 block mb-2">
+            <span className="font-mono text-[11px] uppercase font-bold tracking-widest text-violet-700 block mb-2 truncate">
               {items[active]?.badge}
             </span>
           )}
           <h3
-            className="font-extrabold text-zinc-950 block leading-[1.15] drop-shadow-xs"
-            style={{ fontSize: Math.max(metrics.title * 0.95, 24) }}
+            className="font-extrabold text-zinc-950 block leading-[1.18] drop-shadow-xs line-clamp-3"
+            style={{ fontSize: "clamp(1.15rem, 1.8vw, 2.2rem)" }}
           >
             {items[active]?.title}
           </h3>
           {items[active]?.certData?.issuer && (
-            <p className="text-xs sm:text-sm text-zinc-500 font-medium mt-2.5 leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-500 font-medium mt-2 leading-relaxed truncate">
               Issuer: <span className="text-zinc-800 font-semibold">{items[active]?.certData?.issuer}</span>
             </p>
           )}

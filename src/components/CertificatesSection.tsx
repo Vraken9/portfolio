@@ -90,7 +90,7 @@ export function CertificatesSection() {
         <WorksWheel
           items={wheelItems}
           label="Certifications '24-'26"
-          action="Inspect"
+          action="View"
           showSideTitle={true}
           targetIndex={targetIndex}
           onActiveChange={(idx) => setActiveIndex(idx)}
@@ -138,7 +138,11 @@ export function CertificatesSection() {
             <div className="p-4 sm:p-6 overflow-y-auto flex-1 flex flex-col items-center justify-center bg-zinc-100/60">
               <div className="relative max-w-3xl w-full rounded-xl overflow-hidden shadow-lg border border-black/10 bg-white">
                 <img
-                  src={inspectItem.image}
+                  src={
+                    inspectItem.documentUrl.toLowerCase().endsWith(".pdf")
+                      ? inspectItem.image
+                      : inspectItem.documentUrl
+                  }
                   alt={inspectItem.title}
                   className="w-full h-auto object-contain max-h-[60vh]"
                 />
@@ -166,7 +170,11 @@ export function CertificatesSection() {
                   className="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-medium text-sm transition-all shadow-md shadow-violet-500/20"
                 >
                   <FileText className="w-4 h-4" />
-                  <span>Open Full PDF / Document</span>
+                  <span>
+                    {inspectItem.documentUrl.toLowerCase().endsWith(".pdf")
+                      ? "Open Full PDF Document"
+                      : "Open Full Original Image"}
+                  </span>
                   <ExternalLink className="w-3.5 h-3.5 opacity-80" />
                 </a>
               </div>

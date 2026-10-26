@@ -13,7 +13,10 @@ export interface CertificateItem {
     | "cisco"
     | "systech"
     | "dicoding"
-    | "digitalent";
+    | "digitalent"
+    | "umnu"
+    | "bisa-ai"
+    | "dunia-coding";
   groupLabel: string;
   image: string;
   documentUrl: string;
@@ -32,6 +35,9 @@ export const CERTIFICATE_GROUPS = [
   { key: "systech", label: "Systech" },
   { key: "dicoding", label: "Dicoding" },
   { key: "digitalent", label: "Digitalent Kominfo" },
+  { key: "umnu", label: "UMNU Kebumen" },
+  { key: "bisa-ai", label: "Bisa AI" },
+  { key: "dunia-coding", label: "Dunia Coding" },
 ] as const;
 
 export const CERTIFICATES_DATA: CertificateItem[] = [
@@ -59,8 +65,8 @@ export const CERTIFICATES_DATA: CertificateItem[] = [
     skills: ["Network Security", "Threat Detection", "SIEM Tools", "Linux"],
   },
   {
-    id: "google-extended-2024",
-    title: "Google Developer Extended 2024",
+    id: "google-extended-2026",
+    title: "Google Developer Extended 2026",
     issuer: "Google Developers",
     category: "Software Engineering",
     group: "google",
@@ -403,5 +409,88 @@ export const CERTIFICATES_DATA: CertificateItem[] = [
     documentUrl:
       "/sertifikat-pelatihan/Digitalent Programming Fundamental - Nasional.pdf",
     skills: ["Algorithmic Thinking", "Data Structures", "Clean Code Standards"],
+  },
+
+  // 11. UMNU KEBUMEN
+  {
+    id: "umnu-web-dev",
+    title: "UMNU Kebumen: Web Development Certification",
+    issuer: "Universitas Ma'arif Nahdlatul Ulama Kebumen",
+    category: "Web Engineering",
+    group: "umnu",
+    groupLabel: "UMNU Kebumen",
+    image: "/sertifikat-pelatihan/thumbnails/UMNU Web Dev.png",
+    documentUrl: "/sertifikat-pelatihan/UMNU Web Dev.png",
+    skills: ["Web Development", "Frontend & Backend", "Modern Frameworks"],
+  },
+
+  // 12. BISA AI
+  {
+    id: "bisa-ai-master",
+    title: "Bisa AI: Artificial Intelligence & Machine Learning Track",
+    issuer: "BISA AI Academy",
+    category: "Artificial Intelligence",
+    group: "bisa-ai",
+    groupLabel: "Bisa AI",
+    image: "/sertifikat-pelatihan/thumbnails/Bisa AI.png",
+    documentUrl: "/sertifikat-pelatihan/Bisa AI.png",
+    skills: ["Machine Learning", "Deep Learning", "Computer Vision"],
+  },
+  {
+    id: "bisa-ai-python",
+    title: "Bisa AI: Python for Data Science & AI",
+    issuer: "BISA AI Academy",
+    category: "Programming Language",
+    group: "bisa-ai",
+    groupLabel: "Bisa AI",
+    image: "/sertifikat-pelatihan/thumbnails/Bisa AI Python.png",
+    documentUrl: "/sertifikat-pelatihan/Bisa AI Python.png",
+    skills: ["Python Programming", "NumPy & Pandas", "Data Structures"],
+  },
+  {
+    id: "bisa-ai-ml",
+    title: "Bisa AI: Applied Machine Learning",
+    issuer: "BISA AI Academy",
+    category: "Machine Learning",
+    group: "bisa-ai",
+    groupLabel: "Bisa AI",
+    image: "/sertifikat-pelatihan/thumbnails/Bisa AI ML.png",
+    documentUrl: "/sertifikat-pelatihan/Bisa AI ML.png",
+    skills: ["Model Training", "Scikit-Learn", "Predictive Analytics"],
+  },
+  {
+    id: "bisa-ai-data-science",
+    title: "Bisa AI: Data Science Fundamental & Analytics",
+    issuer: "BISA AI Academy",
+    category: "Data Science",
+    group: "bisa-ai",
+    groupLabel: "Bisa AI",
+    image: "/sertifikat-pelatihan/thumbnails/Bisa AI Data Science.png",
+    documentUrl: "/sertifikat-pelatihan/Bisa AI Data Science.png",
+    skills: ["Data Science", "Exploratory Data Analysis", "Statistical Computing"],
+  },
+
+  // 13. DUNIA CODING
+  {
+    id: "dunia-coding-linux",
+    title: "Dunia Coding: Linux for Cyber Security",
+    issuer: "Dunia Coding",
+    category: "Cybersecurity & Systems",
+    group: "dunia-coding",
+    groupLabel: "Dunia Coding",
+    image: "/sertifikat-pelatihan/thumbnails/Dunia Coding Linux for Cyber Security.png",
+    documentUrl: "/sertifikat-pelatihan/Dunia Coding Linux for Cyber Security.pdf",
+    skills: ["Linux Administration", "Shell Scripting", "System Hardening"],
+  },
+  {
+    id: "dunia-coding-kotlin-ai",
+    title: "Dunia Coding: Workshop Kotlin + AI Android Development",
+    issuer: "Dunia Coding",
+    category: "Mobile & AI",
+    group: "dunia-coding",
+    groupLabel: "Dunia Coding",
+    image: "/sertifikat-pelatihan/thumbnails/Dunia Coding Workshop Kotlin+AI.png",
+    documentUrl: "/sertifikat-pelatihan/Dunia Coding Workshop Kotlin+AI.pdf",
+    skills: ["Kotlin", "Android Studio", "AI API Integration"],
   },
 ];

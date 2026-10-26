@@ -32,6 +32,20 @@ export function GlashmorphismNavigation({
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
+      // Hide floating navbar while in #sertifikat (Certificates / Works-wheel) to prevent covering header
+      const certSection = document.getElementById("sertifikat");
+      if (certSection) {
+        const rect = certSection.getBoundingClientRect();
+        if (rect.top <= 120 && rect.bottom >= 150) {
+          setVisible(false);
+          setMobileMenuOpen(false);
+          lastScrollY.current = currentScrollY;
+          setScrolled(true);
+          setActiveHash("#sertifikat");
+          return;
+        }
+      }
+
       // Always visible near top of page
       if (currentScrollY < 60) {
         setVisible(true);

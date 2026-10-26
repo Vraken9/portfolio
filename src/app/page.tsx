@@ -12,6 +12,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import CertificatesSection from "@/components/CertificatesSection";
 import ContactSection from "@/components/ContactSection";
 import HalftoneWordmarkFooter from "@/components/ui/halftone-wordmark-footer";
+import { CERTIFICATES_DATA } from "@/data/certificatesData";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 export default function Home() {
@@ -78,7 +79,7 @@ export default function Home() {
                           data-cursor-expand
                           className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/90 text-zinc-800 hover:bg-zinc-100 transition-all text-xs sm:text-sm font-semibold border border-zinc-200 shadow-xs"
                         >
-                          <span>Verified Credentials (30)</span>
+                          <span>Verified Credentials ({CERTIFICATES_DATA.length})</span>
                           <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
                         </a>
                       </div>
