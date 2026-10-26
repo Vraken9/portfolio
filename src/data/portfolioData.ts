@@ -64,6 +64,7 @@ export const PERSONAL_INFO = {
   department: "Teknik Informatika",
   semester: "Semester 5",
   location: "Kebumen, Jawa Tengah, Indonesia",
+  email: "akhyarmualif2004@gmail.com",
   bio: "Mahasiswa Teknik Informatika yang berfokus membangun produk digital berbasis AI Agent. Menggabungkan pola pikir Technopreneurship, arsitektur RAG, dan pengembangan Full-Stack untuk menciptakan solusi software yang berdampak nyata.",
   socials: {
     github: "https://github.com/Vraken9",
@@ -83,7 +84,7 @@ export const RUNNING_TEXT_ITEMS = [
   "AKHYAR MUALIF",
   "AI AGENT BUILDER",
   "TECHNOPRENEUR ENTHUSIAST",
-  "TEKNIK INFORMATIKA UNU KEBUMEN",
+  "TEKNIK INFORMATIKA UMNU KEBUMEN",
   "45+ SERTIFIKASI RESMI",
   "FULL-STACK DEVELOPER",
   "RAG ARCHITECTURE",

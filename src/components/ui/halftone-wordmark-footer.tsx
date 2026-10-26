@@ -257,7 +257,7 @@ export function HalftoneWordmarkFooter({
               {PERSONAL_INFO.fullName}
             </h3>
             <p className="mt-2 text-sm text-zinc-600 max-w-md leading-relaxed">
-              Mahasiswa Teknik Informatika UNU Kebumen yang berfokus membangun produk digital berbasis AI Agent & Full-Stack Web.
+              Mahasiswa Teknik Informatika UMNU Kebumen yang berfokus membangun produk digital berbasis AI Agent & Full-Stack Web.
             </p>
             <div className="mt-4 flex items-center gap-3">
               <a
@@ -302,7 +302,7 @@ export function HalftoneWordmarkFooter({
                 </a>
               </li>
               <li>
-                <a href="#about" className="hover:text-zinc-950 transition-colors">
+                <a href="#tentang" className="hover:text-zinc-950 transition-colors">
                   Tentang Saya
                 </a>
               </li>
@@ -312,8 +312,13 @@ export function HalftoneWordmarkFooter({
                 </a>
               </li>
               <li>
-                <a href="#certificates" className="hover:text-zinc-950 transition-colors">
-                  45+ Sertifikat
+                <a href="#sertifikat" className="hover:text-zinc-950 transition-colors">
+                  Verified Credentials
+                </a>
+              </li>
+              <li>
+                <a href="#contact" className="hover:text-zinc-950 transition-colors">
+                  Kontak & Kemitraan
                 </a>
               </li>
             </ul>
@@ -324,8 +329,8 @@ export function HalftoneWordmarkFooter({
             <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 mb-3">
               Informasi Kampus
             </h4>
-            <p className="text-sm text-zinc-700 font-medium">
-              Universitas Ma&apos;arif Nahdlatul Ulama
+            <p className="text-sm text-zinc-800 font-semibold">
+              Universitas Ma&apos;arif Nahdlatul Ulama (UMNU) Kebumen
             </p>
             <p className="text-xs text-zinc-500 mt-0.5">
               Teknik Informatika • Semester 5

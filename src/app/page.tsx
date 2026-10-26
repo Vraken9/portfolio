@@ -10,6 +10,8 @@ import { MagneticCursor } from "@/components/ui/magnetic-cursor";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import CertificatesSection from "@/components/CertificatesSection";
+import ContactSection from "@/components/ContactSection";
+import HalftoneWordmarkFooter from "@/components/ui/halftone-wordmark-footer";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 export default function Home() {
@@ -44,27 +46,21 @@ export default function Home() {
                 className="min-h-[700px] h-[86vh] sm:h-[88vh] lg:h-[92vh]"
                 header={
                   <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 pt-14 sm:pt-20 lg:pt-24 pb-4 sm:pb-6 w-full left-0 top-0 pointer-events-none">
-                    <div className="max-w-3xl relative pointer-events-auto p-5 sm:p-7 lg:p-9 rounded-3xl border border-white/80 bg-white/80 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.06)]">
-                      {/* Soft Radial White Gradient Glow behind text for crisp contrast */}
-                      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-white/95 via-white/85 to-white/40 rounded-3xl pointer-events-none" />
+                    <div className="max-w-3xl relative pointer-events-auto p-5 sm:p-7 lg:p-8 rounded-3xl border border-white/60 shadow-sm">
+                      {/* Soft Radial White Gradient Glow behind text that fades to transparent */}
+                      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-white/95 via-white/70 to-white/10 backdrop-blur-xs rounded-3xl border border-white/60 pointer-events-none" />
 
-                      {/* Micro Badge */}
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-100/90 border border-violet-200/80 text-violet-900 font-mono text-xs tracking-wider mb-4 shadow-2xs">
-                        <span className="w-2 h-2 rounded-full bg-violet-600 animate-pulse" />
-                        <span>✦ AI AGENT BUILDER & TECHNOPRENEUR</span>
-                      </div>
-
-                      {/* Headline (Option A) */}
+                      {/* Headline */}
                       <h1
                         data-cursor-invert
-                        className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black tracking-tight text-zinc-950 leading-[1.08] cursor-default select-none"
+                        className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black tracking-tight text-zinc-950 leading-[1.08] drop-shadow-xs cursor-default select-none"
                       >
                         Architecting Autonomous AI Agents & Production Software Ecosystems.
                       </h1>
 
-                      {/* Description with UMNU Kebumen */}
-                      <p className="mt-3.5 text-xs sm:text-sm md:text-base text-zinc-700 font-medium leading-relaxed max-w-2xl">
-                        Hi, I&apos;m <span className="font-bold text-zinc-950">Akhyar Mualif</span> — Computer Science undergraduate at <span className="font-semibold text-zinc-950">UMNU Kebumen</span>. I engineer full-stack platforms, LLM orchestration workflows, and scalable digital solutions tailored for real-world impact.
+                      {/* Description with Informatics Engineering undergraduate at UMNU Kebumen */}
+                      <p className="mt-3.5 text-xs sm:text-sm md:text-base text-zinc-700 font-semibold leading-relaxed max-w-2xl">
+                        Hi, I&apos;m <span className="font-bold text-zinc-950">Akhyar Mualif</span> — Informatics Engineering undergraduate at <span className="font-bold text-zinc-950">UMNU Kebumen</span>. I engineer full-stack platforms, LLM orchestration workflows, and scalable digital solutions tailored for real-world impact.
                       </p>
 
                       {/* Quick Action CTA Buttons */}
@@ -118,6 +114,12 @@ export default function Home() {
 
         {/* Continuous Learning & Verified Credentials - WorksWheel + ShaderMetal */}
         <CertificatesSection />
+
+        {/* Contact & Open Partnership Section */}
+        <ContactSection />
+
+        {/* Interactive Halftone Wordmark Footer */}
+        <HalftoneWordmarkFooter wordmark="AKHYAR" />
       </main>
     </MagneticCursor>
   );

@@ -43,28 +43,28 @@ export function CertificatesSection() {
   return (
     <section
       id="sertifikat"
-      className="relative w-full border-t border-b border-black/10 bg-[#faf8fd] text-zinc-900 overflow-hidden pt-16 sm:pt-20 pb-0"
+      className="relative w-full border-t border-b border-black/10 bg-[#faf8fd] text-zinc-900 overflow-hidden pt-10 sm:pt-12 pb-0"
     >
       <div id="certificates" className="absolute -top-20" />
 
-      {/* Section Header - Clean, Minimalist, Elegant */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 mb-8 sm:mb-10">
+      {/* Section Header - Clean, Minimalist, Elegant (90% viewport optimized for laptop screens) */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 mb-4 sm:mb-6">
         <div
           data-cursor-expand
           data-cursor-scale="1.45"
           className="max-w-3xl cursor-default"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-950 leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-black tracking-tight text-zinc-950 leading-tight">
             Verified Credentials & Training
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-zinc-600 leading-relaxed font-normal">
+          <p className="mt-2.5 text-xs sm:text-sm md:text-[15px] text-zinc-600 leading-relaxed font-normal">
             Curated certifications completed during academic spare time to accelerate skills across Autonomous AI, Cloud Systems, Cybersecurity, Data Science, and Modern Web Engineering.
           </p>
         </div>
       </div>
 
-      {/* 3D Wheel Interactive Full-Bleed Stage (Pure Radiant Light Mode) */}
-      <div className="relative w-full h-[600px] sm:h-[660px] lg:h-[720px] overflow-hidden select-none bg-[#fdfcff]">
+      {/* 3D Wheel Interactive Full-Bleed Stage (Pure Radiant Light Mode - Compact Height for Laptop Screen Fit) */}
+      <div className="relative w-full h-[500px] sm:h-[550px] lg:h-[600px] overflow-hidden select-none bg-[#fdfcff]">
         {/* Liquid Chrome Shader Metal Background */}
         <ShaderMetal
           metal="chrome"

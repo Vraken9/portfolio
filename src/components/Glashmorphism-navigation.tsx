@@ -12,10 +12,8 @@ export interface NavItem {
 const defaultNavLinks: NavItem[] = [
   { label: "Home", href: "#hero" },
   { label: "About", href: "#tentang" },
-  { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
-  { label: "Certificates", href: "#certificates" },
-  { label: "Experience", href: "#experience" },
+  { label: "Certificates", href: "#sertifikat" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -94,28 +92,17 @@ export function GlashmorphismNavigation({
             })}
           </nav>
 
-          {/* Right Action Buttons */}
-          <div className="hidden md:flex items-center gap-2.5">
+          {/* Right Action: GitHub Profile */}
+          <div className="hidden md:flex items-center gap-2">
             <a
               href={PERSONAL_INFO.socials.github}
               target="_blank"
               rel="noopener noreferrer"
               data-magnetic
-              className="px-3.5 py-1.5 sm:px-4 sm:py-2 text-[13.5px] sm:text-sm font-semibold text-zinc-600 hover:text-zinc-950 hover:bg-white/60 rounded-full transition-all duration-200 inline-flex items-center gap-1.5 border border-transparent hover:border-white/70"
+              className="px-4 py-1.5 sm:py-2 text-[13.5px] sm:text-sm font-semibold text-zinc-700 hover:text-zinc-950 hover:bg-white/70 rounded-full transition-all duration-200 inline-flex items-center gap-1.5 border border-zinc-200/60 hover:border-zinc-300 shadow-2xs"
             >
               <span>GitHub</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-700" />
-            </a>
-
-            <a
-              href={PERSONAL_INFO.socials.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-magnetic
-              className="inline-flex items-center gap-2 px-5 py-2 sm:px-5.5 sm:py-2.5 rounded-full bg-zinc-950 text-white font-semibold text-[13.5px] sm:text-sm hover:bg-zinc-800 transition-all duration-200 shadow-sm hover:shadow-[0_4px_16px_rgba(99,102,241,0.2)] hover:-translate-y-0.5 cursor-pointer"
-            >
-              <MessageSquare className="w-3.5 h-3.5 text-indigo-300" />
-              <span>Get in Touch</span>
             </a>
           </div>
 

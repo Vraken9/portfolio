@@ -43,8 +43,12 @@ export default function RootLayout({
       lang="id"
       className={`${plusJakartaSans.variable} light scroll-smooth`}
       style={{ colorScheme: "light" }}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen bg-zinc-50 text-zinc-900 font-sans antialiased selection:bg-cyan-500/20 selection:text-cyan-900">
+      <body
+        className="min-h-screen bg-zinc-50 text-zinc-900 font-sans antialiased selection:bg-cyan-500/20 selection:text-cyan-900"
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
