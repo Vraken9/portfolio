@@ -102,82 +102,54 @@ export function CertificatesSection() {
         />
       </div>
 
-      {/* Lightbox Modal Preview */}
+      {/* Lightbox Minimalist Modal Preview */}
       {inspectItem && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
           onClick={() => setInspectItem(null)}
         >
+          {/* Floating Close Button */}
+          <button
+            type="button"
+            onClick={() => setInspectItem(null)}
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 cursor-pointer p-2.5 rounded-full bg-zinc-900/80 hover:bg-black text-white/80 hover:text-white border border-white/20 shadow-xl backdrop-blur-md transition-all hover:scale-105"
+            aria-label="Close preview"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
+          {/* Enlarged Certificate and Small Full Document Button */}
           <div
-            className="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden border border-black/10 shadow-2xl flex flex-col max-h-[90vh]"
+            className="relative flex flex-col items-center justify-center max-w-5xl xl:max-w-6xl w-full max-h-[90vh] select-none"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-100 bg-zinc-50/50">
-              <div className="flex items-center gap-3">
-                <span className="font-mono text-xs font-semibold px-2.5 py-1 rounded-md bg-violet-100 text-violet-700 border border-violet-200">
-                  {inspectItem.groupLabel}
-                </span>
-                <h3 className="font-bold text-base sm:text-lg text-zinc-900 truncate max-w-md">
-                  {inspectItem.title}
-                </h3>
-              </div>
-              <button
-                type="button"
-                onClick={() => setInspectItem(null)}
-                className="cursor-pointer p-1.5 rounded-full hover:bg-zinc-200 text-zinc-500 hover:text-zinc-900 transition-colors"
-                aria-label="Close modal"
+            {/* Enlarged Certificate Image */}
+            <div className="relative rounded-xl overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.85)] border border-white/20 bg-white">
+              <img
+                src={
+                  inspectItem.documentUrl.toLowerCase().endsWith(".pdf")
+                    ? inspectItem.image
+                    : inspectItem.documentUrl
+                }
+                alt={inspectItem.title}
+                className="w-auto h-auto max-w-full max-h-[75vh] object-contain rounded-xl"
+              />
+            </div>
+
+            {/* Small button to navigate to full document */}
+            <div className="mt-4 flex items-center justify-center">
+              <a
+                href={inspectItem.documentUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/90 hover:bg-black text-white border border-zinc-700 hover:border-zinc-400 text-xs sm:text-sm font-medium transition-all shadow-xl backdrop-blur-md hover:scale-105"
               >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal Image Body */}
-            <div className="p-4 sm:p-6 overflow-y-auto flex-1 flex flex-col items-center justify-center bg-zinc-100/60">
-              <div className="relative max-w-3xl w-full rounded-xl overflow-hidden shadow-lg border border-black/10 bg-white">
-                <img
-                  src={
-                    inspectItem.documentUrl.toLowerCase().endsWith(".pdf")
-                      ? inspectItem.image
-                      : inspectItem.documentUrl
-                  }
-                  alt={inspectItem.title}
-                  className="w-full h-auto object-contain max-h-[60vh]"
-                />
-              </div>
-            </div>
-
-            {/* Modal Footer */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-t border-zinc-100 bg-white">
-              <div className="flex flex-wrap gap-1.5">
-                {inspectItem.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="font-mono text-xs px-2.5 py-1 rounded bg-zinc-100 text-zinc-700 border border-zinc-200"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex items-center gap-3 w-full sm:w-auto">
-                <a
-                  href={inspectItem.documentUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-medium text-sm transition-all shadow-md shadow-violet-500/20"
-                >
-                  <FileText className="w-4 h-4" />
-                  <span>
-                    {inspectItem.documentUrl.toLowerCase().endsWith(".pdf")
-                      ? "Open Full PDF Document"
-                      : "Open Full Original Image"}
-                  </span>
-                  <ExternalLink className="w-3.5 h-3.5 opacity-80" />
-                </a>
-              </div>
+                <FileText className="w-3.5 h-3.5 text-zinc-300" />
+                <span>Open Full Document</span>
+                <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
+              </a>
             </div>
           </div>
         </div>

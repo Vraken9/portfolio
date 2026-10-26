@@ -129,7 +129,7 @@ export const CERTIFICATES_DATA: CertificateItem[] = [
   // 3. INDONESIA WEB 3 HACKATHON
   {
     id: "indonesia-web3-hackathon",
-    title: "Indonesia Web3 Hackathon 2024",
+    title: "Indonesia Web3 Hackathon 2026",
     issuer: "Web3 Indonesia",
     category: "Decentralized Tech",
     group: "web3",

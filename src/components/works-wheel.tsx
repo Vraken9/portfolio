@@ -391,7 +391,7 @@ export function WorksWheel({
                   }}
                   className={cn(
                     "group absolute [backface-visibility:hidden] cursor-pointer will-change-transform select-none [transform-style:preserve-3d]",
-                    i === active && "ring-2 ring-violet-500/40 rounded-xl"
+                    i === active && "ring-2 ring-zinc-900/90 rounded-xl shadow-[0_20px_50px_-10px_rgba(0,0,0,0.3)]"
                   )}
                   style={{
                     width: metrics.cardW,
@@ -400,7 +400,7 @@ export function WorksWheel({
                     marginTop: -metrics.cardH / 2,
                   }}
                 >
-                  <span className="bg-white relative block size-full overflow-hidden rounded-xl border border-black/10 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.14)] transition-all duration-300 group-hover:shadow-[0_25px_60px_-10px_rgba(139,92,246,0.3)]">
+                  <span className="bg-white relative block size-full overflow-hidden rounded-xl border border-zinc-300 shadow-[0_15px_35px_-10px_rgba(0,0,0,0.18)] transition-all duration-300 group-hover:border-zinc-800 group-hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.28)]">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -420,21 +420,9 @@ export function WorksWheel({
                           e.preventDefault();
                           onCardClick?.(item, i);
                         }}
-                        className="bg-white/95 hover:bg-white text-zinc-900 border border-black/10 cursor-pointer pointer-events-auto absolute right-3 bottom-3 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[0.75rem] font-semibold opacity-95 shadow-md backdrop-blur-md transition-all duration-200 group-hover:scale-105 z-30"
+                        className="bg-white/95 hover:bg-white text-zinc-900 border border-zinc-300 hover:border-zinc-800 cursor-pointer pointer-events-auto absolute right-3 bottom-3 flex items-center justify-center rounded-full px-3.5 py-1.5 text-[0.75rem] font-semibold opacity-95 shadow-md backdrop-blur-md transition-all duration-200 group-hover:scale-105 z-30"
                         title="View Document"
                       >
-                        <svg
-                          viewBox="0 0 24 24"
-                          className="size-3.5 text-violet-600"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-                          <circle cx="12" cy="12" r="3" />
-                        </svg>
                         <span>{action}</span>
                       </button>
                     ) : null}
@@ -458,22 +446,22 @@ export function WorksWheel({
       {showSideTitle && (
         <div
           ref={titleRef}
-          className="pointer-events-none absolute top-1/2 left-[2.5%] sm:left-[3.5%] lg:left-[4.5%] -translate-y-1/2 z-20 max-w-[24%] xl:max-w-[27%] select-none tracking-tight"
+          className="pointer-events-none absolute top-1/2 left-[2.5%] sm:left-[3.5%] lg:left-[4.5%] -translate-y-1/2 z-20 max-w-[26%] xl:max-w-[28%] select-none tracking-tight"
         >
           {items[active]?.badge && (
-            <span className="font-mono text-[11px] uppercase font-bold tracking-widest text-violet-700 block mb-2 truncate">
+            <span className="font-mono text-xs sm:text-[13px] uppercase font-bold tracking-widest text-zinc-500 block mb-2.5 truncate">
               {items[active]?.badge}
             </span>
           )}
           <h3
-            className="font-extrabold text-zinc-950 block leading-[1.18] drop-shadow-xs line-clamp-3"
-            style={{ fontSize: "clamp(1.15rem, 1.8vw, 2.2rem)" }}
+            className="font-extrabold text-zinc-950 block leading-[1.15] drop-shadow-xs line-clamp-3"
+            style={{ fontSize: "clamp(1.35rem, 2.2vw, 2.5rem)" }}
           >
             {items[active]?.title}
           </h3>
           {items[active]?.certData?.issuer && (
-            <p className="text-xs sm:text-sm text-zinc-500 font-medium mt-2 leading-relaxed truncate">
-              Issuer: <span className="text-zinc-800 font-semibold">{items[active]?.certData?.issuer}</span>
+            <p className="text-xs sm:text-sm md:text-[15px] text-zinc-500 font-medium mt-3 leading-relaxed truncate">
+              Issuer: <span className="text-zinc-900 font-semibold">{items[active]?.certData?.issuer}</span>
             </p>
           )}
         </div>
