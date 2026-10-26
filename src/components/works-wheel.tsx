@@ -391,7 +391,7 @@ export function WorksWheel({
                   }}
                   className={cn(
                     "group absolute [backface-visibility:hidden] cursor-pointer will-change-transform select-none [transform-style:preserve-3d]",
-                    i === active && "ring-2 ring-zinc-900/90 rounded-xl shadow-[0_20px_50px_-10px_rgba(0,0,0,0.3)]"
+                    i === active && "ring-1 sm:ring-2 ring-black/10 rounded-xl shadow-[0_20px_45px_-10px_rgba(30,20,50,0.12)]"
                   )}
                   style={{
                     width: metrics.cardW,
@@ -400,7 +400,7 @@ export function WorksWheel({
                     marginTop: -metrics.cardH / 2,
                   }}
                 >
-                  <span className="bg-white relative block size-full overflow-hidden rounded-xl border border-zinc-300 shadow-[0_15px_35px_-10px_rgba(0,0,0,0.18)] transition-all duration-300 group-hover:border-zinc-800 group-hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.28)]">
+                  <span className="bg-white relative block size-full overflow-hidden rounded-xl border border-black/[0.08] shadow-[0_12px_30px_-10px_rgba(0,0,0,0.08)] transition-all duration-300 group-hover:border-black/[0.18] group-hover:shadow-[0_20px_45px_-10px_rgba(0,0,0,0.14)]">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -408,7 +408,7 @@ export function WorksWheel({
                       className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                     {item.badge ? (
-                      <span className="absolute top-2.5 left-2.5 rounded-md bg-black/80 backdrop-blur-md px-2 py-0.5 font-mono text-[9px] font-medium uppercase tracking-wider text-white shadow-sm border border-white/10">
+                      <span className="absolute top-2.5 left-2.5 rounded-md bg-black/75 backdrop-blur-md px-2 py-0.5 font-mono text-[9px] font-medium uppercase tracking-wider text-white shadow-sm border border-white/10">
                         {item.badge}
                       </span>
                     ) : null}
@@ -420,7 +420,7 @@ export function WorksWheel({
                           e.preventDefault();
                           onCardClick?.(item, i);
                         }}
-                        className="bg-white/95 hover:bg-white text-zinc-900 border border-zinc-300 hover:border-zinc-800 cursor-pointer pointer-events-auto absolute right-3 bottom-3 flex items-center justify-center rounded-full px-3.5 py-1.5 text-[0.75rem] font-semibold opacity-95 shadow-md backdrop-blur-md transition-all duration-200 group-hover:scale-105 z-30"
+                        className="bg-white/90 hover:bg-white text-zinc-800 border border-black/10 hover:border-black/20 cursor-pointer pointer-events-auto absolute right-3 bottom-3 flex items-center justify-center rounded-full px-3.5 py-1.5 text-[0.75rem] font-semibold opacity-95 shadow-md backdrop-blur-md transition-all duration-200 group-hover:scale-105 z-30"
                         title="View Document"
                       >
                         <span>{action}</span>
