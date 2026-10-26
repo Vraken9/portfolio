@@ -3,6 +3,8 @@
 :root {
   --background: #fafafa;
   --foreground: #09090b;
+  --border: #e4e4e7;
+  --muted-foreground: #71717a;
   --primary: #0284c7;
   --secondary: #7c3aed;
   --card-bg: rgba(255, 255, 255, 0.75);

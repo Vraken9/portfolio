@@ -10,7 +10,7 @@ import { MagneticCursor } from "@/components/ui/magnetic-cursor";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import CertificatesSection from "@/components/CertificatesSection";
-import ContactSection from "@/components/ContactSection";
+import { LetsWorkTogether } from "@/components/lets-work";
 import HalftoneWordmarkFooter from "@/components/ui/halftone-wordmark-footer";
 import { CERTIFICATES_DATA } from "@/data/certificatesData";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
@@ -117,7 +117,7 @@ export default function Home() {
         <CertificatesSection />
 
         {/* Contact & Open Partnership Section */}
-        <ContactSection />
+        <LetsWorkTogether />
 
         {/* Interactive Halftone Wordmark Footer */}
         <HalftoneWordmarkFooter wordmark="AKHYAR" />
