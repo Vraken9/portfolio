@@ -32,26 +32,26 @@ export default function Home() {
 
         {/* Hero Section: 3D Running Parallax Showcase with Glassmorphism Aesthetic */}
         <section id="hero" className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-slate-50/60 text-zinc-950">
-          {/* Luminous Ambient Glassmorphism Light Mesh Orbs */}
-          <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-0 overflow-hidden select-none">
+          {/* Luminous Ambient Light Mesh without GPU-heavy blur() filters */}
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-0 overflow-hidden select-none [contain:strict]">
             {/* Top-left soft lavender-indigo glow */}
-            <div className="absolute -top-[10%] left-[5%] w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle_at_center,rgba(224,231,255,0.85)_0%,rgba(238,242,255,0.4)_45%,transparent_70%)] blur-3xl opacity-85" />
+            <div className="absolute -top-[15%] left-[2%] w-[720px] h-[720px] rounded-full bg-[radial-gradient(circle_at_center,rgba(224,231,255,0.92)_0%,rgba(238,242,255,0.5)_35%,rgba(238,242,255,0.15)_55%,transparent_75%)] pointer-events-none" />
             
             {/* Top-right soft cyan-sky glow */}
-            <div className="absolute top-[3%] right-[5%] w-[680px] h-[680px] rounded-full bg-[radial-gradient(circle_at_center,rgba(224,242,254,0.8)_0%,rgba(219,234,254,0.35)_45%,transparent_70%)] blur-3xl opacity-80" />
+            <div className="absolute top-[0%] right-[0%] w-[720px] h-[720px] rounded-full bg-[radial-gradient(circle_at_center,rgba(224,242,254,0.88)_0%,rgba(219,234,254,0.45)_35%,rgba(219,234,254,0.12)_55%,transparent_75%)] pointer-events-none" />
             
-            {/* Center-left soft violet glow positioned right behind the glass card */}
-            <div className="absolute top-[26%] left-[10%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle_at_center,rgba(243,232,255,0.75)_0%,rgba(245,243,255,0.3)_45%,transparent_70%)] blur-3xl opacity-80" />
+            {/* Center-left soft violet glow positioned behind the glass card */}
+            <div className="absolute top-[22%] left-[8%] w-[640px] h-[640px] rounded-full bg-[radial-gradient(circle_at_center,rgba(243,232,255,0.85)_0%,rgba(245,243,255,0.4)_35%,rgba(245,243,255,0.1)_55%,transparent_75%)] pointer-events-none" />
             
             {/* Bottom-right gentle mint-emerald glow */}
-            <div className="absolute bottom-[2%] right-[12%] w-[520px] h-[520px] rounded-full bg-[radial-gradient(circle_at_center,rgba(209,250,229,0.5)_0%,rgba(236,253,245,0.2)_45%,transparent_70%)] blur-3xl opacity-60" />
+            <div className="absolute bottom-[0%] right-[10%] w-[580px] h-[580px] rounded-full bg-[radial-gradient(circle_at_center,rgba(209,250,229,0.6)_0%,rgba(236,253,245,0.25)_35%,transparent_70%)] pointer-events-none" />
 
-            {/* Subtle top-to-bottom frosted reflection sheet */}
+            {/* Subtle frosted linear ambient layer */}
             <div
               className="absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(248,250,252,0.45) 50%, rgba(255,255,255,0.85) 100%)",
+                  "linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(248,250,252,0.35) 50%, rgba(255,255,255,0.7) 100%)",
               }}
             />
           </div>
@@ -69,21 +69,21 @@ export default function Home() {
               className="min-h-[700px] h-[86vh] sm:h-[88vh] lg:h-[92vh]"
               header={
                 <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 pt-14 sm:pt-20 lg:pt-24 pb-4 sm:pb-6 w-full left-0 top-0 pointer-events-none">
-                  {/* Authentic Frosted Glassmorphism Card */}
-                  <div className="max-w-3xl relative pointer-events-auto p-5 sm:p-7 lg:p-8 rounded-3xl border border-white/80 bg-white/35 backdrop-blur-2xl sm:backdrop-blur-3xl shadow-[0_8px_32px_0_rgba(31,38,135,0.08),inset_0_1px_2px_0_rgba(255,255,255,0.9)]">
-                    {/* Inner subtle specular light gradient */}
-                    <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-white/45 via-white/10 to-transparent pointer-events-none" />
+                  {/* Authentic High-Transparency Glassmorphism Card */}
+                  <div className="max-w-3xl relative pointer-events-auto p-5 sm:p-7 lg:p-8 rounded-3xl border border-white/60 bg-white/[0.12] sm:bg-white/[0.10] backdrop-blur-md shadow-[0_16px_36px_-6px_rgba(15,23,42,0.08),inset_0_1px_1.5px_0_rgba(255,255,255,0.85),inset_0_-1px_1px_0_rgba(0,0,0,0.02)] will-change-[backdrop-filter] [transform:translateZ(0)]">
+                    {/* Inner subtle specular light sheen (non-milky, authentic glass refraction) */}
+                    <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-white/[0.22] via-transparent to-white/[0.04] pointer-events-none" />
 
                     {/* Headline */}
                     <h1
                       data-cursor-invert
-                      className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black tracking-tight text-zinc-950 leading-[1.08] drop-shadow-xs cursor-default select-none"
+                      className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black tracking-tight text-zinc-950 leading-[1.08] drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)] cursor-default select-none"
                     >
-                      Architecting Autonomous AI Agents & Production Software Ecosystems.
+                      Architecting Autonomous AI Agents &amp; Production Software Ecosystems.
                     </h1>
 
                     {/* Description with Informatics Engineering undergraduate at UMNU Kebumen */}
-                    <p className="mt-3.5 text-xs sm:text-sm md:text-base text-zinc-800 font-semibold leading-relaxed max-w-2xl drop-shadow-2xs">
+                    <p className="mt-3.5 text-xs sm:text-sm md:text-base text-zinc-800 font-semibold leading-relaxed max-w-2xl drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)]">
                       Hi, I&apos;m <span className="font-bold text-zinc-950">Akhyar Mualif</span> — Informatics Engineering undergraduate at <span className="font-bold text-zinc-950">UMNU Kebumen</span>. I engineer full-stack platforms, LLM orchestration workflows, and scalable digital solutions tailored for real-world impact.
                     </p>
 
@@ -92,7 +92,7 @@ export default function Home() {
                       <a
                         href="#projects"
                         data-cursor-expand
-                        className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-950/90 text-white hover:bg-zinc-950 transition-all text-xs sm:text-sm font-semibold shadow-md hover:shadow-lg backdrop-blur-md"
+                        className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 transition-all text-xs sm:text-sm font-semibold shadow-md hover:shadow-lg [transform:translateZ(0)]"
                       >
                         <span>Explore Projects</span>
                         <ArrowDown className="w-3.5 h-3.5" />
@@ -100,7 +100,7 @@ export default function Home() {
                       <a
                         href="#sertifikat"
                         data-cursor-expand
-                        className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/45 text-zinc-900 hover:bg-white/80 transition-all text-xs sm:text-sm font-semibold border border-white/70 backdrop-blur-md shadow-xs"
+                        className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/60 hover:bg-white/90 text-zinc-950 transition-all text-xs sm:text-sm font-semibold border border-white/80 backdrop-blur-sm shadow-xs [transform:translateZ(0)]"
                       >
                         <span>Verified Credentials ({CERTIFICATES_DATA.length})</span>
                         <ArrowUpRight className="w-3.5 h-3.5 opacity-70" />

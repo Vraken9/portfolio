@@ -30,7 +30,7 @@ export function Marquee({
         style={durationStyle}
         className={`${
           reverse ? "animate-marquee-reverse" : "animate-marquee"
-        } flex shrink-0 items-center will-change-transform ${
+        } flex shrink-0 items-center will-change-transform [transform:translateZ(0)] [backface-visibility:hidden] ${
           pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""
         }`}
       >
@@ -43,7 +43,7 @@ export function Marquee({
         style={durationStyle}
         className={`${
           reverse ? "animate-marquee-reverse" : "animate-marquee"
-        } flex shrink-0 items-center will-change-transform ${
+        } flex shrink-0 items-center will-change-transform [transform:translateZ(0)] [backface-visibility:hidden] ${
           pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""
         }`}
       >
