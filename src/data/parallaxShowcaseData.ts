@@ -165,17 +165,6 @@ export const ROW_KOS_NUSA: ProductItem[] = [
     link: "/projects/kos-id",
   },
   {
-    id: "kos-id-pesan",
-    projectId: "kos-id",
-    title: "Kos.id — Instant Reservation & Booking",
-    subtitle: "Streamlined Booking Schedule, Amenities Specs & Contact",
-    tag: "BOOKING FLOW",
-    category: "Booking System",
-    technologies: ["Booking Engine", "Form Engine", "TypeScript"],
-    thumbnail: "/parallax-showcase/kos-4-pesan.png",
-    link: "/projects/kos-id",
-  },
-  {
     id: "nusa-bali-home",
     projectId: "nusa-bali",
     title: "Nusa AI — Bali Tourism & AI Assistant",

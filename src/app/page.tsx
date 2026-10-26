@@ -30,22 +30,36 @@ export default function Home() {
         {/* Floating Glassmorphism Navigation */}
         <Navbar />
 
-        {/* Hero Section: 3D Running Parallax Showcase - Clean Pure White Aesthetic */}
-        <section id="hero" className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-white text-zinc-950">
-          {/* Subtle Ambient Radial White Glow */}
-          <div
-            aria-hidden="true"
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] pointer-events-none -z-0 opacity-80"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 0%, rgba(245, 246, 250, 0.9) 0%, rgba(250, 251, 253, 0.5) 50%, transparent 80%)",
-            }}
-          />
+        {/* Hero Section: 3D Running Parallax Showcase with Glassmorphism Aesthetic */}
+        <section id="hero" className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-slate-50/60 text-zinc-950">
+          {/* Luminous Ambient Glassmorphism Light Mesh Orbs */}
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-0 overflow-hidden select-none">
+            {/* Top-left soft lavender-indigo glow */}
+            <div className="absolute -top-[10%] left-[5%] w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle_at_center,rgba(224,231,255,0.85)_0%,rgba(238,242,255,0.4)_45%,transparent_70%)] blur-3xl opacity-85" />
+            
+            {/* Top-right soft cyan-sky glow */}
+            <div className="absolute top-[3%] right-[5%] w-[680px] h-[680px] rounded-full bg-[radial-gradient(circle_at_center,rgba(224,242,254,0.8)_0%,rgba(219,234,254,0.35)_45%,transparent_70%)] blur-3xl opacity-80" />
+            
+            {/* Center-left soft violet glow positioned right behind the glass card */}
+            <div className="absolute top-[26%] left-[10%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle_at_center,rgba(243,232,255,0.75)_0%,rgba(245,243,255,0.3)_45%,transparent_70%)] blur-3xl opacity-80" />
+            
+            {/* Bottom-right gentle mint-emerald glow */}
+            <div className="absolute bottom-[2%] right-[12%] w-[520px] h-[520px] rounded-full bg-[radial-gradient(circle_at_center,rgba(209,250,229,0.5)_0%,rgba(236,253,245,0.2)_45%,transparent_70%)] blur-3xl opacity-60" />
+
+            {/* Subtle top-to-bottom frosted reflection sheet */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(248,250,252,0.45) 50%, rgba(255,255,255,0.85) 100%)",
+              }}
+            />
+          </div>
 
           {/* Top Spacing to account for fixed navbar */}
           <div className="w-full h-12 sm:h-16" />
 
-          {/* 3D Running Image Parallax Showcase with Option A Branding Header */}
+          {/* 3D Running Image Parallax Showcase with Glassmorphic Branding Header */}
           <div className="relative w-full flex-1 flex flex-col justify-center">
             <HeroParallax
               row1={ROW_MODULKU}
@@ -55,7 +69,11 @@ export default function Home() {
               className="min-h-[700px] h-[86vh] sm:h-[88vh] lg:h-[92vh]"
               header={
                 <div className="relative mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 pt-14 sm:pt-20 lg:pt-24 pb-4 sm:pb-6 w-full left-0 top-0 pointer-events-none">
-                  <div className="max-w-3xl relative pointer-events-auto p-5 sm:p-7 lg:p-8 rounded-3xl border border-zinc-200/80 bg-white/95 shadow-sm backdrop-blur-md">
+                  {/* Authentic Frosted Glassmorphism Card */}
+                  <div className="max-w-3xl relative pointer-events-auto p-5 sm:p-7 lg:p-8 rounded-3xl border border-white/80 bg-white/35 backdrop-blur-2xl sm:backdrop-blur-3xl shadow-[0_8px_32px_0_rgba(31,38,135,0.08),inset_0_1px_2px_0_rgba(255,255,255,0.9)]">
+                    {/* Inner subtle specular light gradient */}
+                    <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-white/45 via-white/10 to-transparent pointer-events-none" />
+
                     {/* Headline */}
                     <h1
                       data-cursor-invert
@@ -65,16 +83,16 @@ export default function Home() {
                     </h1>
 
                     {/* Description with Informatics Engineering undergraduate at UMNU Kebumen */}
-                    <p className="mt-3.5 text-xs sm:text-sm md:text-base text-zinc-700 font-semibold leading-relaxed max-w-2xl">
+                    <p className="mt-3.5 text-xs sm:text-sm md:text-base text-zinc-800 font-semibold leading-relaxed max-w-2xl drop-shadow-2xs">
                       Hi, I&apos;m <span className="font-bold text-zinc-950">Akhyar Mualif</span> — Informatics Engineering undergraduate at <span className="font-bold text-zinc-950">UMNU Kebumen</span>. I engineer full-stack platforms, LLM orchestration workflows, and scalable digital solutions tailored for real-world impact.
                     </p>
 
-                    {/* Quick Action CTA Buttons */}
+                    {/* Quick Action CTA Buttons with Glassmorphic Harmony */}
                     <div className="mt-5 flex flex-wrap items-center gap-3 pt-1">
                       <a
                         href="#projects"
                         data-cursor-expand
-                        className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 transition-all text-xs sm:text-sm font-semibold shadow-md hover:shadow-lg"
+                        className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-950/90 text-white hover:bg-zinc-950 transition-all text-xs sm:text-sm font-semibold shadow-md hover:shadow-lg backdrop-blur-md"
                       >
                         <span>Explore Projects</span>
                         <ArrowDown className="w-3.5 h-3.5" />
@@ -82,10 +100,10 @@ export default function Home() {
                       <a
                         href="#sertifikat"
                         data-cursor-expand
-                        className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-zinc-800 hover:bg-zinc-100 transition-all text-xs sm:text-sm font-semibold border border-zinc-200 shadow-xs"
+                        className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/45 text-zinc-900 hover:bg-white/80 transition-all text-xs sm:text-sm font-semibold border border-white/70 backdrop-blur-md shadow-xs"
                       >
                         <span>Verified Credentials ({CERTIFICATES_DATA.length})</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+                        <ArrowUpRight className="w-3.5 h-3.5 opacity-70" />
                       </a>
                     </div>
                   </div>

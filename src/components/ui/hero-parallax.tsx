@@ -132,7 +132,7 @@ export const ProductCard = ({
     <div
       onClick={() => onSelect?.(product)}
       data-cursor-expand
-      className="group/product h-44 sm:h-52 md:h-56 lg:h-60 xl:h-72 2xl:h-80 w-[18rem] sm:w-[22rem] md:w-[25rem] lg:w-[27rem] xl:w-[32rem] 2xl:w-[36rem] relative shrink-0 rounded-xl sm:rounded-2xl xl:rounded-3xl overflow-hidden border border-zinc-200/90 bg-zinc-100 shadow-sm hover:shadow-2xl hover:border-zinc-400 hover:scale-[1.02] transition-all duration-300 cursor-pointer select-none mx-2 sm:mx-3 lg:mx-4"
+      className="group/product h-44 sm:h-52 md:h-56 lg:h-60 xl:h-72 2xl:h-80 w-[18rem] sm:w-[22rem] md:w-[25rem] lg:w-[27rem] xl:w-[32rem] 2xl:w-[36rem] relative shrink-0 rounded-xl sm:rounded-2xl xl:rounded-3xl overflow-hidden border border-white/70 bg-white/30 backdrop-blur-md shadow-[0_8px_25px_-6px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_-10px_rgba(31,38,135,0.18)] hover:border-white/90 hover:scale-[1.02] transition-all duration-300 cursor-pointer select-none mx-2 sm:mx-3 lg:mx-4"
     >
       <div className="relative h-full w-full overflow-hidden">
         {/* Screenshot Image with Smooth Zoom on Hover */}
@@ -150,19 +150,19 @@ export const ProductCard = ({
         {/* Top Floating Badge Bar */}
         <div className="absolute top-3 inset-x-3 sm:top-4 sm:inset-x-4 flex items-center justify-between z-10 pointer-events-none">
           {product.tag && (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/95 backdrop-blur-md text-zinc-900 text-[9px] sm:text-[11px] font-mono font-bold tracking-wider uppercase shadow-xs border border-zinc-200/60">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/85 backdrop-blur-md text-zinc-900 text-[9px] sm:text-[11px] font-mono font-bold tracking-wider uppercase shadow-xs border border-white/60">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse" />
               {product.tag}
             </span>
           )}
 
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 backdrop-blur-md text-zinc-800 flex items-center justify-center opacity-75 group-hover/product:opacity-100 group-hover/product:bg-zinc-950 group-hover/product:text-white transition-all duration-300 shadow-xs border border-zinc-200/60">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/80 backdrop-blur-md text-zinc-800 flex items-center justify-center opacity-80 group-hover/product:opacity-100 group-hover/product:bg-zinc-950 group-hover/product:text-white transition-all duration-300 shadow-xs border border-white/60">
             <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 group-hover/product:translate-x-0.5 group-hover/product:-translate-y-0.5" />
           </div>
         </div>
 
-        {/* Clean White Frosted Glass Overlay on Hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/85 to-white/20 backdrop-blur-[3px] opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 pointer-events-none" />
+        {/* Clean Glassmorphic Frosted Glass Overlay on Hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/70 to-white/10 backdrop-blur-sm opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
         {/* Bottom Details Content (Clean dark typography on white frosted glass) */}
         <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 translate-y-2 opacity-0 group-hover/product:translate-y-0 group-hover/product:opacity-100 transition-all duration-300 z-10 flex flex-col gap-1 pointer-events-none">
