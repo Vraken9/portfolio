@@ -355,9 +355,9 @@ export const CERTIFICATES_DATA: CertificateItem[] = [
     group: "digitalent",
     groupLabel: "Digitalent Kominfo",
     image:
-      "/sertifikat-pelatihan/thumbnails/Digitalent Intermediate Cybersecurity + AI Essentials - Google - Nasional.png",
+      "/sertifikat-pelatihan/thumbnails/Digitalent Intermediate Cybersecurity and AI Essentials - Google - Nasional.png",
     documentUrl:
-      "/sertifikat-pelatihan/Digitalent Intermediate Cybersecurity + AI Essentials - Google - Nasional.pdf",
+      "/sertifikat-pelatihan/Digitalent Intermediate Cybersecurity and AI Essentials - Google - Nasional.pdf",
     skills: ["AI-Powered Threat Detection", "Defensive Automation", "Applied Security"],
   },
   {
@@ -502,8 +502,8 @@ export const CERTIFICATES_DATA: CertificateItem[] = [
     category: "Mobile & AI",
     group: "dunia-coding",
     groupLabel: "Dunia Coding",
-    image: "/sertifikat-pelatihan/thumbnails/Dunia Coding Workshop Kotlin+AI.png",
-    documentUrl: "/sertifikat-pelatihan/Dunia Coding Workshop Kotlin+AI.pdf",
+    image: "/sertifikat-pelatihan/thumbnails/Dunia Coding Workshop Kotlin and AI.png",
+    documentUrl: "/sertifikat-pelatihan/Dunia Coding Workshop Kotlin and AI.pdf",
     skills: ["Kotlin", "Android Studio", "AI API Integration"],
   },
 

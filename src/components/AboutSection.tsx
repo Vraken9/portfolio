@@ -187,6 +187,8 @@ export default function AboutSection() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/typography/hello.webp"
+                loading="lazy"
+                decoding="async"
                 alt="hello."
                 className="w-[115px] sm:w-[135px] h-auto object-contain select-none pointer-events-none [image-rendering:pixelated]"
               />

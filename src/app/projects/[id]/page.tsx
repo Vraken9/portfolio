@@ -301,6 +301,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 <video
                   src={project.videoDemo}
                   controls
+                  preload="none"
                   className="w-full max-h-[600px] object-cover bg-black"
                 />
               </div>

@@ -141,6 +141,7 @@ export const ProductCard = ({
           src={product.thumbnail}
           className="object-cover object-top absolute h-full w-full inset-0 transition-transform duration-700 ease-out group-hover/product:scale-105 [transform:translateZ(0)] [backface-visibility:hidden]"
           alt={product.title}
+          loading="lazy"
           decoding="async"
         />
 

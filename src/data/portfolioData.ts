@@ -918,7 +918,7 @@ export const CERTIFICATES: CertificateItem[] = [
     issuer: "Kominfo Digitalent & Google",
     issuerCategory: "Kominfo",
     category: "AI & Data Science",
-    filePath: "/sertifikat-pelatihan/Digitalent Intermediate Cybersecurity + AI Essentials - Google - Nasional.pdf",
+    filePath: "/sertifikat-pelatihan/Digitalent Intermediate Cybersecurity and AI Essentials - Google - Nasional.pdf",
     isPdf: true,
   },
   {
@@ -963,7 +963,7 @@ export const CERTIFICATES: CertificateItem[] = [
     issuer: "Dunia Coding",
     issuerCategory: "Lainnya",
     category: "AI & Data Science",
-    filePath: "/sertifikat-pelatihan/Dunia Coding Workshop Kotlin+AI.pdf",
+    filePath: "/sertifikat-pelatihan/Dunia Coding Workshop Kotlin and AI.pdf",
     isPdf: true,
   },
 

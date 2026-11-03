@@ -404,6 +404,8 @@ export function WorksWheel({
                     <img
                       src={item.image}
                       alt={item.title}
+                      loading="lazy"
+                      decoding="async"
                       draggable={false}
                       className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                     />
