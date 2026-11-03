@@ -6,7 +6,7 @@ import { PlusSeparator } from "@/components/ui/plus-separator";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { MagnetizeButton } from "@/components/magnetize-button";
 
-import { GradientWave } from "@/components/ui/gradient-wave";
+import { GridPulse } from "@/components/ui/grid-pulse";
 
 // Re-export showcase rows from dedicated data module
 export { ROW_MODULKU, ROW_FLORAMART, ROW_KOS_NUSA } from "@/data/parallaxShowcaseData";
@@ -100,29 +100,27 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* 3. Header Banner with Dynamic GradientWave WebGL Background */}
+      {/* 3. Header Banner with Interactive Spectrum Hairline GridPulse Background */}
       <div className="w-full border-b border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl min-h-[250px] border-x border-zinc-200/80 overflow-hidden flex items-center bg-transparent">
+        <div className="relative mx-auto max-w-7xl min-h-[250px] border-x border-zinc-200/80 overflow-hidden flex items-center bg-white/70">
           <PlusSeparator
             position={["top-left", "top-right", "bottom-left", "bottom-right"]}
             className="z-20"
           />
 
-          {/* Dynamic Gradient Wave WebGL Canvas */}
-          <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
-            <GradientWave className="opacity-95" />
-          </div>
+          {/* Interactive Spectrum Hairline Grid Pulse (21st.dev style with small cells) */}
+          <GridPulse gridSize={20} baseColor="rgba(0, 0, 0, 0.05)" />
 
-          {/* Text Overlay: Crisp dark text with subtle shadow for high legibility */}
+          {/* Text Overlay: Crisp dark text with high legibility */}
           <div
             data-cursor-expand
             data-cursor-scale="1.45"
-            className="relative z-10 w-full h-full flex flex-col justify-center px-6 sm:px-10 py-12 pointer-events-auto cursor-default"
+            className="relative z-10 w-full h-full flex flex-col justify-center px-6 sm:px-10 py-12 pointer-events-none select-none"
           >
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight text-zinc-950 drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight text-zinc-950 drop-shadow-[0_1px_1px_rgba(255,255,255,0.85)]">
               akhyar&apos;s projects.
             </h2>
-            <p className="max-w-2xl text-xs sm:text-sm md:text-base mt-2.5 leading-relaxed font-normal text-zinc-700 drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)]">
+            <p className="max-w-2xl text-xs sm:text-sm md:text-base mt-2.5 leading-relaxed font-normal text-zinc-700 drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
               here are the projects I&apos;ve worked on, showcasing my skills and passion for software development. each project reflects my commitment to creating impactful solutions and continuous learning.
             </p>
           </div>

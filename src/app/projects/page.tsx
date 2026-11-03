@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { PlusSeparator } from "@/components/ui/plus-separator";
+import { GridPulse } from "@/components/ui/grid-pulse";
 import { GradientBackground } from "@/components/ui/almoayyed";
 import { BackgroundSnippets } from "@/components/ui/background-snippets";
 import { AnimatePresence, motion } from "framer-motion";
@@ -133,31 +134,23 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Hexaa Header Banner with About Section Gradient */}
+      {/* Header Banner with Interactive Spectrum Hairline GridPulse Background */}
       <section className="w-full border-b border-zinc-200/80">
-        <div className="relative mx-auto max-w-7xl min-h-[250px] border-x border-zinc-200/80 overflow-hidden flex items-center bg-white">
+        <div className="relative mx-auto max-w-7xl min-h-[250px] border-x border-zinc-200/80 overflow-hidden flex items-center bg-white/70">
           <PlusSeparator
             position={["top-left", "top-right", "bottom-left", "bottom-right"]}
             className="z-20"
           />
 
-          {/* Authentic Gradient Background Matching About Section */}
-          <div className="absolute inset-0 z-0 pointer-events-none select-none">
-            <div
-              className="w-full h-full"
-              style={{
-                background:
-                  "radial-gradient(135% 100% at 50% 100%, #ebdffc 0%, #f7f3fe 42%, #ffffff 82%)",
-              }}
-            />
-          </div>
+          {/* Interactive Spectrum Hairline Grid Pulse (21st.dev style with small cells) */}
+          <GridPulse gridSize={20} baseColor="rgba(0, 0, 0, 0.05)" />
 
           {/* Text Overlay: Crisp dark text matching About Section */}
-          <div className="relative z-10 w-full h-full flex flex-col justify-center px-6 sm:px-10 py-12 pointer-events-none">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight text-zinc-950">
+          <div className="relative z-10 w-full h-full flex flex-col justify-center px-6 sm:px-10 py-12 pointer-events-none select-none">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight text-zinc-950 drop-shadow-[0_1px_1px_rgba(255,255,255,0.85)]">
               akhyar&apos;s projects.
             </h1>
-            <p className="max-w-2xl text-xs sm:text-sm md:text-base mt-2.5 leading-relaxed font-normal text-zinc-600">
+            <p className="max-w-2xl text-xs sm:text-sm md:text-base mt-2.5 leading-relaxed font-normal text-zinc-700 drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
               here are the projects I&apos;ve worked on, showcasing my skills and passion for software development. each project reflects my commitment to creating impactful solutions and continuous learning.
             </p>
           </div>

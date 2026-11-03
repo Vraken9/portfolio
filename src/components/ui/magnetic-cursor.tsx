@@ -132,7 +132,7 @@ export function MagneticCursor({
           cursor.style.mixBlendMode = blendMode;
           cursor.style.backgroundColor = color;
           cursor.style.border = "1.5px solid rgba(255, 255, 255, 0.85)";
-          cursor.style.boxShadow = `0 0 20px 2px ${logoColor}66`;
+          cursor.style.boxShadow = "none";
         } else {
           // Standard difference inversion mode
           cursor.style.mixBlendMode = blendMode;

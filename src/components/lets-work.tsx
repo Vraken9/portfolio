@@ -200,24 +200,6 @@ export function LetsWorkTogether() {
             INITIAL STATE (Interactive Hero Heading & Social Polishing)
            ============================================================ */}
 
-        {/* Top Status Badge */}
-        <div
-          className="flex items-center gap-3 transition-all duration-500"
-          style={{
-            opacity: isClicked ? 0 : 1,
-            transform: isClicked ? "translateY(-20px)" : "translateY(0)",
-            pointerEvents: isClicked ? "none" : "auto",
-          }}
-        >
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
-          </span>
-          <span className="text-xs sm:text-sm font-mono font-semibold tracking-widest uppercase text-zinc-500">
-            Available for projects &bull; 2026
-          </span>
-        </div>
-
         {/* Giant Interactive Heading "Let's work together" */}
         <div
           className="group relative cursor-pointer select-none"

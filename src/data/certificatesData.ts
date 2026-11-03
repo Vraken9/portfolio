@@ -16,7 +16,8 @@ export interface CertificateItem {
     | "digitalent"
     | "umnu"
     | "bisa-ai"
-    | "dunia-coding";
+    | "dunia-coding"
+    | "indosat";
   groupLabel: string;
   image: string;
   documentUrl: string;
@@ -38,6 +39,7 @@ export const CERTIFICATE_GROUPS = [
   { key: "umnu", label: "UMNU Kebumen" },
   { key: "bisa-ai", label: "Bisa AI" },
   { key: "dunia-coding", label: "Dunia Coding" },
+  { key: "indosat", label: "Indosat" },
 ] as const;
 
 export const CERTIFICATES_DATA: CertificateItem[] = [
@@ -163,6 +165,17 @@ export const CERTIFICATES_DATA: CertificateItem[] = [
     image: "/sertifikat-pelatihan/thumbnails/AWS Cloud Foundation.png",
     documentUrl: "/sertifikat-pelatihan/AWS Cloud Foundation.pdf",
     skills: ["EC2 & S3", "IAM Security", "VPC Networking", "Serverless Lambda"],
+  },
+  {
+    id: "aws-ai-academy",
+    title: "AWS Academy: Artificial Intelligence Foundations",
+    issuer: "Amazon Web Services (AWS)",
+    category: "Artificial Intelligence",
+    group: "aws",
+    groupLabel: "AWS",
+    image: "/sertifikat-pelatihan/thumbnails/AWS AI Academy.png",
+    documentUrl: "/sertifikat-pelatihan/AWS AI Academy.png",
+    skills: ["AWS AI Services", "Machine Learning Pipeline", "Cloud AI Integration"],
   },
 
   // 6. ASEAN AHEAD
@@ -492,5 +505,18 @@ export const CERTIFICATES_DATA: CertificateItem[] = [
     image: "/sertifikat-pelatihan/thumbnails/Dunia Coding Workshop Kotlin+AI.png",
     documentUrl: "/sertifikat-pelatihan/Dunia Coding Workshop Kotlin+AI.pdf",
     skills: ["Kotlin", "Android Studio", "AI API Integration"],
+  },
+
+  // 14. INDOSAT
+  {
+    id: "indosat-automation",
+    title: "Indosat Ooredoo Hutchison: AI & Automation",
+    issuer: "Indosat Ooredoo Hutchison",
+    category: "AI & Automation",
+    group: "indosat",
+    groupLabel: "Indosat",
+    image: "/sertifikat-pelatihan/thumbnails/indosat automation.png",
+    documentUrl: "/sertifikat-pelatihan/indosat automation.pdf",
+    skills: ["Process Automation", "Digital Transformation", "AI Workflows"],
   },
 ];

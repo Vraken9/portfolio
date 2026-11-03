@@ -978,6 +978,15 @@ export const CERTIFICATES: CertificateItem[] = [
     isPdf: true,
   },
   {
+    id: "cert-aws-ai-academy",
+    title: "AWS Academy: AI Foundations",
+    issuer: "Amazon Web Services (AWS)",
+    issuerCategory: "AWS",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/AWS AI Academy.png",
+    isPdf: false,
+  },
+  {
     id: "cert-digitalent-aws-dex",
     title: "Cloud Essentials CA - DEX - AWS Nasional",
     issuer: "Kominfo Digitalent & AWS",
@@ -1177,6 +1186,15 @@ export const CERTIFICATES: CertificateItem[] = [
     issuerCategory: "Lainnya",
     category: "Web & Programming",
     filePath: "/sertifikat-pelatihan/Indonesia WEB3 Hackathon.pdf",
+    isPdf: true,
+  },
+  {
+    id: "cert-indosat-automation",
+    title: "Indosat Ooredoo Hutchison: AI & Automation",
+    issuer: "Indosat Ooredoo Hutchison",
+    issuerCategory: "Lainnya",
+    category: "AI & Data Science",
+    filePath: "/sertifikat-pelatihan/indosat automation.pdf",
     isPdf: true,
   },
 ];
